@@ -132,7 +132,7 @@ return [
 
 
 
-    'timezone'        => 'Africa/Algeria',
+    'timezone'        => 'UTC',
 
 
 
