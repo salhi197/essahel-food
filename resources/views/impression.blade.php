@@ -40,7 +40,7 @@
                                     <input type="hidden" value="{{$type}}" name="type" />
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nombre de ticket à imprimer :</label>
-                                        <input type="text" value="" name="tickets" class="form-control" placeholder="Nombre de ticket à imprimer ">
+                                        <input type="text" value="" name="tickets" class="form-control nombre_ticket" placeholder="Nombre de ticket à imprimer ">
                                     </div>
                                     <div class="btn-group" role="group">
                                         <button type="submit" class="btn btn-primary">Imprimer</button>
@@ -68,4 +68,6 @@
 
 
 
+
 @endsection
+

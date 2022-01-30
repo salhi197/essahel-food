@@ -20,7 +20,7 @@ class ImpressionController  extends Controller
 
     public function impression()
     {
-        return view('impression');
+        return view('impression',compact('impression'));
     }
 
 
@@ -31,54 +31,50 @@ class ImpressionController  extends Controller
         $options->set(array('isRemoteEnabled' => true));
         $dompdf->setOptions($options);
         $html = '
-        
         <html style="page-break-before: always;">
         <head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
         <style type="text/css">
-        
-        @page { width: 100% ;margin:0;padding:0; }
-        span.cls_002{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_002{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_007{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_007{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        span.cls_006{font-family:"Trebuchet MS Bold",serif;font-size:47.0px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_006{font-family:"Trebuchet MS Bold",serif;font-size:47.0px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        span.cls_005{font-family:"Trebuchet MS Bold",serif;font-size:11.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_005{font-family:"Trebuchet MS Bold",serif;font-size:11.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        @page { size: 85pt 85pt;margin:0; }
+        span.cls_008{font-family:"Trebuchet MS",serif;font-size:7.0px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
+        div.cls_008{font-family:"Trebuchet MS",serif;font-size:7.0px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
         span.cls_003{font-family:"Trebuchet MS",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
         div.cls_003{font-family:"Trebuchet MS",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_008{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_008{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_004{font-family:"Trebuchet MS Bold",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_004{font-family:"Trebuchet MS Bold",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        span.cls_009{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(44,44,44);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_009{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(44,44,44);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_010{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_010{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        span.cls_004{font-family:"Trebuchet MS Bold",serif;font-size:10.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        div.cls_004{font-family:"Trebuchet MS Bold",serif;font-size:10.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        span.cls_002{font-family:"Trebuchet MS Bold",serif;font-size:48.0px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        div.cls_002{font-family:"Trebuchet MS Bold",serif;font-size:48.0px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        span.cls_005{font-family:"Trebuchet MS Bold",serif;font-size:14.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        div.cls_005{font-family:"Trebuchet MS Bold",serif;font-size:14.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        span.cls_006{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        div.cls_006{font-family:"Trebuchet MS Bold",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:bold;font-style:normal;text-decoration: none}
+        span.cls_007{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
+        div.cls_007{font-family:"Trebuchet MS",serif;font-size:8.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
+        span.cls_009{font-family:"Trebuchet MS",serif;font-size:12.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
+        div.cls_009{font-family:"Trebuchet MS",serif;font-size:12.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
         .page_breaking
         {
           position:absolute;
           bottom: 0px;
           page-break-after: always;
-        } 
-        
-       
+        }       
+
         </style>
-            <script type="text/javascript" src="a75dddf0-3997-11eb-8b25-0cc47a792c0a_id_a75dddf0-3997-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
+        <script type="text/javascript" src="525ab86c-3723-11eb-8b25-0cc47a792c0a_id_525ab86c-3723-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
         </head>
         <body>
+    
         ';
-        $margin = 20;
+        $margin = -40;
         for($i=0;$i<$request['tickets'];$i++){
-            if($i!=0 and $i%4==0){
-                $html = $html.'
-                <div class="page_breaking"></div>
-                ';
-                $margin = 0;                
-            }
-            $h = Commande::templateBon($i,$margin);
+            $number = mt_rand(100000,999999);
+            file_put_contents('img/essahel_food/'.$number.'.svg', DNS1D::getBarcodeSVG($number, 'C128'));    
+            $codebar = 'img/essahel_food/'.$number.'.svg';
+            $h = Template::templateBon($i,$margin,$codebar);
             $html=$html.$h;
-            $margin = $margin+120;
+            $html = $html.'
+                <div class="page_breaking"></div>
+            ';
+            $margin = $margin+20;
 
         }
         $html = $html.'
