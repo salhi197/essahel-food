@@ -86,9 +86,9 @@ class Commande extends Model
         return $html;   
     }
 
-    public static function templateBon($commande,$margin) {
+    public static function templateBon($commande,$margin,$codebar) {
         $current = date('Y-m-d');
-        $html=Template::templateBon($commande,$margin);
+        $html=Template::templateBon($commande,$margin,$codebar);
         return $html;   
     }
 
