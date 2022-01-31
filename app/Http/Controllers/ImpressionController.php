@@ -41,12 +41,12 @@ class ImpressionController  extends Controller
         $last_num_ticket_produit_copie = $last_num_ticket_produit;
 
         $lastIdTicket = Ticket::orderBy('id', 'desc')->first();        
-        $lastIdTicketCopie = $lastIdTicket; 
         if(is_null($lastIdTicket)){
             $lastIdTicket= 1;
         }else{
             $lastIdTicket=$lastIdTicket->id+1;
         }
+        $lastIdTicketCopie = $lastIdTicket; 
         
         $dompdf = new Dompdf();
         $options = $dompdf->getOptions(); 
@@ -109,21 +109,18 @@ class ImpressionController  extends Controller
         $current = date('Y-m-d');
         $file = "facture_".$current;
         $dompdf->stream("$file", array('Attachment'=>1));
-        /**
-         * ref1n1id1
-         * ref1n1id1
-         * ref1n2id1
-         * 
-         */
         for($i=0;$i<$request['tickets'];$i++){
+            $number ='ref'.$id_produit.'n'.$last_num_ticket_produit_copie.'id'.$lastIdTicketCopie; 
             $ticket = new Ticket();
             $ticket->id_produit = $id_produit;
+            $ticket->codebar = $number;
             // $cpt = selct max(num_ticket_produit) from tickets where idproduit=$idproduit
             // if $cpt = null 1
             // else 
             // $cpt++ , w howa li yinsera
             $ticket->num_ticket_produit = $last_num_ticket_produit_copie;
             $last_num_ticket_produit_copie++;
+            $lastIdTicketCopie++;
             $ticket->save();
 
         }
