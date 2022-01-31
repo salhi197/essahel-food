@@ -11,7 +11,9 @@ use Milon\Barcode\DNS1D;
 use App\Wilaya;
 use App\Template;
 use App\Commande;
-use App\Livreur;
+use App\Produit;
+use App\Ticket;
+use DB;
 use Dompdf\Dompdf;
 
 
@@ -20,12 +22,32 @@ class ImpressionController  extends Controller
 
     public function impression()
     {
-        return view('impression',compact('impression'));
+        $produits = Produit::all();
+        return view('impression',compact('produits'));
     }
 
 
     public function imprimer(Request $request){
 
+
+        $id_produit = $request['id_produit'];
+        $last_num_ticket_produit = DB::select("select max(num_ticket_produit) as cpt from tickets t where t.id_produit=$id_produit");
+        $last_num_ticket_produit = $last_num_ticket_produit[0]->cpt;
+        if(is_null($last_num_ticket_produit)){
+            $last_num_ticket_produit= 1;
+        }else{
+            $last_num_ticket_produit++;
+        }
+        $last_num_ticket_produit_copie = $last_num_ticket_produit;
+
+        $lastIdTicket = Ticket::orderBy('id', 'desc')->first();        
+        $lastIdTicketCopie = $lastIdTicket; 
+        if(is_null($lastIdTicket)){
+            $lastIdTicket= 1;
+        }else{
+            $lastIdTicket=$lastIdTicket->id+1;
+        }
+        
         $dompdf = new Dompdf();
         $options = $dompdf->getOptions(); 
         $options->set(array('isRemoteEnabled' => true));
@@ -57,25 +79,26 @@ class ImpressionController  extends Controller
           bottom: 0px;
           page-break-after: always;
         }       
-
         </style>
         <script type="text/javascript" src="525ab86c-3723-11eb-8b25-0cc47a792c0a_id_525ab86c-3723-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
         </head>
         <body>
-    
+        
         ';
         $margin = -40;
         for($i=0;$i<$request['tickets'];$i++){
-            $number = mt_rand(100000,999999);
+            $number ='ref'.$id_produit.'n'.$last_num_ticket_produit.'id'.$lastIdTicket; 
+            // mt_rand(100000,999999);
             file_put_contents('img/essahel_food/'.$number.'.svg', DNS1D::getBarcodeSVG($number, 'C128'));    
             $codebar = 'img/essahel_food/'.$number.'.svg';
-            $h = Template::templateBon($i,$margin,$codebar);
+            $h = Template::templateBon($i,$margin,$codebar,$number);
             $html=$html.$h;
             $html = $html.'
                 <div class="page_breaking"></div>
             ';
             $margin = $margin+20;
-
+            $last_num_ticket_produit++;
+            $lastIdTicket++;
         }
         $html = $html.'
             </body>
@@ -86,7 +109,24 @@ class ImpressionController  extends Controller
         $current = date('Y-m-d');
         $file = "facture_".$current;
         $dompdf->stream("$file", array('Attachment'=>1));
+        /**
+         * ref1n1id1
+         * ref1n1id1
+         * ref1n2id1
+         * 
+         */
+        for($i=0;$i<$request['tickets'];$i++){
+            $ticket = new Ticket();
+            $ticket->id_produit = $id_produit;
+            // $cpt = selct max(num_ticket_produit) from tickets where idproduit=$idproduit
+            // if $cpt = null 1
+            // else 
+            // $cpt++ , w howa li yinsera
+            $ticket->num_ticket_produit = $last_num_ticket_produit_copie;
+            $last_num_ticket_produit_copie++;
+            $ticket->save();
 
+        }
     }
 
 

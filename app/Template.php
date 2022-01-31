@@ -186,8 +186,8 @@ class Template extends Model
     ];
 
     
-    public static function templateBon($commande,$margin,$codebar) {
-
+    public static function templateBon($commande,$margin,$codebar,$number) 
+    {
         $codebar = asset($codebar);
         $html='
             <div style="position:absolute;left:50%;margin-left:-70px;top:0px;width:283px;height:283px;overflow:hidden">
@@ -196,6 +196,10 @@ class Template extends Model
                         <img src="'.$codebar.'" width=80 height=30>
                     </span>
                 </div>
+                <div style="position:absolute;left:20.89px;top:70px" class="cls_006">
+                    '.$number.'
+                </div>
+                
             </div>
                 ';
         return $html;
