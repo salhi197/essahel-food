@@ -17,6 +17,7 @@ Route::get('/rapport', 'RapportController@rapport')->name('rapport');
 Route::post('/get/scanned/tickets', 'RapportController@getScannedTickets')->name('getScannedTickets');
 Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impression.tickets');
 Route::get('/ticket/affecter/livreur/{livreur}', 'TicketController@affecter')->name('ticket.affecter');
+Route::post('/ticket/affecter/livreur', 'TicketController@assigner')->where('items', '(.*)');    
 
 
 

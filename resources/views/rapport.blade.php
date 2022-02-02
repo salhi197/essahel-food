@@ -35,20 +35,25 @@
 
 
             <div class="row">
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <h1>
                         nombr Tickets Générés :
                         </h1>
                     </div>
 
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <h1>
                         nombr Tickets Vers Depot :
                         </h1>
                     </div>
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <h1>
                         nombr Tickets Au Depot :
+                        </h1>
+                    </div>
+                    <div class="card col-md-3">
+                        <h1>
+                        nombr Tickets Sortie :
                         </h1>
                     </div>
 
@@ -58,14 +63,14 @@
             <div class="row">
 
                 @foreach($produits as $produit)
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <div class="card-body">
                             <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
                             <p class="card-text" id="produit_genere_{{$produit->id}}" >0</p>
                         </div>
                     </div>
 
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <div class="card-body">
                             <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
                             <p class="card-text" id="produit_vers_depot_{{$produit->id}}">0</p>
@@ -73,10 +78,17 @@
                     </div>
 
                     
-                    <div class="card col-md-4">
+                    <div class="card col-md-3">
                         <div class="card-body">
                             <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
                             <p class="card-text" id="produit_au_depot_{{$produit->id}}">0</p>
+                        </div>
+                    </div>
+
+                    <div class="card col-md-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
+                            <p class="card-text" id="produit_sortie_{{$produit->id}}">0</p>
                         </div>
                     </div>
 
@@ -128,7 +140,7 @@
           var nbrTicketsGenerated = res.nbrTicketsGenerated;
           nbrTicketsGenerated.map(obj=>{
             console.log(obj)
-            $('#produit_genere_'+obj.id_produit).html(obj.nbrtickets);
+            $('#produit_genere_'+obj.id_produit).html(obj.nbrtickets).removeClass('alert alert-success').addClass('alert alert-success');
           })
           /** 
            * nbrTicketsVersDepot
@@ -136,7 +148,7 @@
           var nbrTicketsVersDepot = res.nbrTicketsVersDepot;
           nbrTicketsVersDepot.map(obj=>{
             console.log(obj)
-            $('#produit_vers_depot_'+obj.id_produit).html(obj.nbrtickets);
+            $('#produit_vers_depot_'+obj.id_produit).html(obj.nbrtickets).removeClass('alert alert-success').addClass('alert alert-success');
           })
           /** 
            * nbrTicketsAUDepot
@@ -144,9 +156,20 @@
           var nbrTicketsAuDepot = res.nbrTicketsAuDepot;
           nbrTicketsAuDepot.map(obj=>{
             console.log(obj)
-            $('#produit_au_depot_'+obj.id_produit).html(obj.nbrtickets);
+            $('#produit_au_depot_'+obj.id_produit).html(obj.nbrtickets).removeClass('alert alert-success').addClass('alert alert-success');
           })
 
+          /** 
+           * nbrTicketsSortie
+          */
+          var nbrTicketsSortie = res.nbrTicketsSortie;
+          nbrTicketsSortie.map(obj=>{
+            console.log(obj)
+            $('#produit_sortie_'+obj.id_produit).html(obj.nbrtickets).removeClass('alert alert-success').addClass('alert alert-success');
+          })
+
+
+          
         })
         .catch(err=>function (err) {
           console.log(err.message)

@@ -7,7 +7,7 @@ const scanner = new BarcodeScanner(options);
 
 scanner.on('code', code => {
   console.log(code);
-  fetch('https://app.essahel-food.com/api/scan/depot', {
+  fetch('http://localhost:8000/api/scan/depot', {
     method: 'post', 
     headers: {
       'Accept': 'application/json, text/plain, */*',

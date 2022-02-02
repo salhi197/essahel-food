@@ -9,14 +9,14 @@
                         <h1 class="mt-4"> Tableau de bord </h1>        
                            <div class="card mb-4">
                                <div class="card-header">
-                                    Affecter commande 
+                                    Affecter Ticket
                                 </div>
 
                                <div class="card-header">
 
                                     <div class="row">
                                         <input 
-                                        onkeyup="myFunction()" 
+                                        onchange="SearchFunction()" 
                                         class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
 
                                         <!-- <div class="col-md-2" style="">
@@ -26,11 +26,6 @@
                                             </div>
                                         </div> -->
                                         &nbsp;
-                                        <a
-                                            onclick="return confirm('etes vous sure  ?')"
-                                            id="hrefAttacher" href="#" class="btn btn-danger" >
-                                                confirmation   
-                                        </a>                                                                                                        
                                     </div>
 
 
@@ -50,17 +45,25 @@
                                     <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                              <th>date</th>
-                                              <th>client</th>
-                                              <th>Tracking</th>
-                                              <th>Consomateur</th>
-                                                <th>produit</th>
-                                                <th>wilaya</th>
-                                                <th>Livreur</th>
-                                                <th>actions</th>
+                                                <th>créé le</th>
+                                                <th> nom de produit</th>
+                                                <th>code bar </th>
+                                                <th>Staut </th>
+                                                <th>num_ticket_produit </th>
                                             </tr>
                                         </thead>
-              
+                                        <tbody >
+                                            @foreach($tickets as $ticket)
+                                                <tr id="{{$ticket->id}}">
+                                                    
+                                                    <td>{{$ticket->created_at}}</td>
+                                                    <td>{{$ticket->getProduit()['nom']?? ''}}</td>
+                                                    <td>{{$ticket->codebar ?? ''}}</td>
+                                                    <td>{{$ticket->satut  }}</td>
+                                                    <td>{{$ticket->num_ticket_produit ?? ''}}</td>                                                
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                                     <br>
 
@@ -80,22 +83,24 @@
 @section('scripts')
 <script>
     
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-    function myFunction() {
+    function SearchFunction() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("search");
         filter = input.value.toUpperCase();
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         var livreur = <?php echo json_encode($_livreur); ?>;
+        var trId=0;
+        var trFound;
 
-        var hrefAttacher = "/commande/affecter/list/livreur/"+livreur+"/list?id=";
+        var hrefAttacher = "/ticket/affecter/list/livreur/"+livreur+"/list?id=";
         console.log(hrefAttacher)
 
         if(filter.length==0){
-
             for (i = 1; i < tr.length; i++) {
-                tr[i].classList.add("tr-code");
+                tr[i].classList.remove("tr-code");
                 $('#hrefAttacher').attr('href',"#")   
             }
         } else {
@@ -107,12 +112,54 @@
                     // .style.display="inline";
                     tr[i].classList.remove("tr-code");
                     hrefAttacher =hrefAttacher +tr[i].id+",";
+                    trId = tr[i].id;
+                    trFound = tr[i];
+
                 } else {
                     tr[i].classList.add("tr-code");
                 }
-            }   
-            $('#hrefAttacher').attr('href',hrefAttacher)   
-            }        
+            }
+            // $('#hrefAttacher').attr('href',hrefAttacher)
+            }    
+            if(trId!=0)
+            {
+                setTimeout(function (){
+                    fetch('/ticket/affecter/livreur', {
+                        method: 'post', 
+                        headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            _token: CSRF_TOKEN,
+                            livreur : livreur,
+                            ticket:trId
+                        })  
+                    })
+                    .then(res => res.json())
+                        .then(res => {
+                            $('#search').val('')
+                            toastr.success('Ticket Affecté')
+                            for (i = 1; i < tr.length; i++) {
+                                tr[i].classList.remove("tr-code");
+                            }
+                            trFound.getElementsByTagName("td")[3].innerHTML = "Sortie";
+                            $('#'+trId).addClass('alert alert-success')
+
+                            console.log(res);
+                        })
+                    .catch(err=>function (err) {
+                        toastr.danger('Error')
+                        console.log("err.message")
+                    });
+                },100)
+            }else{
+                toastr.error('Probelm : Ticket n\'existe pas ou déja sortie')
+                $('#search').val('')
+                for (i = 1; i < tr.length; i++) {
+                    tr[i].classList.remove("tr-code");
+                }
+            }
         }
     }
 </script>
