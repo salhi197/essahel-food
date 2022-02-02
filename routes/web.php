@@ -12,26 +12,13 @@ use Illuminate\Support\Facades\Auth;
 use Milon\Barcode\DNS1D;
 use Milon\Barcode\DNS2D;
 
-
-Route::get('/codes', function(){
-    
-    $commandes = Commande::all();
-    foreach ($commandes as $key => $commande){
-        file_put_contents('img/codebars/'.$commande->code_tracking.'.svg', DNS1D::getBarcodeSVG($commande->code_tracking, 'C128'));
-    }
-    dd('sasas');
-});
+Route::get('/impression', 'ImpressionController@impression')->name('impression');
+Route::get('/rapport', 'RapportController@rapport')->name('rapport');
+Route::post('/get/scanned/tickets', 'RapportController@getScannedTickets')->name('getScannedTickets');
+Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impression.tickets');
+Route::get('/ticket/affecter/livreur/{livreur}', 'TicketController@affecter')->name('ticket.affecter');
 
 
-Route::get('/sql', function(){
-    $commandes = Commande::where('creance_fournisseur','=',null)->get();
-    foreach ($commandes as $key => $commande){
-        $c = Commande::find($commande->id);
-        $c->creance_fournisseur = 'non solder';
-        $c->save();
-    }
-    dd('sasas');
-});
 
 
 
@@ -49,9 +36,6 @@ Route::get('/coliers', function(){
 })->name('coliers');
 
 
-
-Route::get('/impression', 'ImpressionController@impression')->name('impression');
-Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impression.tickets');
 
 
 Route::get('/codebar', 'HomeController@codebar')->name('codebar');
@@ -397,10 +381,6 @@ Route::group(['prefix' => 'freelancer', 'as' => 'freelancer'], function () {
     Route::post('/create', ['as' => '.create', 'uses' => 'FournisseurController@store']);
 
 
-
-    Route::get('/rapport', function(){
-        return view('rapport');    
-    })->name('rapport');
 
 
 Route::group(['prefix' => 'achat', 'as' => 'achat'], function () {

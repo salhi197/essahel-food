@@ -15,7 +15,8 @@ $_livreurs = Livreur::all();
   <!-- Favicon -->
   <link rel="icon" href="{{asset('img/lsrapide.jpg')}}" type="image/png">
   <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
   <!-- Icons -->
   <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
   <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
@@ -72,8 +73,47 @@ $_livreurs = Livreur::all();
                 </strong>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{route('rapport')}}">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">
+                <strong>
+                    Rapport</span>
+                </strong>
+              </a>
+            </li>
             
+            <li class="nav-item">
+              <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="nav-link-text">
+                <strong>
+                    Affiche Livreur
+                  </strong>
+                </span>
+              <strong>
+                </strong>
+              </a>
+            </li>            
             
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="nav-link-text">
+                <strong>
+                    Utilisateur</span>
+                </strong>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
+                    <a class="dropdown-item" href="{{route('fournisseur.index')}}">Fournisseur</a>
+                    <a class="dropdown-item" href="{{route('admin.index')}}">Personnel</a>
+                    
+                </div>
+            </li>
+
+
         @endif   
       @auth('fournisseur')
           <?php 
@@ -236,45 +276,6 @@ $_livreurs = Livreur::all();
 
 
 
-<div class="modal fade" id="journal" tabindex="-1" role="dialog" aria-labelledby="journalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="journalLabel">Journal : </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-            @csrf
-            <div class="form-group">
-                    <a  href="{{route('journal.livreur')}}" class="btn-icon-clipboard">
-                            <i class="ni ni-badge"></i>
-                            <span>Livreur</span>
-                    </a>
-
-
-                    <a  href="{{route('journal.fournisseur')}}" class="btn-icon-clipboard">
-                            <i class="ni ni-badge"></i>
-                            <span>Fournisseur</span>
-                    </a>
-
-                    <a  href="{{route('journal.personnel')}}" class="btn-icon-clipboard">
-                            <i class="ni ni-badge"></i>
-                            <span>personnel</span>
-                    </a>
-
-
-                    <a  href="{{route('journal.ls')}}" class="btn-icon-clipboard">
-                            <i class="ni ni-badge"></i>
-                            <span>Ls Rapide</span>
-                    </a>
-
-            </div>
-      </div>
-    </div>
-  </div>
-</div>
 
   <!-- Argon Scripts -->
   <!-- Core -->

@@ -14,8 +14,21 @@ class ApiController extends Controller
     public function scan_production(Request $request)
     {      
         $ticket =Ticket::where('codebar',$request['code'])->first();
-        $ticket->satut = "vers_depot";
+        $ticket->satut= "vers_depot";
         $ticket->save();
         return response()->json(['reponse' => $ticket]);    
     } 
+    /**
+     * 
+     */
+    
+     public function scan_depot(Request $request)
+    {      
+        $ticket =Ticket::where('codebar',$request['code'])->first();
+        $ticket->satut= "au_depot";
+        $ticket->save();
+        return response()->json(['reponse' => $ticket]);    
+    } 
+
+
 }

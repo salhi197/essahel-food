@@ -80,7 +80,7 @@
                                                         <a class="btn btn-primary " href="{{route('commande.retour',['livreur'=>$livreur])}}">
                                                             Retour
                                                         </a>                                                                                                        
-                                                        <a class="btn btn-primary" href="{{route('commande.affecter',['livreur'=>$livreur])}}">
+                                                        <a class="btn btn-primary" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
                                                             Affecter Colier
                                                         </a>                                                                                                        
                                                         <!-- <a class="btn btn-primary " href="{{route('commande.detacher',['livreur'=>$livreur])}}">
