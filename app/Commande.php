@@ -135,7 +135,7 @@ class Commande extends Model
         'creance',
         'creance_livreur',
         'creance_fournisseur',
-        'boutique',
+     
         'en_preparation',
         'en_cours',
         'retour_ls',

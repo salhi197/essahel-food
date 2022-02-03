@@ -115,9 +115,7 @@ class Handler extends ExceptionHandler
         if ($request->is('livreur') || $request->is('livreur/*')) {
             return redirect()->guest('/login/livreur');
         }
-        if ($request->is('boutique') || $request->is('boutique/*')) {
-            return redirect()->guest('/login/boutique');
-        }
+        
         if ($request->is('freelancer') || $request->is('freelancer/*')) {
             return redirect()->guest('/login/freelancer');
         }

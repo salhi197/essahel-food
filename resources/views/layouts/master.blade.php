@@ -95,7 +95,9 @@ $_livreurs = Livreur::all();
                 </strong>
               </a>
             </li>            
+
             
+
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -107,13 +109,24 @@ $_livreurs = Livreur::all();
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
-                    <a class="dropdown-item" href="{{route('fournisseur.index')}}">Fournisseur</a>
+                    <a class="dropdown-item" href="{{route('production.index')}}">Agents Production</a>
                     <a class="dropdown-item" href="{{route('admin.index')}}">Personnel</a>
                     
                 </div>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{route('produit.index')}}">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text"><strong>Produit</span></strong>
+              </a>
+            </li>
 
-
+              <li class="nav-item">
+                  <a class="nav-link active" href="{{route('categorie.index')}}">
+                      <i class="ni ni-tv-2 text-primary"></i>
+                      <span class="nav-link-text"><strong>Categorie</span></strong>
+                  </a>
+              </li>
         @endif   
       @auth('fournisseur')
           <?php 

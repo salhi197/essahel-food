@@ -81,7 +81,6 @@ class Admin extends Authenticatable
         $livreurs = Livreur::all()->count();
         $produits = Produit::all()->count();
         $users = User::all()->count();
-        $boutiques = Boutique::all()->count();
 
         $data = [
             'commandes_en_attente'=>$commandes_en_attente,
@@ -90,7 +89,7 @@ class Admin extends Authenticatable
             'livreurs'=>$livreurs,
             'produits'=>$produits,
             'users'=>$users,
-            'boutiques'=>$boutiques,
+            
             'commandes'=>$commandes,
             
         ];

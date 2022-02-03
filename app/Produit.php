@@ -7,6 +7,9 @@ use Carbon\Carbon;
 
 class Produit extends Model
 {
+    protected $fillable = [
+        'nom', 'reference', 'description','prix_gros','prix_semi_gros','prix_detail','prix_minimum','prix_autre','id_categorie'
+    ];
     public function getTicketToday()
     {
         $tickets = Ticket::whereDate('created_at', Carbon::today())->where('id_produit',$this->id)->get();

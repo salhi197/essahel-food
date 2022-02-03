@@ -182,7 +182,7 @@ class Template extends Model
         'acteur',
         'id_acteur',
         'credit_livreur',
-        'boutique'
+        
     ];
 
     

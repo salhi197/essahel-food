@@ -40,7 +40,7 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
         $this->middleware('guest:livreur')->except('logout');
         $this->middleware('guest:freelancer')->except('logout');
-        $this->middleware('guest:boutique')->except('logout');
+        $this->middleware('guest:production')->except('logout');
         $this->middleware('guest:fournisseur')->except('logout');
     }
 
@@ -71,6 +71,14 @@ class LoginController extends Controller
         ]);
     }
 
+    public function showProductionLoginForm()
+    {
+        return view('auth.login', [
+            'url' => Config::get('constants.guards.producion')
+        ]);
+    }
+
+
 
     public function showFreelancerLoginForm()
     {
@@ -79,12 +87,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function showBoutiqueLoginForm()
-    {
-        return view('auth.login', [
-            'url' => Config::get('constants.guards.boutique')
-        ]);
-    }
+    
 
     /**
      * @param Request $request
@@ -164,12 +167,5 @@ class LoginController extends Controller
     }
 
 
-    public function boutiqueLogin(Request $request)
-    {
-        if ($this->guardLogin($request,Config::get('constants.guards.boutique'))) {
-            return redirect()->intended('/home');
-        }
 
-        return back()->withInput($request->only('email', 'remember'));
-    }
 }

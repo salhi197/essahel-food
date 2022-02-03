@@ -35,17 +35,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
-
-
-
-
-
-
 Route::group(['prefix' => 'static', 'as' => 'static.'], function () {
-
     Route::get('/communes/{wilaya}', 'Api\StaticDataController@communes')->name('communes');
-
 });
 
 
@@ -54,8 +45,6 @@ Route::post('/scan/production', 'ApiController@scan_production');
 Route::post('/scan/depot', 'ApiController@scan_depot');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-
     return $request->user();
-
 });
 

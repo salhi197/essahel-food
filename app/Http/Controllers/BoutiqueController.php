@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Commande;
 use App\Commune;
 use App\Freelancer;
-use App\Boutique;
 use App\Wilaya;
 use App\Livreur;
 use App\Produit;

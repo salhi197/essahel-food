@@ -16,25 +16,12 @@ use DB;
 class ProduitController extends Controller
 {
 
-
     public function index()
     {
-        if(auth()->guard('fournisseur')->check()){
-            $id = Auth::guard('fournisseur')->id();
-            $produits = DB::table('produits')->where('fournisseur_id',$id)->orderBy('id', 'DESC')->paginate(10);    
-            return view('produits.index',compact('produits'));
-        }   
-    
-
         $produits = Produit::all();
         return view('produits.index',compact('produits'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $communes = Commune::all();
@@ -43,76 +30,24 @@ class ProduitController extends Controller
         return view('produits.create',compact('fournisseurs','communes','wilayas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {
-        // $validated = $request->validated();
-
-        
-        $fournisseur = json_decode($request->get('fournisseur'), true);
+    {        
         $produit = new Produit();   
         $produit->nom= $request->get('nom');
-        $produit->prix_vente= $request->get('prix_vente');
-        $produit->quantite= $request->get('quantite') ?? 0;
-        $produit->categorie= $request->get('categorie');
-        $produit->prix_fournisseur= $request->get('prix_fournisseur');
-        $produit->marge_commercial= $request->get('marge_commercial');
-        $produit->description = $request->get('description');
-        $produit->fournisseur = $request->get('fournisseur');
-        $produit->fournisseur_id = $fournisseur['id'];
-        $produit->budget = $request->get('budget');
-        $produit->marge_freelance = $request->get('marge_freelance');
-        $produit->marge_boutique = $request->get('marge_boutique');
-        $produit->marge_clicntic = $request->get('marge_clicntic');
-        $produit->state = $request->get('state');
-        $stack = array();
-        if($request->file('image')){
-            $file = $request->file('image');// as $image){
-                $image = $file->store(
-                    'produits/images',
-                    'public'
-                );
-                $produit->image = $image; 
-            }
-
-        $stack = json_encode($stack);
+        $produit->reference = $request['reference'];
+        $produit->description = $request['description'];
+        $produit->prix_gros = $request['prix_gros'];
+        $produit->prix_semi_gros = $request['prix_semi_gros'];
+        $produit->prix_detail = $request['prix_detail'];
+        $produit->prix_minimum = $request['prix_minimum'];
+        $produit->prix_autre = $request['prix_autre'];
+        $produit->id_categorie = $request['id_categorie'] ?? 1;
+        $produit->image = "";
         $produit->save();
-
-        $stock = new  Stock();
-        $stock->produit = json_encode($produit,true);
-        $stock->produit_id = $produit->id;
-        $stock->quantite = $produit['quantite'];
-        $stock->operation = 'entré';
-        $stock->save();
-        $achat = new Achat([
-            'state'=>$request['state'],
-            'fournisseur'=>$request->get('fournisseur'),
-            'fournisseur_id'=>$fournisseur['id'],            
-            'date_achat'=>Carbon::now(),
-        ]);
-        $achat->produits = json_encode($produit); 
-        $achat->reste = json_encode($produit); 
-        $achat->total = $request->get('prix_fournisseur')*$request->get('quantite'); 
-        
-        $achat->save();
-
-
-
-
         return redirect()->route('produit.index')->with('success', 'Produit inséré avec succés ');        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Produit  $produit
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id_produit)
     {
         $produit = Produit::find($id_produit);

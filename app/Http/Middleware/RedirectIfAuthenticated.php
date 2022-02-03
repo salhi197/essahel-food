@@ -30,8 +30,8 @@ class RedirectIfAuthenticated
         if ($guard === 'freelancer' && Auth::guard($guard)->check()) {
             return redirect('/home');
         }
-        if ($guard === 'boutique' && Auth::guard($guard)->check()) {
-            return redirect('/home');
+        if ($guard === 'production' && Auth::guard($guard)->check()) {
+            return redirect('/impression');
         }
 
         if (Auth::guard($guard)->check()) {

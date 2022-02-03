@@ -17,11 +17,19 @@ Route::get('/rapport', 'RapportController@rapport')->name('rapport');
 Route::post('/get/scanned/tickets', 'RapportController@getScannedTickets')->name('getScannedTickets');
 Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impression.tickets');
 Route::get('/ticket/affecter/livreur/{livreur}', 'TicketController@affecter')->name('ticket.affecter');
-Route::post('/ticket/affecter/livreur', 'TicketController@assigner')->where('items', '(.*)');    
+Route::post('/ticket/affecter/livreur', 'TicketController@assigner')->where('items', '(.*)');
 
 
 
 
+Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
+    Route::get('/', ['as' => '.index', 'uses' => 'CategorieController@index']);
+    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'CategorieController@create']);
+    Route::post('/create', ['as' => '.create', 'uses' => 'CategorieController@store']);
+    Route::post('/update/{id_categorie}', ['as' => '.update', 'uses' => 'CategorieController@update']);
+    Route::get('/destroy/{id_categorie}', ['as' => '.destroy', 'uses' => 'CategorieController@destroy']);
+    Route::get('/edit/{id_categorie}', ['as' => '.edit', 'uses' => 'CategorieController@edit']);
+});
 
 
 Route::get('/coliers', function(){
@@ -47,6 +55,7 @@ Auth::routes();
 
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('login.admin');
 Route::get('/login/livreur', 'Auth\LoginController@showLivreurLoginForm')->name('login.Livreur');
+Route::get('/login/production', 'Auth\LoginController@showProductionLoginForm')->name('login.Production');
 Route::get('/login/fournisseur', 'Auth\LoginController@showFournisseurLoginForm')->name('login.Fournisseur');
 Route::get('/login/freelancer', 'Auth\LoginController@showFreelancerLoginForm')->name('login.Freelancer');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm')->name('register.admin');
@@ -54,6 +63,7 @@ Route::get('/register/livreur', 'Auth\RegisterController@showLivreurRegisterForm
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/login/livreur', 'Auth\LoginController@livreurLogin');
+Route::post('/login/production', 'Auth\LoginController@productionLogin');
 Route::post('/login/fournisseur', 'Auth\LoginController@fournisseurLogin');
 Route::post('/login/freelancer', 'Auth\LoginController@freelancerLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
@@ -294,6 +304,19 @@ Route::group(['prefix' => 'produit', 'as' => 'produit'], function () {
     Route::get('/edit/{id_demande}', ['as' => '.edit', 'uses' => 'ProduitController@edit']);
     Route::get('/show/{id_produit}', ['as' => '.show', 'uses' => 'ProduitController@show']);
     Route::post('/update/{produit}', ['as' => '.update', 'uses' => 'ProduitController@update']);    
+});
+
+
+
+Route::group(['prefix' => 'production', 'as' => 'production'], function () {
+    Route::get('/', ['as' => '.index', 'uses' => 'ProductionController@index']);
+    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'ProductionController@create']);
+    Route::post('/create', ['as' => '.create', 'uses' => 'ProductionController@store']);
+    Route::get('/destroy/{id_production}', ['as' => '.destroy', 'uses' => 'ProductionController@destroy']);    
+    Route::get('/remise/{id_production}', ['as' => '.destroy', 'uses' => 'ProductionController@destroy']);    
+    Route::get('/edit/{id_production}', ['as' => '.edit', 'uses' => 'ProductionController@edit']);
+    Route::get('/show/{id_production}', ['as' => '.show', 'uses' => 'ProductionController@show']);
+    Route::post('/update/{id_production}', ['as' => '.update', 'uses' => 'ProductionController@update']);    
 });
 
 Route::group(['prefix' => 'livreur', 'as' => 'livreur'], function () {
