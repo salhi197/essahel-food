@@ -1,7 +1,7 @@
 
-<?php 
+<?php
 use App\Livreur;
-$_livreurs = Livreur::all(); 
+$_livreurs = Livreur::all();
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,12 +34,12 @@ $_livreurs = Livreur::all();
     .modal-ku {
         width: 750px;
         margin: auto;
-    }    
+    }
     .odd{
         font-size: 120%;
     }
 
-  
+
   </style>
 </head>
 
@@ -52,7 +52,7 @@ $_livreurs = Livreur::all();
         <a class="navbar-brand" href="javascript:void(0)">
           <img src="{{asset('img/lsrapide.jpg')}}" alt="...">
           <h3>
-            
+
                 </h3>
 
         </a>
@@ -63,7 +63,7 @@ $_livreurs = Livreur::all();
           <!-- Nav items -->
           <ul class="navbar-nav">
             @auth('admin')
-            
+
             <li class="nav-item">
               <a class="nav-link active" href="{{route('impression')}}">
                 <i class="ni ni-tv-2 text-primary"></i>
@@ -82,7 +82,7 @@ $_livreurs = Livreur::all();
                 </strong>
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
                 <i class="ni ni-single-02 text-yellow"></i>
@@ -94,9 +94,9 @@ $_livreurs = Livreur::all();
               <strong>
                 </strong>
               </a>
-            </li>            
+            </li>
 
-            
+
 
 
             <li class="nav-item dropdown">
@@ -111,7 +111,7 @@ $_livreurs = Livreur::all();
                     <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
                     <a class="dropdown-item" href="{{route('production.index')}}">Agents Production</a>
                     <a class="dropdown-item" href="{{route('admin.index')}}">Personnel</a>
-                    
+
                 </div>
             </li>
             <li class="nav-item">
@@ -127,9 +127,9 @@ $_livreurs = Livreur::all();
                       <span class="nav-link-text"><strong>Categorie</span></strong>
                   </a>
               </li>
-        @endif   
+        @endif
       @auth('fournisseur')
-          <?php 
+          <?php
                 $fournisseur = Auth::guard('fournisseur')->user();
             ?>
             <li class="nav-item">
@@ -186,11 +186,11 @@ $_livreurs = Livreur::all();
 
 
       <li class="nav-item active">
-          <a class="nav-link" href="{{ route('logout') }}" 
+          <a class="nav-link" href="{{ route('logout') }}"
             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
           <i class="fa fa-door-open"></i>
           <strong>
-            <span>déconnexion</span> 
+            <span>déconnexion</span>
           </strong>
         </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -228,7 +228,7 @@ $_livreurs = Livreur::all();
                 <h3>
 
                 </h3>
-                <h4 class="text-white">Accès 
+                <h4 class="text-white">Accès
                 @auth('fournisseur')
                     Fournisseur
                 @endif
@@ -240,7 +240,7 @@ $_livreurs = Livreur::all();
                     Livreur
                 @endif
 
-                 !</h4> 
+                 !</h4>
             </li>
           </ul>
         </div>
@@ -272,7 +272,7 @@ $_livreurs = Livreur::all();
                         <option value="">{{ __('Séléctionner ...') }}</option>
                         @foreach ($_livreurs as $livreur)
                             <option value="{{$livreur->id}}" >
-                            {{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}} 
+                            {{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}}
                             </option>
 
                         @endforeach

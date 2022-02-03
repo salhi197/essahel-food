@@ -12,19 +12,7 @@
                                             Les Coliers de Livreur : {{$l->name ?? ''}} {{$l->prenom ?? ''}}
                                         </p>
 
-                                        <a class="btn btn-info" href="{{route('commande.show.create')}}">
-                                            <i class="fas fa-plus"></i>
-                                            Ajouter 
-                                        </a>
-                                        <a class="btn btn-info" href="#" id="pritnA4">
-                                            <i class="fas fa-print"></i>
-                                            A4 
-                                        </a>
 
-                                        <a class="btn btn-info" href="#" id="printTicket">
-                                            <i class="fas fa-print"></i>
-                                            Ticket
-                                        </a>
 
                                 </div>  
 

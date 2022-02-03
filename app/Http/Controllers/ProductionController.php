@@ -28,16 +28,11 @@ class ProductionController extends Controller
         $production->email = $request->get('email');
         $production->password = Hash::make($request->get('password'));
         $production->password_text = $request->get('password');
-        
-        
-
         $production->save();
-        return redirect()->route('user.index')->with('success', 'un nouveau commercial a été inséré avec succés ');
+        return redirect()->route('production.index')->with('success', 'un nouveau commercial a été inséré avec succés ');
     }  
     public function edit($id_user)
     {
-        $communes = Commune::all();
-        $wilayas = Wilaya::all();
         $production = Production::find($id_user);
         return view('productions.edit',compact('user','wilayas','communes'));
     }
@@ -57,7 +52,7 @@ class ProductionController extends Controller
         $wilayas = Wilaya::all();
         $production = Production::find($id_user);
         $production->delete();    
-        return redirect()->route('user.index')->with('success', 'le  commercial a été supprimé ');
+        return redirect()->route('production.index')->with('success', 'le  commercial a été supprimé ');
     }
 
 }
