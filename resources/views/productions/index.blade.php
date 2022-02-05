@@ -22,11 +22,8 @@
                                     <thead>
                                         <tr>
                                             <th>ID production</th>
-                                            <th> Nom </th>
                                             <th>Login</th>
                                             <th>Password</th>
-                                            <th>wilaya - Commune</th>
-                                            <th>Nombre de Course</th>
                                             <th>actions</th>
                                         </tr>
 
@@ -35,9 +32,56 @@
                                     <tbody>
 
                                         @foreach($productions as $production)
-                                        <tr>
+                                            <tr>
+                                                <td>{{$production->id}}</td>
+                                                <td>{{$production->name ?? ''}}</td>
+                                                <td>{{$production->password_text?? ''}}</td>
+                                                <td>
+                                                    <div class="table-action">
+                                                        <a  href="{{route('production.destroy',['production'=>$production->id])}}"
+                                                            onclick="return confirm('etes vous sure  ?')"
+                                                            class="btn btn-danger text-white"><i class="fa fa-trash"></i> &nbsp; </a>
 
-                                        </tr>
+
+
+
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$production->id}}">
+                                                            <i class="fa fa-plus"></i> Modifier
+                                                        </button>
+                                                            <div class="modal fade" id="exampleModal{{$production->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Modifier Categorie</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <form id="productionFform" action="{{route('production.update',['production'=>$production->id])}}" method="post" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div class="form-group">
+                                                                                <label class="small mb-1" for="inputFirstName">Categorie: </label>
+                                                                                <input type="text" value="{{$production->nom}}" name="nom"  class="form-control"/>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label class="small mb-1" for="inputFirstName">Réference : </label>
+                                                                                <input type="text" value="{{$production->reference}}" name="reference"  class="form-control"/>
+                                                                            </div>
+
+                                                                            <button class="btn btn-primary btn-block" type="submit" id="ajax_production">Modifier</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </td>
+                                            </tr>
                                         @endforeach
                                         </tbody>
                                     </table>

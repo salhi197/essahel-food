@@ -10,30 +10,10 @@ use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
     use AuthenticatesUsers;
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -44,9 +24,6 @@ class LoginController extends Controller
         $this->middleware('guest:fournisseur')->except('logout');
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function showAdminLoginForm()
     {
         return view('auth.login', [
@@ -54,9 +31,6 @@ class LoginController extends Controller
         ]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function showLivreurLoginForm()
     {
         return view('auth.login', [
@@ -74,7 +48,7 @@ class LoginController extends Controller
     public function showProductionLoginForm()
     {
         return view('auth.login', [
-            'url' => Config::get('constants.guards.producion')
+            'url' => 'production'
         ]);
     }
 
@@ -87,12 +61,7 @@ class LoginController extends Controller
         ]);
     }
 
-    
 
-    /**
-     * @param Request $request
-     * @return array
-     */
     protected function validator(Request $request)
     {
         return $this->validate($request, [
@@ -101,11 +70,6 @@ class LoginController extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param $guard
-     * @return bool
-     */
     protected function guardLogin(Request $request, $guard)
     {
         $this->validator($request);
@@ -118,27 +82,24 @@ class LoginController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function adminLogin(Request $request)
     {
         if ($this->guardLogin($request, Config::get('constants.guards.admin'))) {
             return redirect()->intended('/home');
         }
-
         return back()->withInput($request->only('email', 'remember'));
     }
 
 
+    public function productionLogin(Request $request)
+    {
+        if ($this->guardLogin($request, Config::get('constants.guards.production'))) {
+            return redirect()->intended('/production');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
 
-    /**
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function livreurLogin(Request $request)
     {
         if ($this->guardLogin($request,Config::get('constants.guards.livreur'))) {
@@ -156,16 +117,11 @@ class LoginController extends Controller
         return back()->withInput($request->only('email', 'remember'));
     }
 
-
     public function freelancerLogin(Request $request)
     {
         if ($this->guardLogin($request,Config::get('constants.guards.freelancer'))) {
             return redirect()->intended('/home');
         }
-
         return back()->withInput($request->only('email', 'remember'));
     }
-
-
-
 }

@@ -55,7 +55,7 @@ Auth::routes();
 
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('login.admin');
 Route::get('/login/livreur', 'Auth\LoginController@showLivreurLoginForm')->name('login.Livreur');
-Route::get('/login/production', 'Auth\LoginController@showProductionLoginForm')->name('login.Production');
+Route::get('/login/production', 'Auth\LoginController@showProductionLoginForm')->name('login.production');
 Route::get('/login/fournisseur', 'Auth\LoginController@showFournisseurLoginForm')->name('login.Fournisseur');
 Route::get('/login/freelancer', 'Auth\LoginController@showFreelancerLoginForm')->name('login.Freelancer');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm')->name('register.admin');
@@ -313,7 +313,6 @@ Route::group(['prefix' => 'production', 'as' => 'production'], function () {
     Route::get('/show/create',['as'=>'.show.create', 'uses' => 'ProductionController@create']);
     Route::post('/create', ['as' => '.create', 'uses' => 'ProductionController@store']);
     Route::get('/destroy/{id_production}', ['as' => '.destroy', 'uses' => 'ProductionController@destroy']);    
-    Route::get('/remise/{id_production}', ['as' => '.destroy', 'uses' => 'ProductionController@destroy']);    
     Route::get('/edit/{id_production}', ['as' => '.edit', 'uses' => 'ProductionController@edit']);
     Route::get('/show/{id_production}', ['as' => '.show', 'uses' => 'ProductionController@show']);
     Route::post('/update/{id_production}', ['as' => '.update', 'uses' => 'ProductionController@update']);    

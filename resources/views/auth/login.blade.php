@@ -85,18 +85,13 @@
     <div class="container login-container">
             <div class="row">
                 <div class="col-md-6 login-form-1">
-                    <h3>
-                        <img src="{{asset('img/lsrapide-logo.png')}}" alt="" 
-                            width="30%"
-                        />
-                    </h3>
+                    <h3></h3>
                     <p class="text-white">
-                    LSrapide est une société de transport de fret et de livraison express qui vous propose:
-Transfert de toutes les demandes aux propriétaires de magasins et aux magasins en ligne
-                    </p>                   
+                    Essahel Food
+                    </p>
                     <a class="text-white btn btn-info" href="{{ route('login.admin') }}">Admin</a>
-                    <a class="text-white btn btn-info" href="{{ route('login.Fournisseur') }}">Fournisseur</a>
-                    <a class="text-white btn btn-info" href="{{ route('login.Livreur') }}">Livreur</a>
+                    <a class="text-white btn btn-info" href="{{ route('login.production') }}">Production</a>
+
                 </div>
                 <div class="col-md-6 login-form-2">
                     <div class="login-logo">
