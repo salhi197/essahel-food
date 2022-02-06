@@ -36,7 +36,6 @@
                                             <tr>
 
                                                 <td>{{$produit->id ?? ''}}</td>
-
                                                 <td>
                                                     {{$produit->nom ?? ''}}
                                                 </td>
@@ -52,7 +51,7 @@
                                                         class="text-white btn btn-danger">
                                                                 <i class="fas fa-trash"></i> 
                                                         </a>
-                                                        <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">
+                                                        <button data-toggle="modal" data-target="#squarespaceModal{{$produit->id}}" class="btn btn-primary center-block">
                                                             Modifer
                                                         </button>       
                                                         @include('includes.edit_produit',['produit'=>$produit])                                                 
@@ -101,6 +100,19 @@
                         <label for="exampleInputEmail1">Nom Produit</label>
                         <input type="text" value="{{ old('nom') }}" name="nom" class="form-control"
                             id="exampleInputEmail1" placeholder=" ">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom Produit</label>
+                        <select class="form-control">
+                            @foreach($categories as $categorie)
+                                <option value="{{$categorie->nom}}"
+                                        @if($categorie->id == $produit->id) selected @endif>
+                                    {{$categorie->nom ?? ''}}
+                                </option>
+                            @endforeach
+
+                        </select>
+
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Catégorie : </label>

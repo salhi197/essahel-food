@@ -8,7 +8,7 @@ use App\Stock;
 use App\Achat;
 use Carbon\Carbon;
 use App\Produit;
-use App\Fournisseur;
+use App\Categorie;
 use App\Http\Requests\StoreProduit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,8 @@ class ProduitController extends Controller
     public function index()
     {
         $produits = Produit::all();
-        return view('produits.index',compact('produits'));
+        $categories = Categorie::all();
+        return view('produits.index',compact('produits','categories'));
     }
 
     public function create()
@@ -70,33 +71,21 @@ class ProduitController extends Controller
         return view('produits.edit',compact('fournisseurs','communes','wilayas','produit'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produit  $produit
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $produit)
     {   
         $produit = Produit::find($produit);
         $produit->nom= $request->get('nom');
-        $produit->prix_vente= $request->get('prix_vente');
-        $produit->quantite= $request->get('quantite');
-        $produit->categorie= $request->get('categorie');
-        $produit->prix_fournisseur= $request->get('prix_fournisseur');
-        $produit->marge_commercial= $request->get('marge_commercial');
-        $produit->description = $request->get('description');
-
-        if ($request->hasFile('image')) {
-            
-            $produit->image = $request->file('image')->store(
-                'produits/images',
-                'public'
-            );
-        }
+        $produit->reference = $request['reference'];
+        $produit->description = $request['description'] ?? '';
+        $produit->prix_gros = $request['prix_gros'];
+        $produit->prix_semi_gros = $request['prix_semi_gros'];
+        $produit->prix_detail = $request['prix_detail'];
+        $produit->prix_minimum = $request['prix_minimum'];
+        $produit->prix_autre = $request['prix_autre'];
+        $produit->id_categorie = $request['id_categorie'] ?? 1;
+        $produit->image = "";
         $produit->save();
-        $produits = Produit::all();
         return redirect()->route('produit.index')->with('success', 'Produit modifé avec succés ');        
     }
 

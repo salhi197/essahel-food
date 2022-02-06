@@ -1,4 +1,4 @@
-<div class="modal fade " id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+<div class="modal fade " id="squarespaceModal{{$produit->id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -13,6 +13,21 @@
                         <input type="text" value="{{ $produit->nom ?? '' }}" name="nom" class="form-control"
                             id="exampleInputEmail1" placeholder=" ">
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom Produit</label>
+                        <select class="form-control">
+                            @foreach($categories as $categorie)
+                                <option value="{{$categorie->nom}}"
+                                @if($categorie->id == $produit->id) selected @endif
+                                >
+                                    {{$categorie->nom ?? ''}}
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Réference : </label>
                         <input type="text" value="{{ $produit->reference ?? '' }}" name="reference" class="form-control"

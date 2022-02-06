@@ -8,7 +8,7 @@
  
 ?>
 <div class="container-fluid">
-    <h1 class="mt-4"> Fournisseurs</h1>
+    <h1 class="mt-4"> Impression des Tickets</h1>
     <div class="card mb-4">
         <div class="card-header">
             <div class="row">

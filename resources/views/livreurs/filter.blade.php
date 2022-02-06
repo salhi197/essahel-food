@@ -7,61 +7,39 @@
 
   <div class="container-fluid">
                         <h1 class="mt-4"> Tableau de bord </h1>        
-                        <div class="card-header">
+                                    <div class="card-header">
                                         <p>
-                                            Les Coliers de Livreur : {{$l->name ?? ''}} {{$l->prenom ?? ''}}
+                                            Les Tickets de Livreur : {{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}}
                                         </p>
+                                    </div>
+                               <div class="card mb-4">
+                                 <div class="card-header">
+                                                     <form method="post" action="{{route('livreur.extra.filter',['livreur'=>$livreur->id])}}">
+                                                            @csrf
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="small mb-1" for="inputEmailAddress">date début : </label>
+                                                                            <input  class="form-control py-4" id="telephpone"
+                                                                             name="date_debut" value="{{$date_debut}}" type="date" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="small mb-1" for="inputEmailAddress">data fin: </label>
+                                                                            <input  class="form-control py-4" id="telephpone"
+                                                                             name="date_fin" value="{{$date_fin}}" type="date" />
+                                                                        </div>
+                                                                    </div>
 
 
-
-                                </div>  
-
-                           <div class="card mb-4">
-                                     <div class="card-header">
-                                     <form method="post" action="{{route('livreur.extra.filter',['livreur'=>$livreur_id])}}">
-                                        @csrf
-                                                <div class="row">
-
-                                                   
-
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputEmailAddress">date de : </label>
-                                                        <input  class="form-control py-4" id="telephpone" 
-                                                         name="date_debut" value="{{$date_debut}}" type="date" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputEmailAddress">dataà: </label>
-                                                        <input  class="form-control py-4" id="telephpone" 
-                                                         name="date_fin" value="{{$date_fin}}" type="date" />
-                                                    </div>
-                                                </div>
-
-
-                                                    <div class="col-md-2">
-                                                            <label class="control-label">{{ __('Type') }}: </label>
-                                                            <select class="form-control states" id="states" name="states">
-                                                                <option value="commande-state-all">Tous </option>
-                                                                <option value="en cours">en cours</option>
-                                                                <option value="sortie">sortie</option>
-                                                                <option value="annule">annule</option>
-                                                                <option value="reporte">reporte</option>
-                                                                <option value="ne_repond_pas">ne repond pas</option>
-                                                                <option value="livree">livree</option>
-                                                                <option value="retour_ls">retour ls</option>
-                                                                <option value="retour_client">retour client</option>
-
-                                                            </select>
-                                                    </div>
-                                                    <div class="col-md-2" style="padding:35px;">
-                                                    <button class="text-white btn btn-primary" type="submit">
-                                                            envoyer
-                                                        </button>                                                                                                        
-                                                    </div>
-                                                    </form>
+                                                                    <div class="col-md-2" style="padding:35px;">
+                                                                    <button class="text-white btn btn-primary" type="submit">
+                                                                            envoyer
+                                                                        </button>
+                                                                    </div>
+                                                     </form>
 
 
                                                     <div class="col-md-5" style="padding:35px;">
@@ -71,14 +49,12 @@
                                                         <a class="btn btn-primary" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
                                                             Affecter Colier
                                                         </a>                                                                                                        
-                                                        <!-- <a class="btn btn-primary " href="{{route('commande.detacher',['livreur'=>$livreur])}}">
-                                                            Détacher
-                                                        </a>                                                                                                         -->
-                                                            <a
-                                                                onclick="return confirm('etes vous sure  ?')"
-                                                                id="hrefDetacher" href="#" class="btn btn-danger" >
-                                                                    détacher directement  
-                                                            </a>                                                                                                        
+                                                                                                                                                               -->
+                                                        <a
+                                                            onclick="return confirm('etes vous sure  ?')"
+                                                            id="hrefDetacher" href="#" class="btn btn-danger" >
+                                                                détacher directement
+                                                        </a>
 
 
                                                     </div>
@@ -89,9 +65,6 @@
                                                             <label class="form-check-label" for="checkAll">séléctionner tout</label>
                                                         </div>
                                                     </div>
-
-                                                    
-
                                                 </div>
                                 </div>
 
@@ -105,10 +78,6 @@
                                         <thead>
                                             <tr>
                                                 <th>date</th>
-                                                <th>Fournisseur</th>
-                                                <th>Tracking</th>
-                                                <th>Consomateur</th>
-                                                <th>produit</th>
                                                 <th>wilaya </th>
                                                 <th>Commune</th>
                                                 <th>Livreur</th>
@@ -118,101 +87,14 @@
                                         </thead>
                                         <tbody>
 
-                                        <?php
-                                            $date = "";//Carbon\Carbon::parse($commandes[0]->created_at)->format('Y-m-d') 
-                                            ?>
-                                            @foreach($commandes as $commande)
-                                            <tr>
-                                            <?php 
-                                            if($date != Carbon\Carbon::parse($commande->sortie)->format('Y-m-d')){ ?>
-                                            <tr>
-                                                <td colspan="10" style="background-color:#ee4035;color:white;text-align:center;">{{ Carbon\Carbon::parse($commande->sortie)->format('Y-m-d') }}</td>
-                                            </tr>
-                                            <?php 
-                                                $date = Carbon\Carbon::parse($commande->sortie)->format('Y-m-d') ;
-                                            }  ?>
-                                            <tr class="commande-wilaya-{{$commande->wilaya}} commande-wilaya-all
-                                            commande-state-all
-                                            commande-state-{{$commande->state}}">
-                                                <td>
-                                                    <input type="checkbox" value="{{$commande->id}}" class="form-check-input all commande-checkbox" id="exampleCheck{{$commande->wilaya }}">
-                                                    crée le :  {{$commande->created_at ?? ''}} 
-
-                                                </td>
-                                                <td >                                                 
-                                                    <?php
-                                                        $fournisseur = json_decode($commande->fournisseur); 
-                                                    ?>
-                                                    {{$fournisseur->nom_prenom ?? ''}}                                                    
-                                                </td>
-
-                                                <td style="text-transform: uppercase;">                                  
-
-                                                    {{$commande->code_tracking ?? ''}}
-                                                </td>
-
-
-                                                <td >             
-                                                    {{$commande->nom_client ?? 'non définie'}}<br>
-                                                    {{$commande->telephone ?? 'non définie'}}<br>
-                                                 </td>
-
-
-                                                 <td >                                                 
-                                                 <?php
-                                                    $total_produit = 0;$total= 0;
-                                                    $produits = json_decode($commande->produit);
-                                                    foreach($produits as $produit){
-                                                        $produit = json_decode(json_encode($produit), true);
-
-                                                                                                                
-                                                ?>
-                                                  <i class=" fas fa-box	"></i>  produit : 
-                                                   {{$produit['nom']}}
-                                                    | {{$produit['quantite'] ?? 'non définie'}}<br>
-
-                                                    <?php
-                                                        }                                        
-                                                    ?>
-                                                <br>
-                                                    <i class=" fas fa-money-bill	"></i> prix :{{$commande->total}} DA<br>
-                                                </td>
-                                                <td>                                                 
-                                                    {{App\Commande::getWilaya($commande->wilaya) ?? 'non définie'}} 
-                                                </td>
-
-                                                <td>                                                 
-                                                    {{App\Commande::getCommune($commande->commune) ?? 'non définie'}} 
-                                                </td>
-
-
-                                                <td>                                                 
-                                                    <?php
-                                                        $livreur = json_decode($commande->livreur); 
-                                                    ?>
-                                                    <?php  if(isset($livreur->name)){echo '<i class="fa fa-user" style="color:green;"></i>'.$livreur->name.' ';}else{echo '<i class="fa fa-user" style="color:green;"></i> ';}?>
-                                                    <?php  if(isset($livreur->prenom)){echo $livreur->prenom.'<br>';}?><br>
-                                                    <?php  if(isset($livreur->telephone)){echo '<i class="fa fa-phone"></i> '.$livreur->telephone.'<br>';}?>
-
-                                                </td>
-                                                <td>                                                 
-                                                    <span class="badge badge-info btn btn-info" style=""> 
-                                                        {!! str_replace('_', ' ', $commande->state) !!}
-                                                    </span>
-                                                </td>
-
-                                                <td >
-                                                   
-                                                    <div class="dropdown">
-                                                    <a href="{{route('commande.timeline',['id_commande'=>$commande->id])}}" class="btn btn-success"><i class="fa fa-list"></i> </a>
-
-                                                                <a class="btn btn-info" href="{{route('commande.edit',['commande'=>$commande->id])}}"><i class="fa fa-pen"></i> </a>
-                                                                <a href="{{route('commande.show',['id_commande'=>$commande->id])}}" class="btn btn-danger"><i class="fa fa-plus"></i> </a>
-                                                    </div>                                                
-                                                </td>
-
-                                            </tr>
-
+                                            @foreach($tickets as $ticket)
+                                                <tr>
+                                                    <td>{{$produit->id ?? ''}}</td>
+                                                    <td>{{$produit->id ?? ''}}</td>
+                                                    <td>{{$produit->id ?? ''}}</td>
+                                                    <td>{{$produit->id ?? ''}}</td>
+                                                    <td>{{$produit->id ?? ''}}</td>
+                                                </tr>
                                             @endforeach
                                             <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -235,7 +117,6 @@
                                                                         <label class="small mb-1" for="inputFirstName">Montant de crédit: </label>
                                                                         <input type="text" class="form-control" value="" name="montant_credit" id=""/>                                        
                                                                     </div>
-
                                                             </div>
                                                             <br>
                                                         </form>
@@ -245,15 +126,10 @@
                                                 </div>
                                             </div>
                                         </tbody>
-
                                     </table>
                                     <br>
-
-
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
@@ -362,7 +238,7 @@ function watchWilayaChanges() {
             onChangeState();
             onChangeWilaya();
             $('.commande-checkbox').change(function(){
-                var livreur = <?php echo json_encode($livreur_id); ?>;
+                var livreur = <?php echo json_encode($livreur->id); ?>;
                 console.log(livreur)
                 var checks = $(".commande-checkbox:checked"); // returns object of checkeds.
                 var hrefDetacher = "/commande/detacher/list/livreur/"+livreur+"/list?id=";
@@ -386,7 +262,7 @@ function watchWilayaChanges() {
 
 
             $("#checkAll").click(function(){
-                var livreur = <?php echo json_encode($livreur_id); ?>;
+                var livreur = <?php echo json_encode($livreur->id); ?>;
                 $('input:checkbox').not(this).prop('checked', this.checked);
                 var checks = $(".commande-checkbox:checked"); // returns object of checkeds.
 

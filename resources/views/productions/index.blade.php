@@ -52,26 +52,37 @@
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Modifier Categorie</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Modifier Agent Production</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
 
                                                                     <div class="modal-body">
-                                                                        <form id="productionFform" action="{{route('production.update',['production'=>$production->id])}}" method="post" enctype="multipart/form-data">
+                                                                        <form action="{{route('production.update',['production'=>$production->id])}}" method="post" enctype="multipart/form-data">
                                                                             @csrf
                                                                             <div class="form-group">
-                                                                                <label class="small mb-1" for="inputFirstName">Categorie: </label>
-                                                                                <input type="text" value="{{$production->nom}}" name="nom"  class="form-control"/>
+                                                                                <label for="exampleInputEmail1">Nom </label>
+                                                                                <input type="text" value="{{ $production->name ?? '' }}" name="name" class="form-control"
+                                                                                       id="exampleInputEmail1" placeholder=" ">
                                                                             </div>
 
                                                                             <div class="form-group">
-                                                                                <label class="small mb-1" for="inputFirstName">Réference : </label>
-                                                                                <input type="text" value="{{$production->reference}}" name="reference"  class="form-control"/>
+                                                                                <label for="exampleInputEmail1">Login </label>
+                                                                                <input type="text" value="{{ $production->email ?? '' }}" name="email" class="form-control"
+                                                                                       id="exampleInputEmail1" placeholder=" ">
                                                                             </div>
 
-                                                                            <button class="btn btn-primary btn-block" type="submit" id="ajax_production">Modifier</button>
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputEmail1">Password </label>
+                                                                                <input type="text" value="{{ $production->password_text ?? '' }}" name="password" class="form-control"
+                                                                                       id="exampleInputEmail1" placeholder=" ">
+                                                                            </div>
+
+                                                                            <div class="btn-group" role="group">
+                                                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" role="button">Fermer</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>

@@ -6,6 +6,8 @@ use App\Commande;
 use App\Commune;
 use App\Http\Requests\StoreLivreur;
 use App\Livreur;
+use App\Ticket;
+use App\Sortie;
 use App\Wilaya;
 use Illuminate\Http\Request;
 use Auth;
@@ -17,8 +19,6 @@ class LivreurController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth:admin');
-        // $this->middleware('auth:livreur');
     }
 
 
@@ -134,12 +134,7 @@ class LivreurController extends Controller
         return redirect()->route('livreur.index')->with('success', 'livreur inséré avec succés ');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function destroy($id_livreur)
     {
@@ -182,37 +177,25 @@ class LivreurController extends Controller
     }
     public function filter($id_livreur)
     {
-        $livreur = $id_livreur;
-        // $commandes = Commande::where('livreur_id',$livreur)->get();
-        $commandes = Commande::where([
-            ['livreur_id','=',$livreur],
-            ['type', '=', 'colier'],
-            ['state', '<>', 'retour_client'],            
-            ['state', '<>', 'retour_ls'],           
-            ['state', '<>', 'retour_ls'],          
-            ['state', '<>', 'Livree']
-        ])->get();
-
-        $wilayas =Wilaya::all();
-        $l=Livreur::find($id_livreur); 
-        $livreur_id = $id_livreur;
+        $sorties = Sortie::where('id_livreur',$id_livreur)->get();
+        /*
+         * where in search for it in google
+         * */
+        $tickets = Ticket::where('id','=',$id_livreur)->get();
+        $livreur=Livreur::find($id_livreur);
         $date_debut = "";
         $date_fin = "";
-        return view('livreurs.filter',compact('commandes','wilayas','l','livreur','livreur_id',
-        'date_debut',
-        'date_fin'
+        return view('livreurs.filter',compact(
+            'tickets',
+            'livreur',
+            'id_livreur',
+            'date_debut',
+            'date_fin'
     ));
     }
 
 
-    public function changeState($id_livreur)
-    {
-        $livreur = Livreur::find($id_livreur);
-        $livreur->state = !$livreur->state;
 
-        $livreur->save();
-        return redirect()->back()->with(['success' => 'désactivé']);
-    }   
 
 
 

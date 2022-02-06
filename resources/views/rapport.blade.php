@@ -36,25 +36,25 @@
 
             <div class="row">
                     <div class="card col-md-3">
-                        <h1>
+                        <h3>
                         Nombre Tickets Générés :
-                        </h1>
+                        </h3>
                     </div>
 
                     <div class="card col-md-3">
-                        <h1>
+                        <h3>
                         Nombre Tickets Vers Depot :
-                        </h1>
+                        </h3>
                     </div>
                     <div class="card col-md-3">
-                        <h1>
+                        <h3>
                         Nombre Tickets Au Depot :
-                        </h1>
+                        </h3>
                     </div>
                     <div class="card col-md-3">
-                        <h1>
+                        <h3>
                         Nombre Tickets Sortie :
-                        </h1>
+                        </h3>
                     </div>
 
             </div>        

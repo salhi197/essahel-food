@@ -37,12 +37,15 @@ class ProductionController extends Controller
         return view('productions.edit',compact('user','wilayas','communes'));
     }
 
-    public function update($id_user)
+    public function update(Request $request,$id_user)
     {
-        dd('update');
         $production = Production::find($id_user);
-
-        return view('productions.edit',compact('user','wilayas','communes'));
+        $production->name = $request->get('name');
+        $production->email = $request->get('email');
+        $production->password = Hash::make($request->get('password'));
+        $production->password_text = $request->get('password');
+        $production->save();
+        return redirect()->route('production.index')->with('success', 'les informations de l\'agent ont été modifié ');
     }
 
     

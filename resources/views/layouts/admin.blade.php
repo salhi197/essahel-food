@@ -1,467 +1,335 @@
+
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>CliNtic </title>
-  <!-- Custom fonts for this template -->
-  <link href="{{asset('super/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-  <style>
-    body{
-      text-transform: capitalize;
-    }
-    .btn {
-      text-transform: capitalize;
-    }
-    .modal .modal-dialog {
-      width: 850px !important;
-    }
-    input[type="text"] {
-      text-transform: initial;
-    }
-  </style>
-
-  <!-- Custom styles for this template -->
-  <link href="{{asset('super/css/sb-admin-2.min.css')}}" rel="stylesheet">
-  <link href="{{asset('css/toastr.css')}}" rel="stylesheet" />
-
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('template/img/apple-icon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('template/img/favicon.png')}}">
+    <title>
+        Material Dashboard 2 by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="{{asset('template/css/nucleo-icons.css')}}" rel="stylesheet" />
+    <link href="{{asset('template/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{{asset('template/css/material-dashboard.css?v=3.0.0')}}" rel="stylesheet" />
 </head>
 
-<body id="page-top" class="sidebar-toggled">
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">CLINnTIC <sup>2</sup></div>
-      </a>
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="/home">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span> Tableau de bord </span></a>
-      </li>
-      @auth('freelancer')
-
-        <li class="nav-item active">
-              <a class="nav-link" href="#">
-              <i class="fas fa-dumpster"></i>
-              <span>produit à vendre </span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-address-card"></i>
-            <span>Mon stock clicntic</span></a>
-          </li> 
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-address-card"></i>
-            <span>freelancers </span></a>
-          </li> 
-          </li>
-
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-users"></i>
-            <span>Mon payment</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-motorcycle"></i>
-            <span>Rapports</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" target="_blank" href="https://www.clicntic-dz.com">
-            <i class="fas fa-motorcycle"></i>
-            <span>clicntic-dz.com</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" target="_blank" href="facebook.com">
-            <i class="fas fa-facebook-f"></i>
-            <span>Rapports</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" href="#" target="_blank">
-            <i class="fas fa-motorcycle"></i>
-            <span>Rapports</span></a>
-          </li>      
-          
-
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-store"></i>
-            <span>gestion de stock</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-            <i class="fas fa-envelope-open-text"></i> 
-            <span>news Letter</span></a>
-          </li>
-      
-      @endif
-      @auth('livreur')
-    <li class="nav-item active">
-      <a class="nav-link" href="/admin">
-          <i class="fas fa-list"></i>
-          <span>tout les Commandes</span></a>
-      </li>
-      <li class="nav-item active">
-      <a class="nav-link" href="{{route('livreur.livraisons')}}">
-      <i class="fas fa-user "></i>
-          <span>mes commandes </span></a>
-      </li>
-      @endif
-     @auth('admin')
-     <li class="nav-item active">
-      <a class="nav-link" href="{{route('produit.index')}}">
-      <i class="fas fa-cart-plus"></i>
-                <span>Produit</span></a>
-      </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="{{route('commande.index')}}">
-          <i class="fas fa-dumpster"></i>
-          <span>Commandes</span></a>
-      </li>
-      <li class="nav-item active">
-          <a class="nav-link" href="{{route('type.index')}}">
-          <i class="fas fa-list"></i>
-          <span>type livraison</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('fournisseur.index')}}">
-        <i class="fas fa-address-card"></i>
-        <span>Fournisseurs </span></a>
-      </li> 
-
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('achat.index')}}">
-        <i class="fas fa-address-card"></i>
-        <span>renouvlemnt / payment</span></a>
-      </li> 
-
-
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('freelancer.index')}}">
-        <i class="fas fa-address-card"></i>
-        <span>freelancers </span></a>
-      </li> 
-      </li>
-
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('user.index')}}">
-        <i class="fas fa-users"></i>
-        <span>Liste des commeciaux</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('livreur.index')}}">
-        <i class="fas fa-motorcycle"></i>
-        <span>Liste des livreurs</span></a>
-      </li>      
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('stock.index')}}">
-        <i class="fas fa-store"></i>
-        <span>gestion de stock</span></a>
-      </li>      
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('newsletter.index')}}">
-        <i class="fas fa-envelope-open-text"></i> 
-        <span>news Letter</span></a>
-      </li>
-      <li class="nav-item active">
-            <a class="nav-link" href="{{route('pub.index')}}">
-            <i class="fas fa-broadcast-tower"></i>
-            <span>Gestion publicitaire</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('boutique.index')}}">
-        <i class="fas fa-cogs"></i>
-        <span>Boutique</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('rapport')}}">
-        <i class="fas fa-chart-bar"></i>
-        <span>Rapports</span></a>
-      </li>
-      <hr class="sidebar-divider">
-
-      <li class="nav-item active">
-            <a class="nav-link" target="_blank" href="https://www.clicntic-dz.com">
-            <i class="fas fa-motorcycle"></i>
-            <span>clicntic-dz.com</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" target="_blank" href="https://www.facebook.com">
-              <i class="fab fa-facebook-square"></i>
-              <span>page facebok</span></a>
-          </li>      
-          <li class="nav-item active">
-            <a class="nav-link" href="https://www.clicntic-dz.com/contact" target="_blank">
-            <i class="fas fa-file-signature"></i>
-            <span>Contact</span></a>
-          </li>      
-
-      @endif
-      <li class="nav-item active">
-          <a class="nav-link" href="{{ route('logout') }}" 
-            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-          <i class="fa fa-door-open"></i>
-          <span>déconnexion</span> 
+<body class="g-sidenav-show  bg-gray-200">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+            <img src="{{asset('template/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-      </li>
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-    </ul>
-    
-    <!-- Sidebar -->
-<!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-      <!-- Main Content -->
-      <div id="content">
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-          <!-- Sidebar Toggle (Topbar) -->
-          <form class="form-inline">
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars"></i>
-              Tableau de bord
-            </button>
-          </form>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw">
-                </i>
-              </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            @auth('admin')
 
-            <div class="topbar-divider d-none d-sm-block"></div>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('impression')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">Impression des Tickets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('rapport')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">
+                                <strong>
+                                    Rapport</span>
+                        </strong>
+                    </a>
+                </li>
 
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              @auth('livreur')
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user('livreur')->name ?? '' }} {{Auth::user('livreur')->prenom ?? ''  }}</span>
-              @endif
-              @auth('boutique')
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user('livreur')->name ?? '' }} {{Auth::user('livreur')->prenom ?? ''  }}</span>
-              @endif
-              @auth('freelancer')
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">freelancer</span>
-              @endif
-              @auth('admin')
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user('guard:admin')->name ?? ''}}</span>
-              @endif
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                <li class="nav-item">
+                    <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
+                        <i class="ni ni-single-02 text-yellow"></i>
+                        <span class="nav-link-text">
+                                <strong>
+                                    Affiche Livreur
+                                </strong>
+                            </span>
+                    </a>
+                </li>
+
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ni ni-pin-3 text-primary"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Utilisateur</span>
+                        </strong>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
+                        <a class="dropdown-item" href="{{route('production.index')}}">Agents Production</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('produit.index')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text"><strong>Produit</span></strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('categorie.index')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text"><strong>Categorie</span></strong>
+                    </a>
+                </li>
+            @endif
+            @auth('fournisseur')
+                <?php
+                $fournisseur = Auth::guard('fournisseur')->user();
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Mes Colis   </span>
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('produit.index')}}">
+                        <i class="ni ni-single-02 text-yellow"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Produits</span>
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('fournisseur.journal',['fournisseur'=>$fournisseur->id])}}">
+                        <i class="ni ni-circle-08 text-pink"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Mon Journal</span>
+                        </strong>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('fournisseur.stock')}}">
+                        <i class="ni ni-circle-08 text-pink"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Stock</span>
+                        </strong>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('wilaya.fournisseurs')}}">
+                        <i class="ni ni-key-25 text-info"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    T.Fournisseur</span>
+                        </strong>
+                    </a>
+                </li>
+
+            @endif
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <i class="fa fa-door-open"></i>
+                    <strong>
+                        <span>déconnexion</span>
+                    </strong>
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
 
-          </ul>
 
-        </nav>
-        <!-- End of Topbar -->
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-            @yield('content')
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; <a href="clicntic.com/">clicntic.com</a> 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
-
+        </ul>
     </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-  @if(!Auth::guard('admin')->user())
-  <div class="modal fade" id="ad-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Espace publicitaire</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <img width='300px' class="" src="{{asset('pub.jpg')}}">
-          <img width='300px' class="" src="{{asset('pub.jpeg')}}">
-          <img width='300px' class="" src="{{asset('pub.jpng')}}">
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+            </nav>
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="input-group input-group-outline">
+                        <label class="form-label">Type here...</label>
+                        <input type="text" class="form-control">
+                    </div>
                 </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-  @endif 
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-                
-
-                          <div class="modal fade" id="leModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">saisir le Motif:</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="fa fa-door-open"></i>
+                            <strong>
+                                <span>déconnexion</span>
+                            </strong>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                            <div class="sidenav-toggler-inner">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0">
+                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell cursor-pointer"></i>
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img src="{{asset('template/img/team-2.jpg')}}" class="avatar avatar-sm  me-3 ">
                                         </div>
-                                        <div class="modal-body">
-                                            <form id="form_type" action=" {{route('commande.annuler')}}" method="post">
-                                                @csrf
-                                                <div class="form-row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <input type="hidden" value="{{$commande->id ?? ''}}" name="commande" id="commande_id"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="small mb-1" for="inputFirstName">Motif d'annulation  : </label>
-                                                            <textarea name="motif" class="form-control">
-
-                                                            </textarea>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <button class="btn btn-primary btn-block" type="submit" >envoyer</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New message</span> from Laur
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                13 minutes ago
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img src="{{asset('template/img/small-logos/logo-spotify.svg')}}" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New album</span> by Travis Scott
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                1 day
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <title>credit-card</title>
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                        <g transform="translate(1716.000000, 291.000000)">
+                                                            <g transform="translate(453.000000, 454.000000)">
+                                                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                Payment successfully completed
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                2 days
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid mt--6">
+    @yield('content')
+    <!-- Footer -->
+    </div>
 
+    </div>
+</main>
+<!--   Core JS Files   -->
+<script src="{{asset('template/js/core/popper.min.js')}}"></script>
+<script src="{{asset('template/js/core/bootstrap.min.js')}}"></script>
+<script src="{{asset('template/js/plugins/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('template/js/plugins/smooth-scrollbar.min.js')}}"></script>
+<script src="{{asset('template/js/plugins/chartjs.min.js')}}"></script>
 
-
-
-
-
-
-                            <!-- Bootstrap core JavaScript-->
-  <script src="{{asset('super/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('super/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="{{asset('super/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-  <script src="{{asset('js/toastr.min.js')}}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="{{asset('super/js/sb-admin-2.min.js')}}"></script>
-  <script src="{{asset('js/dynamic-form.js')}}"></script>
-  <script src="{{asset('js/printThis.js')}}"></script>
-  <script>
-  @if(session('success'))
-      $(function(){
-          toastr.success('{{Session::get("success")}}')
-      })
-  @endif
-  @if ($errors->any())
-      $(function(){
-        @foreach ($errors->all() as $error)
-                  toastr.error('{{$error}}')
-        @endforeach
-      })
-  @endif
-  @if(session('error'))
-    $(function(){
-        toastr.error('{{Session::get("error")}}')
-    })
-  @endif
-// setInterval(function(){
-
-//   $('#ad-modal').modal('show');
-// }, 30000); //This value is represented in mili seconds.
-
-
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
 </script>
-
-        @yield('scripts')
-
-
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{asset('template/assets/js/material-dashboard.min.js?v=3.0.0')}}"></script>
 </body>
 
 </html>

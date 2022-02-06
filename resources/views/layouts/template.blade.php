@@ -49,87 +49,137 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-primary" href="../pages/dashboard.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
+            @auth('admin')
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('impression')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">Impression des Tickets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('rapport')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">
+                                <strong>
+                                    Rapport</span>
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
+                        <i class="ni ni-single-02 text-yellow"></i>
+                        <span class="nav-link-text">
+                                <strong>
+                                    Affiche Livreur
+                                </strong>
+                            </span>
+                    </a>
+                </li>
+
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ni ni-pin-3 text-primary"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Utilisateur</span>
+                        </strong>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
+                        <a class="dropdown-item" href="{{route('production.index')}}">Agents Production</a>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('produit.index')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text"><strong>Produit</span></strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('categorie.index')}}">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text"><strong>Categorie</span></strong>
+                    </a>
+                </li>
+            @endif
+            @auth('fournisseur')
+                <?php
+                $fournisseur = Auth::guard('fournisseur')->user();
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home">
+                        <i class="ni ni-tv-2 text-primary"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Mes Colis   </span>
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('produit.index')}}">
+                        <i class="ni ni-single-02 text-yellow"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Produits</span>
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('fournisseur.journal',['fournisseur'=>$fournisseur->id])}}">
+                        <i class="ni ni-circle-08 text-pink"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Mon Journal</span>
+                        </strong>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('fournisseur.stock')}}">
+                        <i class="ni ni-circle-08 text-pink"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    Stock</span>
+                        </strong>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('wilaya.fournisseurs')}}">
+                        <i class="ni ni-key-25 text-info"></i>
+                        <span class="nav-link-text">
+                <strong>
+                    T.Fournisseur</span>
+                        </strong>
+                    </a>
+                </li>
+
+            @endif
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <i class="fa fa-door-open"></i>
+                    <strong>
+                        <span>déconnexion</span>
+                    </strong>
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/tables.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/billing.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/virtual-reality.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/rtl.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                    </div>
-                    <span class="nav-link-text ms-1">RTL</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/notifications.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/profile.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-in.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">login</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-up.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li>
+
+
         </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-        </div>
     </div>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -152,10 +202,16 @@
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Sign In</span>
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="fa fa-door-open"></i>
+                            <strong>
+                                <span>déconnexion</span>
+                            </strong>
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -253,8 +309,8 @@
     @yield('content')
     <!-- Footer -->
     </div>
-        
-        </div>
+
+    </div>
 </main>
 <!--   Core JS Files   -->
 <script src="{{asset('template/js/core/popper.min.js')}}"></script>
@@ -272,9 +328,7 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
-<!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('template/assets/js/material-dashboard.min.js?v=3.0.0')}}"></script>
 </body>
 
