@@ -325,6 +325,7 @@ $_livreurs = Livreur::all();
     @endif
 
     $('.affiche_livreurs').on('change', function (e) {
+
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
         var lien = "/livreur/filter/"+valueSelected;

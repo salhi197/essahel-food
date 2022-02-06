@@ -177,11 +177,7 @@ class LivreurController extends Controller
     }
     public function filter($id_livreur)
     {
-        $sorties = Sortie::where('id_livreur',$id_livreur)->get();
-        /*
-         * where in search for it in google
-         * */
-        $tickets = Ticket::where('id','=',$id_livreur)->get();
+        $tickets = DB::select("select * from tickets t where t.id in (select id_ticket from sorties s where id_livreur=$id_livreur)");
         $livreur=Livreur::find($id_livreur);
         $date_debut = "";
         $date_fin = "";

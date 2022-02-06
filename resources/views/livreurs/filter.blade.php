@@ -12,58 +12,44 @@
                                             Les Tickets de Livreur : {{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}}
                                         </p>
                                     </div>
-                               <div class="card mb-4">
-                                 <div class="card-header">
-                                                     <form method="post" action="{{route('livreur.extra.filter',['livreur'=>$livreur->id])}}">
-                                                            @csrf
-                                                                <div class="row">
-                                                                    <div class="col-md-2">
-                                                                        <div class="form-group">
-                                                                            <label class="small mb-1" for="inputEmailAddress">date début : </label>
-                                                                            <input  class="form-control py-4" id="telephpone"
-                                                                             name="date_debut" value="{{$date_debut}}" type="date" />
-                                                                        </div>
-                                                                    </div>
 
-                                                                    <div class="col-md-2">
-                                                                        <div class="form-group">
-                                                                            <label class="small mb-1" for="inputEmailAddress">data fin: </label>
-                                                                            <input  class="form-control py-4" id="telephpone"
-                                                                             name="date_fin" value="{{$date_fin}}" type="date" />
-                                                                        </div>
-                                                                    </div>
+                           <div class="card mb-4">
+                                     <div class="card-header">
+                                         <form method="post" action="{{route('livreur.extra.filter',['livreur'=>$livreur->id])}}">
+                                            @csrf
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="inputEmailAddress">date début : </label>
+                                                            <input  class="form-control py-4" id="telephpone"
+                                                             name="date_debut" value="{{date('Y-m-d')}}" type="date" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="inputEmailAddress">data fin: </label>
+                                                            <input  class="form-control py-4" id="telephpone"
+                                                             name="date_fin" value="{{date('Y-m-d')}}" type="date" />
+                                                        </div>
+                                                    </div>
 
 
-                                                                    <div class="col-md-2" style="padding:35px;">
-                                                                    <button class="text-white btn btn-primary" type="submit">
-                                                                            envoyer
-                                                                        </button>
-                                                                    </div>
-                                                     </form>
+                                                    <div class="col-md-2" style="padding:35px;">
+                                                    <button class="text-white btn btn-primary" type="submit">
+                                                            envoyer
+                                                        </button>
+                                                    </div>
+                                                    </form>
 
 
                                                     <div class="col-md-5" style="padding:35px;">
-                                                        <a class="btn btn-primary " href="{{route('commande.retour',['livreur'=>$livreur])}}">
-                                                            Retour
-                                                        </a>                                                                                                        
                                                         <a class="btn btn-primary" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
-                                                            Affecter Colier
-                                                        </a>                                                                                                        
-                                                                                                                                                               -->
-                                                        <a
-                                                            onclick="return confirm('etes vous sure  ?')"
-                                                            id="hrefDetacher" href="#" class="btn btn-danger" >
-                                                                détacher directement
+                                                            Affecter Colis
                                                         </a>
-
-
-                                                    </div>
-
-                                                    <div class="col-md-3" style="padding:35px;">
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" id="checkAll">
-                                                            <label class="form-check-label" for="checkAll">séléctionner tout</label>
-                                                        </div>
+                                                        <a class="btn btn-primary" href="{{route('ticket.detacher',['livreur'=>$livreur])}}">
+                                                            Détacher Colis
+                                                        </a>
                                                     </div>
                                                 </div>
                                 </div>
@@ -78,22 +64,17 @@
                                         <thead>
                                             <tr>
                                                 <th>date</th>
-                                                <th>wilaya </th>
-                                                <th>Commune</th>
-                                                <th>Livreur</th>
-                                                <th>etat</th>
-                                                <th>actions</th>
+                                                <th>Id</th>
+                                                <th>Code bare</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             @foreach($tickets as $ticket)
                                                 <tr>
-                                                    <td>{{$produit->id ?? ''}}</td>
-                                                    <td>{{$produit->id ?? ''}}</td>
-                                                    <td>{{$produit->id ?? ''}}</td>
-                                                    <td>{{$produit->id ?? ''}}</td>
-                                                    <td>{{$produit->id ?? ''}}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
+                                                    <td>{{$ticket->id ?? ''}}</td>
+                                                    <td>{{$ticket->codebar ?? ''}}</td>
                                                 </tr>
                                             @endforeach
                                             <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
@@ -117,6 +98,7 @@
                                                                         <label class="small mb-1" for="inputFirstName">Montant de crédit: </label>
                                                                         <input type="text" class="form-control" value="" name="montant_credit" id=""/>                                        
                                                                     </div>
+
                                                             </div>
                                                             <br>
                                                         </form>
@@ -126,10 +108,15 @@
                                                 </div>
                                             </div>
                                         </tbody>
+
                                     </table>
                                     <br>
+
+
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 

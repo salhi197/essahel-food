@@ -24,6 +24,11 @@
                                             <tr>
                                                 <th>ID produit</th>
                                                 <th>Nom produit </th>
+                                                <th> prix_semi_gros </th>
+                                                <th> prix_detail  </th>
+                                                <th> prix_minimum  </th>
+                                                <th> prix_autre  </th>
+
                                                 <th>Prix</th>
                                                 <th>actions</th>
                                             </tr>
@@ -40,7 +45,11 @@
                                                     {{$produit->nom ?? ''}}
                                                 </td>
                                                 <td>{{$produit->prix_gros ?? ''}} </td>
-                                                
+                                                <td>{{$produit->prix_semi_gros?? ''}} </td>
+                                                <td>{{$produit->prix_detail ?? ''}} </td>
+                                                <td>{{$produit->prix_minimum ?? ''}} </td>
+                                                <td>{{$produit->prix_autre ?? ''}} </td>
+
                                                 <td >
 
                                                     <div class="table-action">  
@@ -48,10 +57,10 @@
                                                         <a  
                                                         href="{{route('produit.destroy',['id_produit'=>$produit->id])}}"
                                                         onclick="return confirm('etes vous sure  ?')"
-                                                        class="text-white btn btn-danger">
+                                                        class="text-white btn btn-danger btn-sm">
                                                                 <i class="fas fa-trash"></i> 
                                                         </a>
-                                                        <button data-toggle="modal" data-target="#squarespaceModal{{$produit->id}}" class="btn btn-primary center-block">
+                                                        <button data-toggle="modal" data-target="#squarespaceModal{{$produit->id}}" class="btn btn-primary btn-sm center-block">
                                                             Modifer
                                                         </button>       
                                                         @include('includes.edit_produit',['produit'=>$produit])                                                 
@@ -102,7 +111,7 @@
                             id="exampleInputEmail1" placeholder=" ">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nom Produit</label>
+                        <label for="exampleInputEmail1">Catégorie</label>
                         <select class="form-control">
                             @foreach($categories as $categorie)
                                 <option value="{{$categorie->nom}}"

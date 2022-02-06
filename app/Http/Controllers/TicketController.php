@@ -20,10 +20,35 @@ use Carbon\Carbon;
 class TicketController  extends Controller
 {
 
+    public function detacher($livreur)
+    {
+        $tickets = DB::select("select *,t.id as id_ticket, t.updated_at as pupdated_at,t.created_at as pcreated_at,p.nom from tickets t,produits p where (t.id_produit=p.id) and t.id in (select id_ticket from sorties s where id_livreur=$livreur) and satut='sortie'");
+        return view('tickets.detacher',compact('tickets','livreur'));
+    }
+
+    public function enlever(Request $request)
+    {
+        $ticket = Ticket::find($request['ticket']);
+        $ticket->satut = 'au_depot';
+        $ticket->save();
+        Sortie::where('id_ticket',$ticket->id)->first()->delete();
+        return response()->json([
+            'ticket'=>$request['ticket'],
+            'livreur'=>$request['livreur'],
+
+        ]);
+
+    }
+
+
     public function affecter($livreur)
     {
         $_livreur = $livreur;
-        $tickets = Ticket::where('satut', '=', 'au_depot')->orWhere('satut', '=', '0')->orWhere('satut', '=', 'vers_depot')->orderBy('created_at','desc')->get();
+        $tickets = Ticket::where('satut', '=', 'au_depot')
+//            ->orWhere('satut', '=', '0')
+//            ->orWhere('satut', '=', 'vers_depot')
+            ->orderBy('created_at','desc')
+            ->get();
         return view('tickets.affecter',compact('tickets','_livreur'));
     }
     
@@ -35,8 +60,8 @@ class TicketController  extends Controller
         $ticket->satut = 'sortie';
         $ticket->save();
         
-        $nbticket = DB::select("select statut_livraison as nbticket from sortie where id_ticket=$id_ticket and updated_at=CURDATE()");
-        if(count($nbticket)>0){
+        $nbticket = DB::select("select statut_livraison as nbticket from sorties where id_ticket=$id_ticket and date(updated_at)=CURDATE()");
+        if(count($nbticket)==0){
             $sortie  = new Sortie();
             $sortie->id_ticket = $request['ticket'];
             $sortie->id_livreur = $request['livreur'];

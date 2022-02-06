@@ -15,8 +15,9 @@
                                <div class="card-header">
 
                                     <div class="row">
-                                        <input 
-                                        onchange="SearchFunction()" 
+                                        <input
+                                                onblur="this.focus()" autofocus
+                                                onchange="SearchFunction()"
                                         class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
 
                                         <!-- <div class="col-md-2" style="">
@@ -46,6 +47,7 @@
                                         <thead>
                                             <tr>
                                                 <th>créé le</th>
+                                                <th>Au Depot le </th>
                                                 <th> nom de produit</th>
                                                 <th>code bar </th>
                                                 <th>Staut </th>
@@ -55,8 +57,8 @@
                                         <tbody >
                                             @foreach($tickets as $ticket)
                                                 <tr id="{{$ticket->id}}">
-                                                    
                                                     <td>{{$ticket->created_at}}</td>
+                                                    <td>{{$ticket->updated_at}}</td>
                                                     <td>{{$ticket->getProduit()['nom']?? ''}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
                                                     <td>{{$ticket->satut  }}</td>
@@ -82,7 +84,8 @@
 
 @section('scripts')
 <script>
-    
+
+
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     function SearchFunction() {
@@ -162,6 +165,12 @@
             }
         }
     }
+
+    $(document).ready(function() {
+        document.dispatchEvent(new KeyboardEvent("keydown", { key: "c" }));
+    });
+
+
 </script>
 @endsection
 @section('styles')

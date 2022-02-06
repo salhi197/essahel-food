@@ -19,6 +19,9 @@ Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impre
 Route::get('/ticket/affecter/livreur/{livreur}', 'TicketController@affecter')->name('ticket.affecter');
 Route::post('/ticket/affecter/livreur', 'TicketController@assigner')->where('items', '(.*)');
 
+Route::get('/ticket/detacher/livreur/{livreur}', 'TicketController@detacher')->name('ticket.detacher');
+Route::post('/ticket/enlever/livreur', 'TicketController@enlever')->where('items', '(.*)');
+
 
 
 
