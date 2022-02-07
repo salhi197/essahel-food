@@ -16,6 +16,9 @@ Route::get('/impression', 'ImpressionController@impression')->name('impression')
 Route::get('/rapport', 'RapportController@rapport')->name('rapport');
 Route::post('/get/scanned/tickets', 'RapportController@getScannedTickets')->name('getScannedTickets');
 Route::post('/ticket/impression/', 'ImpressionController@imprimer')->name('impression.tickets');
+
+Route::get('/ticket', 'TicketController@index')->name('ticket.index');
+
 Route::get('/ticket/affecter/livreur/{livreur}', 'TicketController@affecter')->name('ticket.affecter');
 Route::post('/ticket/affecter/livreur', 'TicketController@assigner')->where('items', '(.*)');
 
@@ -28,6 +31,7 @@ Route::post('/ticket/retourner/livreur', 'TicketController@retourner')->where('i
 
 
 Route::post('/ticket/filter/livreur/{livreur}', 'TicketController@filter')->name('ticket.filter.livreur');
+Route::post('/ticket/filter/extra', 'TicketController@filterExtra')->name('ticket.filter.extra');
 
 
 

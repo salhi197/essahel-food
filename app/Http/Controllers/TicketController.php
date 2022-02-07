@@ -20,6 +20,30 @@ use Carbon\Carbon;
 
 class TicketController  extends Controller
 {
+    public function index()
+    {
+        $tickets = Ticket::all();
+        $date_debut = date('Y-m-d');
+        // date($request['date_debut'],'Y-m-d');
+        $date_fin = date('Y-m-d');
+        return view('tickets.index',compact('tickets',
+        'date_debut',
+        'date_fin'  
+        ));
+    }
+
+    public function filterExtra(Request $request)
+    {        
+        $date_debut = Carbon::parse($request['date_debut'])->format('Y-m-d');
+        $date_fin = Carbon::parse($request['date_fin'])->format('Y-m-d');
+        // $tickets = DB::select("select * from tickets t where ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
+        $tickets = DB::select("select t.id,t.created_at,t.updated_at,t.satut,t.num_ticket_produit,t.codebar ,p.nom  as nom from tickets t,produits p where (p.id=t.id_produit) and ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
+        return view('tickets.index',compact(
+            'tickets',
+            'date_debut',
+            'date_fin'
+        ));
+    }
     public function retour($livreur)
     {
         $tickets = DB::select("select *,t.id as id_ticket, t.updated_at as pupdated_at,t.created_at as pcreated_at,p.nom from tickets t,produits p where (t.id_produit=p.id) and t.id in (select id_ticket from sorties s where id_livreur=$livreur) and satut='sortie'");

@@ -29,9 +29,13 @@ class ApiController extends Controller
      public function scan_depot(Request $request)
     {      
         $ticket =Ticket::where('codebar',$request['code'])->first();
-        $ticket->satut= "au_depot";
-        $ticket->save();
-        return response()->json(['reponse' => $ticket]);    
+        if ($ticket->satut =="sortie" or $ticket->satut =="au_depot") {
+            return response()->json(['reponse' => $ticket]);    
+        }else{
+            $ticket->satut= "au_depot";            
+            $ticket->save();
+            return response()->json(['reponse' => $ticket]);    
+        }
     } 
 
 

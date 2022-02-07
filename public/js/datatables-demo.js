@@ -28,8 +28,9 @@ $(document).ready(function() {
       });
 
       $('#dataTable').DataTable({
-        pageLength: 100,
-        order: [[ 1, 'desc' ]],
+        pageLength: 300,
+        order: [[ 1, 'asc' ]],
+        lengthMenu: [[10, 25, 50, -1], [300,"All"]],
         language: {
             search: "Filtrer ",
             paginate: {
