@@ -98,7 +98,7 @@
                 }
             } else {
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[2];
+                    td = tr[i].getElementsByTagName("td")[3];
                     if (td) {
                         txtValue=td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -136,7 +136,7 @@
                                 for (i = 1; i < tr.length; i++) {
                                     tr[i].classList.remove("tr-code");
                                 }
-                                trFound.getElementsByTagName("td")[3].innerHTML = "Sortie";
+                                trFound.getElementsByTagName("td")[4].innerHTML = "au_depot";
                                 $('#'+trId).addClass('alert alert-success')
 
                                 console.log(res);

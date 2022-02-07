@@ -143,51 +143,19 @@ class LivreurController extends Controller
             return redirect()->route('livreur.index')->with('success', 'le livreur a été supprimé ');     
     }
 
-    public function extraFilter(Request $request,$livreur_id)
-    {
-        $result = Commande::query();
-        $date_debut = "";
-        $date_fin = "";
-
-        if (!empty($request['date_debut'])) {
-            $date_debut = $request['date_debut'];
-            $result = $result->whereDate('created_at', '>=', $request['date_debut']);
-        }
-
-        if (!empty($request['date_fin'])) {
-            $date_fin = $request['date_fin'];
-            $result = $result->whereDate('created_at', '<=', $request['date_fin']);
-        }
-        $result = $result->where('livreur_id','=',$livreur_id);
-        $result = $result->where('type', '=', 'colier');
-        $result = $result->where('state', '<>', 'retour_client');            
-        $result = $result->where('state', '<>', 'retour_ls');           
-        $result = $result->where('state', '<>', 'retour_ls');          
-        $result = $result->where('state', '<>', 'Livree');
-        $commandes = $result->get();//->orderBy('sortie','asc');
-        $wilayas =Wilaya::all();
-        $l=Livreur::find($livreur_id); 
-        $livreur = $livreur_id;
-        return view('livreurs.filter',compact('commandes',
-            'date_debut',
-            'date_fin',
-        'wilayas','l','livreur_id','livreur'));
-
-
-    }
     public function filter($id_livreur)
     {
         $tickets = DB::select("select * from tickets t where t.id in (select id_ticket from sorties s where id_livreur=$id_livreur)");
         $livreur=Livreur::find($id_livreur);
-        $date_debut = "";
-        $date_fin = "";
+        $date_debut = date('Y-m-d');
+        $date_fin = date('Y-m-d');
         return view('livreurs.filter',compact(
             'tickets',
             'livreur',
             'id_livreur',
             'date_debut',
             'date_fin'
-    ));
+        ));
     }
 
 

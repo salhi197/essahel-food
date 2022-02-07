@@ -4,7 +4,7 @@ $(document).ready(function() {
         pageLength: 10,  
         order: [[ 1, 'desc' ]],
         language: {
-            search: "Filtrer avec le codebar",
+            search: "Filtrer ",
             paginate: {
               next: '&#8594;', // or '→'
               previous: '&#8592;' // or '←' 
@@ -18,7 +18,7 @@ $(document).ready(function() {
         pageLength: 10,  
         order: [[ 0, 'asc' ]],
         language: {
-            search: "Filtrer avec le codebar",
+            search: "Filtrer ",
             paginate: {
               next: '&#8594;', // or '→'
               previous: '&#8592;' // or '←' 
@@ -28,10 +28,10 @@ $(document).ready(function() {
       });
 
       $('#dataTable').DataTable({
-        pageLength: 10,
+        pageLength: 100,
         order: [[ 1, 'desc' ]],
         language: {
-            search: "Filtrer avec le codebar",
+            search: "Filtrer ",
             paginate: {
               next: '&#8594;', // or '→'
               previous: '&#8592;' // or '←' 

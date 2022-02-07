@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
 use App\Wilaya;
 use App\Template;
-use App\Commande;
+use App\Livreur;
 use App\Sortie;
+use App\Retour;
 use App\Ticket;
 use DB;
 use Dompdf\Dompdf;
@@ -28,13 +29,20 @@ class TicketController  extends Controller
     public function retourner(Request $request)
     {
         $ticket = Ticket::find($request['ticket']);
-        $ticket->satut = 'au_depot';
+        $ticket->satut = 'retour';
         $ticket->save();
-        Sortie::where('id_ticket',$ticket->id)->first()->delete();
+        /**
+         * insérer retour
+         */
+        $retour  = new Retour();
+        $retour->id_ticket = $request['ticket'];
+        $retour->id_livreur = $request['livreur'];
+        $retour->id_client = 1;
+        $retour->prix_vente = 100;        
+        $retour->save();    
         return response()->json([
             'ticket'=>$request['ticket'],
             'livreur'=>$request['livreur'],
-
         ]);
     }
 
@@ -65,7 +73,7 @@ class TicketController  extends Controller
         $_livreur = $livreur;
         $tickets = Ticket::where('satut', '=', 'au_depot')
 //            ->orWhere('satut', '=', '0')
-//            ->orWhere('satut', '=', 'vers_depot')
+           ->orWhere('satut', '=', 'retour')
             ->orderBy('created_at','desc')
             ->get();
         return view('tickets.affecter',compact('tickets','_livreur'));
@@ -96,6 +104,22 @@ class TicketController  extends Controller
         ]);    
     }
 
+    public function filter(Request $request,$id_livreur)
+    {
+        $date_debut = Carbon::parse($request['date_debut'])->format('Y-m-d');
+        // date($request['date_debut'],'Y-m-d');
+        $date_fin = Carbon::parse($request['date_fin'])->format('Y-m-d');
+        // date($request['date_fin'],'Y-m-d');  
+        $tickets = DB::select("select * from tickets t where ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') ) and t.id in (select id_ticket from sorties s where id_livreur=$id_livreur)");
+        $livreur=Livreur::find($id_livreur);
+        return view('livreurs.filter',compact(
+            'tickets',
+            'livreur',
+            'id_livreur',
+            'date_debut',
+            'date_fin'
+        ));
 
+    }
 }
 

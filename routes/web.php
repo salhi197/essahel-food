@@ -27,6 +27,9 @@ Route::get('/ticket/retour/livreur/{livreur}', 'TicketController@retour')->name(
 Route::post('/ticket/retourner/livreur', 'TicketController@retourner')->where('items', '(.*)');
 
 
+Route::post('/ticket/filter/livreur/{livreur}', 'TicketController@filter')->name('ticket.filter.livreur');
+
+
 
 Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
     Route::get('/', ['as' => '.index', 'uses' => 'CategorieController@index']);

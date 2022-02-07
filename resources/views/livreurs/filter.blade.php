@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.master')
 
 @section('content')
 
@@ -15,14 +15,15 @@
 
                            <div class="card mb-4">
                                      <div class="card-header">
-                                         <form method="post" action="{{route('livreur.extra.filter',['livreur'=>$livreur->id])}}">
+                                         <form method="post" action="{{route('ticket.filter.livreur',['livreur'=>$livreur->id])}}">
                                             @csrf
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputEmailAddress">date début : </label>
                                                             <input  class="form-control py-4" id="telephpone"
-                                                             name="date_debut" value="{{date('Y-m-d')}}" type="date" />
+                                                             name="date_debut" value="{{$date_debut}}"
+                                                             type="date" />
                                                         </div>
                                                     </div>
 
@@ -30,9 +31,17 @@
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputEmailAddress">data fin: </label>
                                                             <input  class="form-control py-4" id="telephpone"
-                                                             name="date_fin" value="{{date('Y-m-d')}}" type="date" />
+                                                             name="date_fin" value="{{$date_fin}}"
+                                                             type="date" />
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                            <button type="submit" class="btn-sm btn btn-success">
+                                                                Filtrer
+                                                            </button>
+
+                                                    </div>
+
                                             </form>
 
 
@@ -46,7 +55,6 @@
                                                         <a class="btn btn-primary btn-sm" href="{{route('ticket.retour',['livreur'=>$livreur])}}">
                                                             Retour
                                                         </a>
-
                                                     </div>
                                                 </div>
                                 </div>
@@ -60,18 +68,22 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
+                                            <th>date Création</th>
+                                            <th>date Affectation</th>
                                                 <th>Id</th>
                                                 <th>Code bare</th>
+                                                <th>Statut </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             @foreach($tickets as $ticket)
                                                 <tr>
-                                                    <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
+                                                    <td>{{ date('d/m/Y h:m:s', strtotime($ticket->created_at)) }}</td>
+                                                    <td>{{ $ticket->updated_at ?? '' }}</td>
                                                     <td>{{$ticket->id ?? ''}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
+                                                    <td>{{$ticket->satut ?? ''}}</td>
                                                 </tr>
                                             @endforeach
                                             <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
@@ -105,7 +117,6 @@
                                                 </div>
                                             </div>
                                         </tbody>
-
                                     </table>
                                     <br>
 

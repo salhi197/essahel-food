@@ -19,6 +19,16 @@
                                                 onblur="this.focus()" autofocus
                                                 onchange="SearchFunction()"
                                         class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
+                                        <div class="col-md-4">
+                                                <a class="float-right btn btn-primary btn-sm" href="{{route('ticket.detacher',['livreur'=>$_livreur])}}">
+                                                    Détacher Colis
+                                                </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class=" btn btn-primary btn-sm" href="{{route('ticket.retour',['livreur'=>$_livreur])}}">
+                                                Retour
+                                            </a>
+                                        </div>
 
                                         <!-- <div class="col-md-2" style="">
                                             <div class="form-check">
@@ -103,7 +113,7 @@
             }
         } else {
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
+                td = tr[i].getElementsByTagName("td")[3];
                 if (td) {
                 txtValue=td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -141,7 +151,7 @@
                             for (i = 1; i < tr.length; i++) {
                                 tr[i].classList.remove("tr-code");
                             }
-                            trFound.getElementsByTagName("td")[3].innerHTML = "Sortie";
+                            trFound.getElementsByTagName("td")[4].innerHTML = "Sortie";
                             $('#'+trId).addClass('alert alert-success')
 
                             console.log(res);
