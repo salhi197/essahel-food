@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.template')
 
 @section('content')
 
@@ -33,23 +33,20 @@
                                                              name="date_fin" value="{{date('Y-m-d')}}" type="date" />
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="col-md-2" style="padding:35px;">
-                                                    <button class="text-white btn btn-primary" type="submit">
-                                                            envoyer
-                                                        </button>
-                                                    </div>
-                                                    </form>
+                                            </form>
 
 
                                                     <div class="col-md-5" style="padding:35px;">
-                                                        <a class="btn btn-primary" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
+                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
                                                             Affecter Colis
                                                         </a>
-                                                        <a class="btn btn-primary" href="{{route('ticket.detacher',['livreur'=>$livreur])}}">
+                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.detacher',['livreur'=>$livreur])}}">
                                                             Détacher Colis
                                                         </a>
+                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.retour',['livreur'=>$livreur])}}">
+                                                            Retour
+                                                        </a>
+
                                                     </div>
                                                 </div>
                                 </div>

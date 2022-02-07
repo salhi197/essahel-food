@@ -94,6 +94,8 @@ $_livreurs = Livreur::all();
 
 
 
+
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="ni ni-pin-3 text-primary"></i>
@@ -121,61 +123,7 @@ $_livreurs = Livreur::all();
                             </a>
                         </li>
                     @endif
-                    @auth('fournisseur')
-                        <?php
-                        $fournisseur = Auth::guard('fournisseur')->user();
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/home">
-                                <i class="ni ni-tv-2 text-primary"></i>
-                                <span class="nav-link-text">
-                <strong>
-                    Mes Colis   </span>
-                                </strong>
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('produit.index')}}">
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                <span class="nav-link-text">
-                <strong>
-                    Produits</span>
-                                </strong>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('fournisseur.journal',['fournisseur'=>$fournisseur->id])}}">
-                                <i class="ni ni-circle-08 text-pink"></i>
-                                <span class="nav-link-text">
-                <strong>
-                    Mon Journal</span>
-                                </strong>
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('fournisseur.stock')}}">
-                                <i class="ni ni-circle-08 text-pink"></i>
-                                <span class="nav-link-text">
-                <strong>
-                    Stock</span>
-                                </strong>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('wilaya.fournisseurs')}}">
-                                <i class="ni ni-key-25 text-info"></i>
-                                <span class="nav-link-text">
-                <strong>
-                    T.Fournisseur</span>
-                                </strong>
-                            </a>
-                        </li>
-
-                    @endif
 
 
                     <li class="nav-item active">
@@ -272,7 +220,6 @@ $_livreurs = Livreur::all();
 
                     </select>
                 </div>
-                <a href="#" id="filter_livreur" class="btn btn-primary">Filtrer</a>
             </div>
         </div>
     </div>
@@ -325,11 +272,12 @@ $_livreurs = Livreur::all();
     @endif
 
     $('.affiche_livreurs').on('change', function (e) {
-
+        console.log('test');
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
         var lien = "/livreur/filter/"+valueSelected;
         $('#filter_livreur').attr('href',lien)
+        window.location = lien
     });
 
     // setInterval(function(){

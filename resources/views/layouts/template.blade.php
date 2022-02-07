@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('template/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('template/img/favicon.png')}}">
     <title>
-        Material Dashboard 2 by Creative Tim
+        Essahel Food
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -43,7 +43,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
             <img src="{{asset('template/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+            <span class="ms-1 font-weight-bold text-white">Tableau de bord</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -52,29 +52,29 @@
             @auth('admin')
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('impression')}}">
-                        <i class="ni ni-tv-2 text-primary"></i>
+                    <a class="nav-link" href="{{route('impression')}}">
+
                         <span class="nav-link-text">Impression des Tickets</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('rapport')}}">
-                        <i class="ni ni-tv-2 text-primary"></i>
+                    <a class="nav-link" href="{{route('rapport')}}">
+
                         <span class="nav-link-text">
                                 <strong>
-                                    Rapport</span>
-                        </strong>
+                                    Rapport
+                                </strong>
+                        </span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
-                        <i class="ni ni-single-02 text-yellow"></i>
                         <span class="nav-link-text">
                                 <strong>
                                     Affiche Livreur
                                 </strong>
-                            </span>
+                        </span>
                     </a>
                 </li>
 
@@ -83,94 +83,42 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="ni ni-pin-3 text-primary"></i>
                         <span class="nav-link-text">
-                <strong>
-                    Utilisateur</span>
-                        </strong>
+                            <strong>
+                                Utilisateur
+                            </strong>
+                        </span>
                     </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{route('livreur.index')}}">Livreur</a>
-                        <a class="dropdown-item" href="{{route('production.index')}}">Agents Production</a>
-                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('produit.index')}}">
-                        <i class="ni ni-tv-2 text-primary"></i>
+                    <a class="nav-link" href="{{route('produit.index')}}">
                         <span class="nav-link-text"><strong>Produit</span></strong>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('categorie.index')}}">
-                        <i class="ni ni-tv-2 text-primary"></i>
+                    <a class="nav-link" href="{{route('categorie.index')}}">
+
                         <span class="nav-link-text"><strong>Categorie</span></strong>
                     </a>
                 </li>
             @endif
-            @auth('fournisseur')
-                <?php
-                $fournisseur = Auth::guard('fournisseur')->user();
-                ?>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/home">
-                        <i class="ni ni-tv-2 text-primary"></i>
-                        <span class="nav-link-text">
-                <strong>
-                    Mes Colis   </span>
-                        </strong>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('produit.index')}}">
-                        <i class="ni ni-single-02 text-yellow"></i>
-                        <span class="nav-link-text">
-                <strong>
-                    Produits</span>
-                        </strong>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('fournisseur.journal',['fournisseur'=>$fournisseur->id])}}">
-                        <i class="ni ni-circle-08 text-pink"></i>
-                        <span class="nav-link-text">
-                <strong>
-                    Mon Journal</span>
-                        </strong>
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('fournisseur.stock')}}">
-                        <i class="ni ni-circle-08 text-pink"></i>
-                        <span class="nav-link-text">
-                <strong>
-                    Stock</span>
-                        </strong>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('wilaya.fournisseurs')}}">
-                        <i class="ni ni-key-25 text-info"></i>
-                        <span class="nav-link-text">
-                <strong>
-                    T.Fournisseur</span>
-                        </strong>
-                    </a>
-                </li>
-
-            @endif
-
+            <li class="nav-item">
+                <a onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                   class="nav-link" >
+                    <span class="nav-link-text">
+                        <strong>Déconnexion</strong>
+                    </span>
+                </a>
+            </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <i class="fa fa-door-open"></i>
                     <strong>
-                        <span>déconnexion</span>
+                        <span></span>
                     </strong>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

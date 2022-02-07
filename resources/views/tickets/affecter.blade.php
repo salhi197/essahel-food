@@ -84,10 +84,7 @@
 
 @section('scripts')
 <script>
-
-
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
     function SearchFunction() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("search");
@@ -97,10 +94,8 @@
         var livreur = <?php echo json_encode($_livreur); ?>;
         var trId=0;
         var trFound;
-
         var hrefAttacher = "/ticket/affecter/list/livreur/"+livreur+"/list?id=";
         console.log(hrefAttacher)
-
         if(filter.length==0){
             for (i = 1; i < tr.length; i++) {
                 tr[i].classList.remove("tr-code");

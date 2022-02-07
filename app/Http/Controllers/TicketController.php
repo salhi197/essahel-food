@@ -19,6 +19,11 @@ use Carbon\Carbon;
 
 class TicketController  extends Controller
 {
+    public function retour($livreur)
+    {
+        $tickets = DB::select("select *,t.id as id_ticket, t.updated_at as pupdated_at,t.created_at as pcreated_at,p.nom from tickets t,produits p where (t.id_produit=p.id) and t.id in (select id_ticket from sorties s where id_livreur=$livreur) and satut='sortie'");
+        return view('tickets.retour',compact('tickets','livreur'));
+    }
 
     public function detacher($livreur)
     {
