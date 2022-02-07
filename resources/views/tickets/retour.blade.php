@@ -46,7 +46,7 @@
                                 <td>{{$ticket->satut  }}</td>
                                 <td>{{$ticket->num_ticket_produit ?? ''}}</td>
                             </tr>
-                            </tr>
+
                         @endforeach
                         </tbody>
                     </table>
@@ -94,7 +94,6 @@
                     if (td) {
                         txtValue=td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            // .style.display="inline";
                             tr[i].classList.remove("tr-code");
                             hrefAttacher =hrefAttacher +tr[i].id+",";
                             trId = tr[i].id;
@@ -104,7 +103,7 @@
                             tr[i].classList.add("tr-code");
                         }
                     }
-                    // $('#hrefAttacher').attr('href',hrefAttacher)
+
                 }
                 if(trId!=0)
                 {
