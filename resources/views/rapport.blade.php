@@ -12,25 +12,25 @@
     <div class="card mb-4">
        <div class="card-header">
 
-       <form method="post" action="filter">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputEmailAddress">date début : </label>
-                                                        <input  class="form-control py-4"  
-                                                        id="date_debut"  name="date_debut" type="date" value="{{date('Y-m-d')}}" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="inputEmailAddress">date Fin : </label>
-                                                        <input  class="form-control py-4"  
-                                                        id="date_fin"  name="date_fin" type="date" value="{{date('Y-m-d')}}" />
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                      </form>
+        <form method="post" action="filter">
+            @csrf
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">Date début : </label>
+                        <input  class="form-control py-4"  
+                        id="date_debut"  name="date_debut" type="date" value="{{date('Y-m-d')}}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">Date Fin : </label>
+                        <input  class="form-control py-4"  
+                        id="date_fin"  name="date_fin" type="date" value="{{date('Y-m-d')}}" />
+                    </div>
+                </div>
+            </div>  
+        </form>
                                     
 
 

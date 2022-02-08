@@ -1,4 +1,4 @@
 <?php
 
-	/*Route::get('/fff','4');*/
+Route::get('/statistiques','StatistiqueController@index');
 

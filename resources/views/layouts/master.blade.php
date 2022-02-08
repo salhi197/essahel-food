@@ -65,24 +65,35 @@ $_livreurs = Livreur::all();
                     @auth('admin')
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('impression')}}">
+                            <a class="nav-link" href="{{route('impression')}}">
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text">Impression des Tickets</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('ticket.index')}}">
+                            <a class="nav-link" href="{{route('ticket.index')}}">
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text">Mes Tickets</span>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('rapport')}}">
-                                <i class="ni ni-tv-2 text-primary"></i>
+                            <a class="nav-link" href="{{route('rapport')}}">
+                                <i class="ni ni-chart-bar-32 text-primary"></i>
                                 <span class="nav-link-text">
                                 <strong>
                                     Rapport</span>
+                                </strong>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/statistiques">
+                                <i class="ni ni-chart-pie-35 text-primary"></i>
+                                <span class="nav-link-text">
+                                <strong>
+                                    Statistiques</span>
                                 </strong>
                             </a>
                         </li>
@@ -117,14 +128,14 @@ $_livreurs = Livreur::all();
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('produit.index')}}">
+                            <a class="nav-link" href="{{route('produit.index')}}">
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text"><strong>Produit</span></strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('categorie.index')}}">
+                            <a class="nav-link" href="{{route('categorie.index')}}">
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text"><strong>Categorie</span></strong>
                             </a>
