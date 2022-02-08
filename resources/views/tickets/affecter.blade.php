@@ -71,7 +71,7 @@
                                                     <td>{{$ticket->updated_at}}</td>
                                                     <td>{{$ticket->getProduit()['nom']?? ''}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
-                                                    <td>{{$ticket->satut  }}</td>
+                                                    <td>{{($ticket->satut==0) ? 'Vient d\'étre créé' : $ticket->satut}}</td>
                                                     <td>{{$ticket->num_ticket_produit ?? ''}}</td>                                                
                                                 </tr>
                                             @endforeach
