@@ -86,36 +86,7 @@
                                                     <td>{{$ticket->satut ?? ''}}</td>
                                                 </tr>
                                             @endforeach
-                                            <div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="example" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Saisir le crédit  :</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                        <form id="commande_update_credit" action=" {{route('commande.update.credit')}}" method="post">
-                                                        @csrf
-                                                            <div class="form-row">
-                                                                <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <input type="hidden" value="" name="commande" id="commande_credit"/>
-                                                                </div>
-                                                                    <div class="form-group">
-                                                                        <label class="small mb-1" for="inputFirstName">Montant de crédit: </label>
-                                                                        <input type="text" class="form-control" value="" name="montant_credit" id=""/>                                        
-                                                                    </div>
-
-                                                            </div>
-                                                            <br>
-                                                        </form>
-                                                        <button class="btn btn-primary btn-block" type="button" onclick="document.getElementById('commande_update_credit').submit();" >envoyer</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </tbody>
                                     </table>
                                     <br>
@@ -128,43 +99,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modifier l'etat de la commande :</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                <form id="form_type" action=" {{route('commande.update.state')}}" method="post">
-                                @csrf
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                        <div class="form-group">
-                                        <input type="hidden" value="" name="commande" id="commande_id"/>
-                                        </div>
-                                            <div class="form-group">
-                                            <label class="small mb-1" for="inputFirstName">type: </label>
-                                                <select class='form-control produits' name='state' >
-                                                    <option>veuillez séélctionner </option>
-                                                    <option value="en attente">en attente</option>
-                                                    <option value="accepte">accepte</option>
-                                                    <option value="expedier">expedier</option>
-                                                    <option value="en attente paiement">en attente paiement</option>
-                                                    <option value="livree">livree</option>
-                                                </select>
-
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <button class="btn btn-primary btn-block" type="submit" >modifer type</button>
-                                </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     
 @endsection
