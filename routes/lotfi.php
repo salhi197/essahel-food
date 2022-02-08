@@ -1,11 +1,4 @@
 <?php
 
-
-	Route::get('/fff',function ()
-	{
-
-
-		// code...
-	});
-
+	/*Route::get('/fff','4');*/
 

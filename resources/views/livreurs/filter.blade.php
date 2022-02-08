@@ -83,7 +83,7 @@
                                                     <td>{{ $ticket->updated_at ?? '' }}</td>
                                                     <td>{{$ticket->id ?? ''}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
-                                                    <td>{{$ticket->satut ?? ''}}</td>
+                                                    <td>{{($ticket->satut==0) ? 'Vient d\'étre créé' : $ticket->satut}}</td>
                                                 </tr>
                                             @endforeach
                                             
