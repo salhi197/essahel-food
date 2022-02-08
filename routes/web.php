@@ -45,22 +45,11 @@ Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
 });
 
 
-Route::get('/coliers', function(){
-    if(!auth()->guard('admin')->check()){
-        return redirect()->route('login');//->with('success', 'la commande vous a été accordée ');           
-    }   
-    $commandes = DB::table('commandes')->orderBy('id', 'DESC')->paginate(20);
-    $communes = Commune::all();
-    $fournisseurs = Fournisseur::all();
-    $wilayas =Wilaya::all();
-    $livreurs =Livreur::all();    
-    return view('coliers',compact('fournisseurs','commandes','communes','wilayas','livreurs'));
-})->name('coliers');
 
 
 
 
-Route::get('/codebar', 'HomeController@codebar')->name('codebar');
+
 Route::get('/', function(){
     return redirect()->route('login.admin');
 });
@@ -90,111 +79,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
 });
 
 
-Route::get('/commande/prendre/{id_commande}', ['as' => 'commande.prendre', 'uses' => 'CommandeController@prendre']);
-
-Route::get('/commande/consulter/{id_commande}', ['as' => 'commande.consulter', 'uses' => 'CommandeController@consulter']);
 
 
 
-
-Route::group(['prefix' => 'commande', 'as' => 'commande'], function () {
-    Route::get('/', ['as' => '.index', 'uses' => 'CommandeController@index']);
-    Route::get('/fournisseur/{fournisseur}', ['as' => '.fournisseur', 'uses' => 'CommandeController@fournisseur']);
-    
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'CommandeController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'CommandeController@store']);
-    Route::post('/create/for/fournisseur', ['as' => '.create-for-fournisseur', 'uses' => 'CommandeController@storeForFournisseur']);
-    Route::post('/update/{commande}', ['as' => '.update', 'uses' => 'CommandeController@update']);
-    Route::get('/destroy/{id_commande}', ['as' => '.destroy', 'uses' => 'CommandeController@destroy']);    
-    Route::get('/relancer/{id_commande}', ['as' => '.relancer', 'uses' => 'CommandeController@relancer']);    
-    Route::get('/edit/{id_demande}', ['as' => '.edit', 'uses' => 'CommandeController@edit']);
-    Route::get('/show/{id_commande}', ['as' => '.show', 'uses' => 'CommandeController@show']);
-    Route::get('/download/{id_commande}', ['as' => '.download', 'uses' => 'CommandeController@download']);
-    Route::get('/display/{id_commande}', ['as' => '.display', 'uses' => 'CommandeController@display']);
-    Route::get('/retirer/{id_commande}', ['as' => '.retirer', 'uses' => 'CommandeController@retirer']);
-    Route::get('/affecter/livreur/{livreur}', ['as' => '.affecter', 'uses' => 'CommandeController@affecter']);
-    Route::get('/detacher/liverur/{livreur}', ['as' => '.detacher', 'uses' => 'CommandeController@detacher']);
-    Route::get('/retour/{livreur}', ['as' => '.retour', 'uses' => 'CommandeController@retour']);
-    Route::get('/confirmer/fournisseur/{fournisseur}', ['as' => '.confirmer', 'uses' => 'CommandeController@confirmer']);
-    Route::get('/affecter/action/{commande}/{livreur}', ['as' => '.affecter.action', 'uses' => 'CommandeController@assigner']);
-    Route::get('/detacher/action/{commande}/{livreur}', ['as' => '.detacher.action', 'uses' => 'CommandeController@desassigner']);
-    Route::get('/list/retour/', ['as' => '.list.retour', 'uses' => 'CommandeController@ListRetourCommandes']);
-    Route::get('/list/des/retour/ls', ['as' => '.retour.list.ls', 'uses' => 'CommandeController@ListRetourCommandes']);
-    
-    Route::get('/accepter/{id_commande}', ['as' => '.accepter', 'uses' => 'CommandeController@accepter']);
-    Route::get('/timeline/{id_commande}', ['as' => '.timeline', 'uses' => 'CommandeController@timeline']);
-    Route::get('/non/abouti/{id_commande}', ['as' => '.non.abouti', 'uses' => 'CommandeController@NonAbouti']);
-    
-    Route::get('/edit/delete/produit/{id_commande}/{index}', ['as' => '.edit.delete.produit', 'uses' => 'CommandeController@editDeleteProduit']);
-
-    
-    
-    Route::post('/date/update/', ['as' => '.update.date', 'uses' => 'CommandeController@updateDate']);    
-    Route::post('/credit', ['as' => '.update.credit', 'uses' => 'CommandeController@updateCredit']);    
-    Route::get('/retour/action/{commande}', ['as' => '.update.retour', 'uses' => 'CommandeController@updateRetour']);    
-
-    Route::get('/retour/stock/one/{commande}', ['as' => '.retour.stock.one', 'uses' => 'CommandeController@retourStockOne']);    
-
-    Route::post('/annuler', ['as' => '.annuler', 'uses' => 'CommandeController@annuler']);    
-    Route::post('/livrer', ['as' => '.livrer', 'uses' => 'CommandeController@livrer']);    
-
-    Route::get('/setstate/{commande}/{state}', ['as' => '.set.state', 'uses' => 'CommandeController@setState']);    
-
-
-    // Route::get('/solder/{items?}', ['as' => '.solder', 'uses' => 'CommandeController@solder'])->where('items', '(.*)');    
-
-    Route::get('/solder/livreur/{items?}', ['as' => '.solder', 'uses' => 'CommandeController@solderLivreur'])->where('items', '(.*)');    
-    Route::get('/solder/fournisseur/{items?}', ['as' => '.solder', 'uses' => 'CommandeController@solderFournisseur'])->where('items', '(.*)');    
-
-
-
-    // Route::get('/nonsolder/{items?}', ['as' => '.nonsolder', 'uses' => 'CommandeController@nonsolder'])->where('items', '(.*)');    
-    Route::get('/nonsolder/livreur/{items?}', ['as' => '.nonsolder', 'uses' => 'CommandeController@nonsolderLivreur'])->where('items', '(.*)');    
-    Route::get('/nonsolder/fournisseur/{items?}', ['as' => '.nonsolder', 'uses' => 'CommandeController@nonsolderFournisseur'])->where('items', '(.*)');    
-
-    // Route::get('/retour/list/{items?}', ['as' => '.retourList', 'uses' => 'CommandeController@retourList'])->where('items', '(.*)');    
-    Route::get('/detacher/list/livreur/{livreur}/{items?}', ['as' => '.detacherList', 'uses' => 'CommandeController@detacherList'])->where('items', '(.*)');    
-    
-    Route::get('/retour/list/livreur/{livreur}/{items?}', ['as' => '.retourListLs', 'uses' => 'CommandeController@retourListLs'])->where('items', '(.*)');    
-    Route::get('/retour/list/stock/{items?}', ['as' => '.retourListStock', 'uses' => 'CommandeController@retourListStock'])->where('items', '(.*)');    
-
-    
-    
-    Route::get('/affecter/list/livreur/{livreur}/{items?}', ['as' => '.detacherList', 'uses' => 'CommandeController@affecterList'])->where('items', '(.*)');    
-
-    Route::get('/supprimer/list/{items?}', ['as' => '.destroyList', 'uses' => 'CommandeController@destroyList'])->where('items', '(.*)');    
-    Route::get('/confirmer/list/fournisseur/{fournisseur}/{items?}', ['as' => '.confirmerList', 'uses' => 'CommandeController@confirmerList'])->where('items', '(.*)');    
-    
-
-    Route::get('/one/confirmer/{commande}', ['as' => '.confirmerOne', 'uses' => 'CommandeController@confirmerOne']);
-
-    Route::get('/print/a4/{items?}', ['as' => '.printA4', 'uses' => 'CommandeController@printA4'])->where('items', '(.*)');    
-    Route::get('/print/ticket{items?}', ['as' => '.printTicket', 'uses' => 'CommandeController@printTicket'])->where('items', '(.*)');    
-
-    Route::get('/download/single/{commande}/{type}', ['as' => '.download.single', 'uses' => 'CommandeController@printSingle']);    
-
-    
-    Route::post('/search', ['as' => '.search', 'uses' => 'CommandeController@search']);    
-    Route::post('/change/state', ['as' => '.update.state', 'uses' => 'CommandeController@updateState']);
-
-    
-});
-
-Route::group(['prefix' => 'journal', 'as' => 'journal'], function () {
-
-    Route::get('/livreur', ['as' => '.livreur', 'uses' => 'JournalController@livreur']);
-    Route::get('/fournisseur', ['as' => '.fournisseur', 'uses' => 'JournalController@fournisseur']);
-    Route::get('/personnel', ['as' => '.personnel', 'uses' => 'JournalController@personnel']);
-    Route::get('/ls', ['as' => '.ls', 'uses' => 'JournalController@ls']);
-    
-    Route::post('/filter/livreur', ['as' => '.filter.livreur', 'uses' => 'JournalController@Filterlivreur']);
-
-    Route::post('/filter/personnel', ['as' => '.filterpourpersonnel', 'uses' => 'JournalController@Filterpersonnel']);
-    Route::post('/filter/fournisseur', ['as' => '.filter.fournisseur', 'uses' => 'JournalController@Filterfournisseur']);
-    Route::post('/filter/ls', ['as' => '.filter.ls', 'uses' => 'JournalController@Filterls']);
-
-
-});
 
 
 Route::group(['prefix' => 'user', 'as' => 'user'], function () {
@@ -268,29 +155,7 @@ Route::group(['prefix' => 'livreur', 'as' => 'livreur'], function () {
 });
 
 
-Route::group(['prefix' => 'fournisseur', 'as' => 'fournisseur'], function () {
-    Route::get('/', ['as' => '.index', 'uses' => 'FournisseurController@index']);
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'FournisseurController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'FournisseurController@store']);
-    Route::post('/create/ajax', ['as' => '.store.ajax', 'uses' => 'FournisseurController@storeAjax']);
-    Route::get('/destroy/{id_fournisseur}', ['as' => '.destroy', 'uses' => 'FournisseurController@destroy']);    
-    Route::get('/edit/{id_fournisseur}', ['as' => '.edit', 'uses' => 'FournisseurController@edit']);
-    Route::get('/show/{id_fournisseur}', ['as' => '.show', 'uses' => 'FournisseurController@show']);
-    Route::post('/update', ['as' => '.update', 'uses' => 'FournisseurController@update']); 
-    Route::post('/filter', ['as' => '.filter', 'uses' => 'FournisseurController@filter']); 
-       
-    Route::get('/stock', ['as' => '.stock', 'uses' => 'FournisseurController@stock']);    
-    Route::get('/coliers/{fournisseur}', ['as' => '.coliers', 'uses' => 'FournisseurController@coliers']);  
-    Route::get('/journal/{fournisseur}', ['as' => '.journal', 'uses' => 'FournisseurController@journal']);  
 
-    Route::post('/stock/entrer', ['as' => '.stock.entrer', 'uses' => 'FournisseurController@entrer']);
-    Route::post('/stock/sortie', ['as' => '.stock.sortie', 'uses' => 'FournisseurController@sortie']);
-    Route::post('/fournisseur/filter/journal', ['as' => '.filter.journal', 'uses' => 'FournisseurController@fournisseurFilterJournal']);
-    
-
-
-    
-});
 Route::group(['prefix' => 'type', 'as' => 'type'], function () {
     Route::get('/', ['as' => '.index', 'uses' => 'TypeController@index']);
     Route::get('/show/create',['as'=>'.show.create', 'uses' => 'TypeController@create']);
@@ -303,61 +168,11 @@ Route::group(['prefix' => 'type', 'as' => 'type'], function () {
 });
 
 
-Route::group(['prefix' => 'freelancer', 'as' => 'freelancer'], function () {
-    Route::get('/', ['as' => '.index', 'uses' => 'FreelancerController@index']);
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'FreelancerController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'FreelancerController@store']);
-    Route::post('/create/ajax', ['as' => '.store.ajax', 'uses' => 'FreelancerController@storeAjax']);
-    Route::get('/destroy/{freelancer}', ['as' => '.destroy', 'uses' => 'FreelancerController@destroy']);    
-    Route::get('/edit/{freelancer}', ['as' => '.edit', 'uses' => 'FreelancerController@edit']);
-    Route::get('/show/{freelancer}', ['as' => '.show', 'uses' => 'FreelancerController@show']);
-    Route::post('/update/{freelancer}', ['as' => '.update', 'uses' => 'FreelancerController@update']);    
-});
-
-
-    Route::get('/pub', function(){
-        return view('pubs.index');
-    })->name('pub.index');
-
-    Route::post('/pub', function(Request $request){
-        if(request('image')){
-            $imageName = 'pub.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('/'), $imageName);
-            return redirect()->route('pub.index')->with('success', 'pub changé avec succés ');                    
-
-        }
-    })->name('pub.store');
-
-
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'FournisseurController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'FournisseurController@store']);
 
 
 
 
-Route::group(['prefix' => 'achat', 'as' => 'achat'], function () {
-    Route::get('/', ['as' => '.index', 'uses' => 'AchatController@index']);
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'AchatController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'AchatController@store']);
-    Route::get('/destroy/{id_achat}', ['as' => '.destroy', 'uses' => 'AchatController@destroy']);    
-    Route::get('/edit/{id_achat}', ['as' => '.edit', 'uses' => 'AchatController@edit']);
-    Route::get('/facture/{id_achat}', ['as' => '.facture', 'uses' => 'AchatController@facture']);
-    Route::post('/update/{id_achat}', ['as' => '.update', 'uses' => 'AchatController@update']);    
-    Route::post('/update/retour', ['as' => '.update.retour', 'uses' => 'AchatController@updateRetour']);    
 
-});
-    
-
-Route::group(['prefix' => 'stock', 'as' => 'stock'], function () {
-    Route::get('/', ['as' => '.index', 'uses' => 'StockController@index']);
-
-    Route::post('/entrer', ['as' => '.entrer', 'uses' => 'StockController@entrer']);
-    Route::post('/sortie', ['as' => '.sortie', 'uses' => 'StockController@sortie']);
-    Route::post('/print/{stock}', ['as' => '.print', 'uses' => 'StockController@print']);
-    Route::post('/delete/{stock}', ['as' => '.delete', 'uses' => 'StockController@delete']);
-    
-    Route::get('/detail/{stock}', ['as' => '.detail', 'uses' => 'StockController@detail']);
-});
 
 
 Route::group(['prefix' => 'wilaya', 'as' => 'wilaya'], function () {
@@ -375,19 +190,6 @@ Route::group(['prefix' => 'wilaya', 'as' => 'wilaya'], function () {
     
     Route::get('/sortie', ['as' => '.sortie', 'uses' => 'HomeController@sortie']);
     
-});
-
-
-Route::group(['prefix' => 'payment', 'as' => 'payment'], function () {
-    Route::get('/{achat}', ['as' => '.index', 'uses' => 'PaymentController@index']);
-    Route::get('/list/{achat}', ['as' => '.list', 'uses' => 'PaymentController@list']);
-    
-    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'PaymentController@create']);
-    Route::post('/create', ['as' => '.create', 'uses' => 'PaymentController@store']);
-    Route::get('/destroy/{id_payment}', ['as' => '.destroy', 'uses' => 'PaymentController@destroy']);    
-    Route::get('/edit/{id_payment}', ['as' => '.edit', 'uses' => 'PaymentController@edit']);
-    Route::get('/facture/{id_payment}', ['as' => '.facture', 'uses' => 'PaymentController@facture']);
-    Route::post('/update/{id_payment}', ['as' => '.update', 'uses' => 'PaymentController@update']);    
 });
 
 Route::get('/down', function () {
