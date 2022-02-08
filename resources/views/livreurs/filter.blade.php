@@ -104,12 +104,15 @@
 
                     
 
+
                     
 @endsection
 
 
 @section('scripts')
 <script>
+
+
 
 function onChangeState()
     {
@@ -166,7 +169,8 @@ function watchWilayaChanges() {
                     });
             });
         }
-        $(document).ready(function () {
+        $(document).ready(function (e) 
+        {   
             watchWilayaChanges();
             onChangeState();
             onChangeWilaya();
