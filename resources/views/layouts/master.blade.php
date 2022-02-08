@@ -87,7 +87,7 @@ $_livreurs = Livreur::all();
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li style="cursor:pointer;" class="nav-item">
                             <a class="nav-link button" data-toggle="modal" data-target="#livreurModal">
                                 <i class="ni ni-single-02 text-yellow"></i>
                                 <span class="nav-link-text">

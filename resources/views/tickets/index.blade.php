@@ -17,7 +17,7 @@
                                <form method="post" action="{{route('ticket.filter.extra')}}">
                                             @csrf
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputEmailAddress">date début : </label>
                                                             <input  class="form-control py-4" id="telephpone"
@@ -26,16 +26,16 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="small mb-1" for="inputEmailAddress">data fin: </label>
+                                                            <label class="small mb-1" for="inputEmailAddress">date fin: </label>
                                                             <input  class="form-control py-4" id="telephpone"
                                                              name="date_fin" value="{{$date_fin}}"
                                                              type="date" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                            <button type="submit" class="btn-sm btn btn-success">
+                                                    <div class="col-md-4">
+                                                            <button type="submit" style="margin-top:9%;" class="form-control btn-sm btn btn-success">
                                                                 Filtrer
                                                             </button>
                                                     </div>
@@ -55,12 +55,12 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>créé le</th>
-                                                <th>Mis à jour le : </th>
-                                                <th> nom de produit</th>
-                                                <th>code bar </th>
-                                                <th>Staut </th>
-                                                <th>num_ticket_produit </th>
+                                                <th style="cursor:pointer;">créé le</th>
+                                                <th style="cursor:pointer;">Mis à jour le : </th>
+                                                <th style="cursor:pointer;"> nom de produit</th>
+                                                <th style="cursor:pointer;">code bar </th>
+                                                <th style="cursor:pointer;">Staut </th>
+                                                <th style="cursor:pointer;">N°ticket_produit </th>
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -70,7 +70,12 @@
                                                     <td>{{date('d-m-Y h:m:s',strtotime($ticket->updated_at))}}</td>
                                                     <td>{{$ticket->nom ?? $ticket->getProduit()['nom']}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
-                                                    <td>{{$ticket->satut  }}</td>
+                                                    
+                                                    <td style="color:rgb({!! ord($ticket->satut) !!},{!! (ord($ticket->satut)**2)%256 !!},{!! (ord($ticket->satut)**3)%256 !!});">
+
+                                                        {!! $ticket->satut=='0' ? 'Vient d\'étre créé' : $ticket->satut !!}
+                                                    </td>
+                                                    
                                                     <td>{{$ticket->num_ticket_produit ?? ''}}</td>                                                
                                                 </tr>
                                             @endforeach

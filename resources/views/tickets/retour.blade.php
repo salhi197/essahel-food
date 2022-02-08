@@ -43,7 +43,7 @@
                                 <td>{{$ticket->pupdated_at}}</td>
                                 <td>{{$ticket->nom ?? ''}}</td>
                                 <td>{{$ticket->codebar ?? ''}}</td>
-                                <td>{{($ticket->satut==0) ? 'Vient d\'étre créé' : $ticket->satut}}</td>
+                                <td>{{($ticket->satut=='0') ? 'Vient d\'étre créé' : $ticket->satut}}</td>
                                 <td>{{$ticket->num_ticket_produit ?? ''}}</td>
                             </tr>
 

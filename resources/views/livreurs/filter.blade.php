@@ -18,7 +18,7 @@
                                          <form method="post" action="{{route('ticket.filter.livreur',['livreur'=>$livreur->id])}}">
                                             @csrf
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputEmailAddress">date début : </label>
                                                             <input  class="form-control py-4" id="telephpone"
@@ -27,32 +27,35 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="small mb-1" for="inputEmailAddress">data fin: </label>
+                                                            <label class="small mb-1" for="inputEmailAddress">date fin: </label>
                                                             <input  class="form-control py-4" id="telephpone"
                                                              name="date_fin" value="{{$date_fin}}"
                                                              type="date" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                            <button type="submit" class="btn-sm btn btn-success">
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <button type="submit" style="margin-top:9%;" class="form-control btn btn-info">
                                                                 Filtrer
                                                             </button>
-
+                                                        </div>
                                                     </div>
+
 
                                             </form>
 
 
-                                                    <div class="col-md-5" style="padding:35px;">
-                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
+                                                    <div class="col-md-12" style="padding-top:3%;">
+                                                        <a class="btn btn-success col-md-4" href="{{route('ticket.affecter',['livreur'=>$livreur])}}">
                                                             Affecter Colis
                                                         </a>
-                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.detacher',['livreur'=>$livreur])}}">
+                                                        <a class="btn btn-warning col-md-4" href="{{route('ticket.detacher',['livreur'=>$livreur])}}">
                                                             Détacher Colis
                                                         </a>
-                                                        <a class="btn btn-primary btn-sm" href="{{route('ticket.retour',['livreur'=>$livreur])}}">
+                                                        <a class="btn btn-danger col-md-3" href="{{route('ticket.retour',['livreur'=>$livreur])}}">
                                                             Retour
                                                         </a>
                                                     </div>
@@ -68,11 +71,11 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                            <th>date Création</th>
-                                            <th>date Affectation</th>
-                                                <th>Id</th>
-                                                <th>Code bare</th>
-                                                <th>Statut </th>
+                                                <th style="cursor:pointer;">date Création</th>
+                                                <th style="cursor:pointer;">date Affectation</th>
+                                                <th style="cursor:pointer;">Id</th>
+                                                <th style="cursor:pointer;">Code bare</th>
+                                                <th style="cursor:pointer;">Statut </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,7 +86,7 @@
                                                     <td>{{ $ticket->updated_at ?? '' }}</td>
                                                     <td>{{$ticket->id ?? ''}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
-                                                    <td>{{($ticket->satut==0) ? 'Vient d\'étre créé' : $ticket->satut}}</td>
+                                                    <td>{{($ticket->satut=='0') ? 'Vient d\'étre créé' : $ticket->satut}}</td>
                                                 </tr>
                                             @endforeach
                                             
