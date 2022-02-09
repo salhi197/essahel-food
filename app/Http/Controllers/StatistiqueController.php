@@ -26,7 +26,7 @@ class StatistiqueController extends Controller
 
 
         $tickets_jour_sorties = DB::select("select date(updated_at) as created_at, count(id) as nb_ticket 
-        from tickets where (satut='vers_depot' and date(updated_at) >= date('$last_month') )group by date(updated_at) order by date(updated_at) asc limit 30");
+        from tickets where (satut<>'0' and date(updated_at) >= date('$last_month') )group by date(updated_at) order by date(updated_at) asc limit 30");
 
         $tickets_jour_sorties = Ticket::extract_date_and_number($tickets_jour_sorties);
 

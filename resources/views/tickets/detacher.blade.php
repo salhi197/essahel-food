@@ -47,8 +47,8 @@
                         <tbody >
                         @foreach($tickets as $ticket)
                             <tr id="{{$ticket->id_ticket ?? ''}}">
-                                <td>{{$ticket->pcreated_at}}</td>
-                                <td>{{$ticket->pupdated_at}}</td>
+                                <td>{{date('d/m/Y h:m:s',strtotime($ticket->pcreated_at))}}</td>
+                                <td>{{date('d/m/Y h:m:s',strtotime($ticket->pupdated_at))}}</td>
                                 <td>{{$ticket->nom ?? ''}}</td>
                                 <td>{{$ticket->codebar ?? ''}}</td>
                                 <td>{{($ticket->satut=='0') ? 'Vient d\'étre créé' : $ticket->satut}}</td>

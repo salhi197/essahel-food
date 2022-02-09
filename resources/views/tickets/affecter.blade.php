@@ -17,7 +17,7 @@
                                     <div class="row">
                                         <input
                                                 onblur="this.focus()" autofocus
-                                                onchange="SearchFunction()"
+                                                onchange="SearchFunction();" 
                                         class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
                                         <div class="col-md-4">
                                                 <a class="float-right btn btn-primary btn-sm" href="{{route('ticket.detacher',['livreur'=>$_livreur])}}">
@@ -92,8 +92,72 @@
 @endsection
 
 
+
+
 @section('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script>
+    
+    window.addEventListener("keydown", function(event) 
+    {
+        
+        if(event.getModifierState("CapsLock")==true)
+        {
+
+            swal.stopLoading();
+            swal.close();
+
+            //
+        }
+        else
+        {
+
+            $("#search").val("");
+
+            swal("Attention", "Veuillez Allumer Ver Maj", "warning");
+
+
+            //
+        }
+
+        //
+    });
+
+</script>
+
+
+<script type="text/javascript">
+    
+
+
+
+        /*if( (event.getModifierState("CapsLock"))===true)
+        {
+
+            swal.stopLoading();
+            swal.close();
+
+            //
+        }
+        else
+        {
+
+            $(obj).val("");
+
+            swal("Attention", "Veuillez Allumer Ver Maj", "warning");
+
+            //
+        }*/
+
+
+        
+    /**/
+</script>
+
+<script>
+
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     function SearchFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -170,10 +234,6 @@
             }
         }
     }
-
-    $(document).ready(function() {
-        document.dispatchEvent(new KeyboardEvent("keydown", { key: "c" }));
-    });
 
 
 </script>

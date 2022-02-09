@@ -64,6 +64,25 @@
 
 @endsection
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    
+    window.addEventListener("mouseover", function(event) 
+    {
+
+        if( (event.getModifierState("CapsLock"))===false)
+        {
+
+            swal("Attention", "Veuillez Allumer Ver Maj", "warning");
+
+            //
+        }
+
+    });
+    
+    /**/
+</script>
+
 
 @section('scripts')
     <script>

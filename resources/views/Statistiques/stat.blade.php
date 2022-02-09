@@ -48,14 +48,14 @@
 <script>
 
   	const labels_sorties = {!! $jours_sorties !!};
-  	alert(labels_sorties);
+  	
   	const data_sorties = 
   	{
 	    labels: labels_sorties,
 	    datasets: [{
 	    label: 'Tickets envoyés',
 	    backgroundColor: 'rgb(25, 255, 233)',
-	    borderColor: 'rgb(25, 255, 233)',
+	    borderColor: 'rgb(100, 255, 100)',
 	    data: {!! $numbers_sorties !!},
 	    }]
   	};
