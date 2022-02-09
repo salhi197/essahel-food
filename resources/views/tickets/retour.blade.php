@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 @section('content')
 
@@ -6,17 +6,17 @@
 
 
     <div class="container-fluid">
-        <h1 class="mt-4"> Tableau de bord </h1>
         <div class="card mb-4">
-            <div class="card-header">
+            <h4 class="card-header">
                 Retour Ticket pour ce livreur :
-            </div>
+            </h4>
             <div class="card-header">
                 <div class="row">
-                    <input
-                            onblur="this.focus()" autofocus
-                            onchange="SearchFunction()"
-                            class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
+                    <div class="col-md-2">
+                        <input onblur="this.focus()" autofocus onchange="SearchFunction();" 
+                        class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
+                    </div>
+
                 </div>
 
 
@@ -64,27 +64,34 @@
 
 @endsection
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+@section('scripts')
+
+
 <script type="text/javascript">
     
-    window.addEventListener("mouseover", function(event) 
+    window.addEventListener("keydown", function(event) 
     {
-
-        if( (event.getModifierState("CapsLock"))===false)
+        if(event.getModifierState("CapsLock")==true)
         {
-
-            swal("Attention", "Veuillez Allumer Ver Maj", "warning");
-
+            swal.stopLoading();
+            swal.close();
             //
         }
-
-    });
-    
+        else
+        {
+            $("#search").val("");
+            swal("Attention", "Veuillez Allumer Ver Maj", "warning");
+            //
+        }
+        //
+    });    
     /**/
 </script>
 
 
-@section('scripts')
+
     <script>
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

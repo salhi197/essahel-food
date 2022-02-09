@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 
 
@@ -53,14 +53,12 @@
                                                 <td >
 
                                                     <div class="table-action">  
-
-                                                        <a  
-                                                        href="{{route('produit.destroy',['id_produit'=>$produit->id])}}"
-                                                        onclick="return confirm('etes vous sure  ?')"
-                                                        class="text-white btn btn-danger btn-sm">
-                                                                <i class="fas fa-trash"></i> 
+                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="return confirm('etes vous sure  ?')" >
+                                                            <i class="far fa-trash-alt me-2"></i>
+                                                            Delete
                                                         </a>
-                                                        <button data-toggle="modal" data-target="#squarespaceModal{{$produit->id}}" class="btn btn-primary btn-sm center-block">
+
+                                                        <button data-toggle="modal" data-target="#squarespaceModal{{$produit->id}}" class="btn btn-link text-dark px-3 mb-0">
                                                             Modifer
                                                         </button>       
                                                         @include('includes.edit_produit',['produit'=>$produit])                                                 

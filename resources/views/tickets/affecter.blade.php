@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 @section('content')
 
@@ -6,19 +6,20 @@
 
 
   <div class="container-fluid">
-                        <h1 class="mt-4"> Tableau de bord </h1>        
                            <div class="card mb-4">
                                <div class="card-header">
+                                    <h4>
                                     Affecter Ticket
+                                    </h4> 
                                 </div>
 
                                <div class="card-header">
 
                                     <div class="row">
-                                        <input
-                                                onblur="this.focus()" autofocus
-                                                onchange="SearchFunction();" 
-                                        class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
+                                        <div class="col-md-2">
+                                            <input onblur="this.focus()" autofocus onchange="SearchFunction();" 
+                                            class="col-md-2 form-control" id="search"  placeholder="filter avec Code Bar" />
+                                        </div>
                                         <div class="col-md-4">
                                                 <a class="float-right btn btn-primary btn-sm" href="{{route('ticket.detacher',['livreur'=>$_livreur])}}">
                                                     Détacher Colis

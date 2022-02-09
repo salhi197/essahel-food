@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 @section('content')
 
@@ -6,11 +6,10 @@
 
 
   <div class="container-fluid">
-                        <h1 class="mt-4"> Tableau de bord </h1>        
                                     <div class="card-header">
-                                        <p>
-                                            Les Tickets de Livreur : {{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}}
-                                        </p>
+                                        <h4>
+                                            Les Tickets de Livreur : {{$livreur->name ?? ''}} {{$livreur->h2renom ?? ''}}
+                                        </h4>
                                     </div>
 
                            <div class="card mb-4">

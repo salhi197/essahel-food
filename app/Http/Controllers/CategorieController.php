@@ -20,11 +20,10 @@ class CategorieController extends Controller
 
     public function store(Request $request)
     {
-        $categorie = new Categorie([
-            'nom' => $request['nom'],
-            'reference' => $request['reference'],
-
-        ]);
+        $categorie = new Categorie();   
+        $categorie->nom = $request['nom'];
+        $categorie->reference = $request['reference'];
+        $categorie->description = $request['description'] ?? '';
         $categorie->save();
         return redirect()->route('categorie.index')->with('success', 'inserted successfuly ! ');
     }
@@ -32,18 +31,15 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::find($categorie);
         $categorie->delete();
-        return redirect()->route('categorie.index')
-            ->with('success', 'supprimé avec succé !');
+        return redirect()->route('categorie.index')->with('success', 'supprimé avec succé !');
     }
-    /**
-     *
-     */
 
     public function update(Request $request)
     {
         $categorie = Categorie::find($request['id_categorie']);
         $categorie->nom = $request['nom'];
         $categorie->reference = $request['reference'];
+        $categorie->description = $request['description'] ?? '';
         $categorie->save();
         return redirect()->route('categorie.index')->with('success', 'Categorie Modifié ! ');
     }

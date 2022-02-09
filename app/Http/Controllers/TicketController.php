@@ -22,7 +22,8 @@ class TicketController  extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets= Ticket::orderBy('created_at', 'desc')->limit(300)->get();
+
         $date_debut = date('Y-m-d');
         // date($request['date_debut'],'Y-m-d');
         $date_fin = date('Y-m-d');

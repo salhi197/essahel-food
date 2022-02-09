@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 
 
@@ -31,16 +31,16 @@
                                             <td>{{$categorie->nom ?? ''}}</td>
                                             <td >
                                                 <div class="table-action">  
-                                                    <a  href="{{route('categorie.destroy',['categorie'=>$categorie->id])}}"
-                                                    onclick="return confirm('etes vous sure  ?')"
-                                                    class="btn btn-danger text-white"><i class="fa fa-trash"></i> &nbsp; </a>
+                                                        <a class="btn btn-outline btn-danger text-danger text-gradient px-3 mb-0" 
+                                                        href="{{route('categorie.destroy',['categorie'=>$categorie->id])}}"
+                                                        onclick="return confirm('etes vous sure  ?')" >
+                                                            <i class="far fa-trash-alt me-2"></i>
+                                                            Delete
+                                                        </a>
+                                                        <button data-toggle="modal" data-target="#exampleModaledit{{$categorie->id}}" class="btn btn-outline btn-outlinez text-dark px-3 mb-0">
+                                                            Modifer
+                                                        </button>       
 
-
-
-
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModaledit{{$categorie->id}}">
-                                                        <i class="fa fa-plus"></i> Modifier
-                                                    </button>
                                                     <div class="modal fade" id="exampleModaledit{{$categorie->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -63,11 +63,7 @@
                                                                             <label class="small mb-1" for="inputFirstName">Réference : </label>
                                                                             <input type="text" value="{{$categorie->reference}}" name="reference"  class="form-control"/>
                                                                         </div>
-
-
-
-
-                                                                        <button class="btn btn-primary btn-block" type="submit" id="ajax_categorie">ajouter categorie</button>
+                                                                        <button class="btn btn-primary btn-block" type="submit" id="ajax_categorie">Modifier categorie</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -105,7 +101,7 @@
       </div>
       
       <div class="modal-body">
-            <form id="categorieFform" action="{{route('categorie.update',['categorie'=>$categorie->id])}}" method="post" enctype="multipart/form-data">
+            <form id="categorieFform" action="{{route('categorie.create')}}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
                     <label class="small mb-1" for="inputFirstName">Categorie: </label>

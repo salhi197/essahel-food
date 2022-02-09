@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 @section('content')
 
@@ -6,11 +6,10 @@
 
 
   <div class="container-fluid">
-                        <h1 class="mt-4"> Tableau de bord </h1>        
                            <div class="card mb-4">
-                               <div class="card-header">
-                                    Les Tickets : 
-                                </div>
+                               <h4 class="card-header">
+                                    La Liste de tout Les Tickets : 
+                                </h4>
 
                                <div class="card-header">
 
@@ -35,7 +34,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
-                                                            <button type="submit" style="margin-top:9%;" class="form-control btn-sm btn btn-success">
+                                                            <button type="submit" style="margin-top:9%;" class="form-control btn btn-success">
                                                                 Filtrer
                                                             </button>
                                                     </div>
@@ -71,7 +70,7 @@
                                                     <td>{{$ticket->nom ?? $ticket->getProduit()['nom']}}</td>
                                                     <td>{{$ticket->codebar ?? ''}}</td>
                                                     
-                                                    <td style="color:rgb({!! ord($ticket->satut) !!},{!! (ord($ticket->satut)**2)%256 !!},{!! (ord($ticket->satut)**3)%256 !!});">
+                                                    <td style="color:rgb({!! ord($ticket->satut)%256 !!},{!! (ord($ticket->satut)**2)%256 !!},{!! (ord($ticket->satut)**3)%256 !!});">
 
                                                         {!! $ticket->satut=='0' ? 'Vient d\'étre créé' : $ticket->satut !!}
                                                     </td>
