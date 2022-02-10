@@ -8,7 +8,7 @@
   <div class="container-fluid">
                            <div class="card mb-4">
                                <h4 class="card-header">
-                                    La Liste de tout Les Tickets : 
+                                    La Liste de tout Les Tickets : {{count($tickets)}}
                                 </h4>
 
                                <div class="card-header">

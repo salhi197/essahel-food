@@ -23,13 +23,15 @@ class TicketController  extends Controller
     public function index()
     {
         $tickets= Ticket::orderBy('created_at', 'desc')->limit(300)->get();
+        $nbrtickets = count(Ticket::all());
 
         $date_debut = date('Y-m-d');
         // date($request['date_debut'],'Y-m-d');
         $date_fin = date('Y-m-d');
         return view('tickets.index',compact('tickets',
         'date_debut',
-        'date_fin'  
+        'date_fin' ,
+        'nbrtickets'
         ));
     }
 
