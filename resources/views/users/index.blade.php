@@ -8,20 +8,12 @@
 
                         <h1 class="mt-4"> liste des Personnels</h1>
 
-                             <div class="card mb-4">
-
-                            <div class="card-header">
-
-                            <a class="btn btn-info" href="{{route('user.show.create')}}">
-
-                                    <i class="fas fa-plus"></i>
-
-                                    Ajouter 
-
-                                </a>
-
-
-
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <a class="btn btn-info" href="{{route('user.show.create')}}">
+                                        <i class="fas fa-plus"></i>
+                                        Ajouter 
+                                    </a>
                             </div>
 
                             <div class="card-body">

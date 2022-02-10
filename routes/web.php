@@ -45,7 +45,9 @@ Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
 });
 
 
-
+Route::get('/test', function(){
+    return view('template_for_dash');
+});
 
 
 
