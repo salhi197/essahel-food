@@ -98,13 +98,12 @@
                         <img src="{{asset('img/lsrapide-logo.png')}}" alt="" />
                     </div>
                     <h3>Login</h3>
-                        @isset($url)
-                            <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
-                        @else
-                            <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
-                        @endisset
+                            @isset($url)
+                                <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+                            @else
+                                <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                            @endisset
                             @csrf
-
                             <div class="form-group">
                                 <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Login"  />
                             </div>
@@ -121,7 +120,7 @@
                 </div>
             </div>
             <div class="row justify-content-center" style="padding-top:15px;">
-            Copyright©2020 Powered by <a style="color:#F05837;" target="_blank" href="https://hani-evolutions.com">&nbsp;H-Evolutions&nbsp;</a>&nbsp;& &nbsp;<a style="color:#F05837;" target="_blank" href="https://celluleinformatique.com">Cellule Informatique</a>
+            Copyright©2020 Powered by powerevo
             </div>
 
         </div>

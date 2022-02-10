@@ -26,28 +26,28 @@ class LoginController extends Controller
 
     public function showAdminLoginForm()
     {
-        return view('auth.login', [
+        return view('auth.auth', [
             'url' => Config::get('constants.guards.admin')
         ]);
     }
 
     public function showLivreurLoginForm()
     {
-        return view('auth.login', [
+        return view('auth.auth', [
             'url' => Config::get('constants.guards.livreur')
         ]);
     }
 
     public function showFournisseurLoginForm()
     {
-        return view('auth.login', [
+        return view('auth.auth', [
             'url' => Config::get('constants.guards.fournisseur')
         ]);
     }
 
     public function showProductionLoginForm()
     {
-        return view('auth.login', [
+        return view('auth.auth', [
             'url' => 'production'
         ]);
     }
@@ -56,7 +56,7 @@ class LoginController extends Controller
 
     public function showFreelancerLoginForm()
     {
-        return view('auth.login', [
+        return view('auth.auth', [
             'url' => Config::get('constants.guards.freelancer')
         ]);
     }
