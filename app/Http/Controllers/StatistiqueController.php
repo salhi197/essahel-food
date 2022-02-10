@@ -34,7 +34,7 @@ class StatistiqueController extends Controller
         $numbers_sorties = (json_encode($tickets_jour_sorties->numbers));
 
 
-        return view('Statistiques/stat',compact('jours_sorties','numbers_sorties','jours_1','numbers_1'));
+        return view('Statistiques.stat',compact('jours_sorties','numbers_sorties','jours_1','numbers_1'));
 
         // code...
     }
