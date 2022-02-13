@@ -184,7 +184,6 @@ class Template extends Model
         'credit_livreur',
         
     ];
-
     
     public static function templateBon($commande,$margin,$codebar,$number) 
     {
@@ -193,10 +192,10 @@ class Template extends Model
             <div style="position:absolute;left:50%;margin-left:-70px;top:0px;width:283px;height:283px;overflow:hidden">
                 <div style="position:absolute;left:20.89px;top:10px" class="cls_002">
                     <span class="cls_002">
-                        <img src="'.$codebar.'" width=80 height=30>
+                        <img src="'.$codebar.'" width="100px" height="50px">
                     </span>
                 </div>
-                <div style="position:absolute;left:20.89px;top:70px" class="cls_006">
+                <div style="position:absolute;left:20.89px;top:60px" class="cls_006">
                     '.$number.'
                 </div>
                 
