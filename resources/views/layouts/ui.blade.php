@@ -26,9 +26,7 @@ $_livreurs = Livreur::all();
 
     <link id="pagestyle" href="{{ asset('ui/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-
+    <link href="{{ asset('css/select2.min.css.css') }}" rel="stylesheet" />    
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -37,7 +35,7 @@ $_livreurs = Livreur::all();
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+            <a class="navbar-brand m-0" href=""
                 target="_blank">
                 <img src="{{ asset('ui/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">Admin</span>
@@ -420,12 +418,15 @@ $_livreurs = Livreur::all();
     <script src="{{ asset('ui/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('ui/js/soft-ui-dashboard.min.js?v=1.0.3') }}"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+
     <script src="{{ asset('js/datatables-demo.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="{{asset('js/select2.min.js')}}"></script>
+
     <script src="{{ asset('ui/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
 
     <script src="{{ asset('js/toastr.min.js') }}"></script>

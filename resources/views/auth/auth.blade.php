@@ -41,6 +41,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navigation">
               <ul class="navbar-nav d-lg-block d-none">
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/login/production">
+                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                    Espace Agent Production
+                  </a>
+                </li>
+
+
+
+                            
+
+
+
               </ul>
             </div>
           </div>

@@ -71,9 +71,11 @@ Route::post('/login/depot', 'Auth\LoginController@depotLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
 Route::post('/register/livreur', 'Auth\RegisterController@createLivreur')->name('register.Livreur');
 
-Route::get('/home', function(){
-        return redirect()->route('impression');
-})->name('home');
+
+Route::get('/home', 'HomeController@redirect')->name('home');
+// Route::get('/home', function(){
+//         return redirect()->route('impression');
+// })->name('home');
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
 });

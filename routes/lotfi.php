@@ -1,4 +1,4 @@
 <?php
 
-Route::get('/statistiques','StatistiqueController@index');
+Route::get('/statistiques','StatistiqueController@index')->name('stats');
 

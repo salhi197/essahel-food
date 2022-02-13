@@ -29,7 +29,7 @@ class DepotController extends Controller
         $depot->password = Hash::make($request->get('password'));
         $depot->password_text = $request->get('password');
         $depot->save();
-        return redirect()->route('depot.index')->with('success', 'un nouveau commercial a été inséré avec succés ');
+        return redirect()->route('depot.index')->with('success', 'un nouveau agent a été inséré avec succés ');
     }  
     public function edit($id_user)
     {
@@ -55,7 +55,7 @@ class DepotController extends Controller
         $wilayas = Wilaya::all();
         $depots = Depot::find($id_user);
         $depot->delete();    
-        return redirect()->route('depot.index')->with('success', 'le  commercial a été supprimé ');
+        return redirect()->route('depot.index')->with('success', 'le  agent a été supprimé ');
     }
 
 }

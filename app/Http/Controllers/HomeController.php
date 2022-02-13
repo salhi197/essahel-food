@@ -16,18 +16,18 @@ class HomeController extends Controller
 
 {
 
-    /**
 
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
-
-    public function __construct()
+    public function redirect()
     {
+        if(auth()->guard('admin')->check()){
+            return redirect()->route('stats');
+        }
+        if(auth()->guard('depot')->check()){
+            return redirect()->route('impression');
+        }
+        if(auth()->guard('production')->check()){
+            return redirect()->route('ticket.index');
+        }
 
     }
 
