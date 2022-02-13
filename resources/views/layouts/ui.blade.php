@@ -412,7 +412,7 @@ $_livreurs = Livreur::all();
 
 
     </main>
-    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('ui/js/jquery.min.js') }}"></script>
 
     <script src="{{ asset('ui/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('ui/js/core/bootstrap.min.js') }}"></script>
@@ -424,7 +424,7 @@ $_livreurs = Livreur::all();
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/datatables-demo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('ui/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
