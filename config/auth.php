@@ -90,8 +90,6 @@ return [
 
         ],
 
-        
-
         'livreur' => [
 
             'driver' => 'session',
@@ -99,8 +97,6 @@ return [
             'provider' => 'livreurs',
 
         ],
-
-
 
         'production' => [
             'driver' => 'session',
@@ -111,54 +107,12 @@ return [
             'provider' => 'depots',
         ],
 
-        'freelancer' => [
-            'driver' => 'session',
-            'provider' => 'freelancers'
-        ],
-        'fournisseur' => [
-
-            'driver' => 'session',
-
-            'provider' => 'fournisseurs',
-
-        ],
 
         
     ],
 
 
 
-    /*
-
-    |--------------------------------------------------------------------------
-
-    | User Providers
-
-    |--------------------------------------------------------------------------
-
-    |
-
-    | All authentication drivers have a user provider. This defines how the
-
-    | users are actually retrieved out of your database or other storage
-
-    | mechanisms used by this application to persist your user's data.
-
-    |
-
-    | If you have multiple user tables or models you may configure multiple
-
-    | sources which represent each model / table. These sources may then
-
-    | be assigned to any extra authentication guards you have defined.
-
-    |
-
-    | Supported: "database", "eloquent"
-
-    |
-
-    */
 
 
 
@@ -205,14 +159,6 @@ return [
             'model' => App\Livreur::class,
 
         ],
-        'freelancers' => [
-
-            'driver' => 'eloquent',
-
-            'model' => App\Freelancer::class,
-
-        ],
-
 
 
 
@@ -260,8 +206,9 @@ return [
             'expire' => 60,
 
         ],
-        'freelancers' => [
-            'provider' => 'freelancers',
+
+        'productions' => [
+            'provider' => 'productions',
             'table' => 'password_resets',
             'expire' => 60,
 
@@ -275,8 +222,6 @@ return [
         ],
 
     ],
-
-
 
 ];
 
