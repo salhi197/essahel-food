@@ -106,6 +106,10 @@ return [
             'driver' => 'session',
             'provider' => 'productions',
         ],
+        'depot' => [
+            'driver' => 'session',
+            'provider' => 'depots',
+        ],
 
         'freelancer' => [
             'driver' => 'session',
@@ -178,11 +182,11 @@ return [
 
         ],
 
-        'fournisseurs' => [
+        'depots' => [
 
             'driver' => 'eloquent',
 
-            'model' => App\Fournisseur::class,
+            'model' => App\Depot::class,
 
         ],
 
@@ -258,6 +262,13 @@ return [
         ],
         'freelancers' => [
             'provider' => 'freelancers',
+            'table' => 'password_resets',
+            'expire' => 60,
+
+        ],
+
+        'depots' => [
+            'provider' => 'depots',
             'table' => 'password_resets',
             'expire' => 60,
 

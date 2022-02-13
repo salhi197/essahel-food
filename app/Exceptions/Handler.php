@@ -119,8 +119,8 @@ class Handler extends ExceptionHandler
         if ($request->is('freelancer') || $request->is('freelancer/*')) {
             return redirect()->guest('/login/freelancer');
         }
-        if ($request->is('fournisseur') || $request->is('fournisseur/*')) {
-            return redirect()->guest('/login/fournisseur');
+        if ($request->is('depot') || $request->is('depot/*')) {
+            return redirect()->guest('/login/depot');
         }
 
         return redirect()->guest(route('login'));

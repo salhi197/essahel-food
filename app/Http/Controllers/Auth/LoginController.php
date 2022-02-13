@@ -52,6 +52,13 @@ class LoginController extends Controller
         ]);
     }
 
+    public function showDepotLoginForm()
+    {
+        return view('auth.auth', [
+            'url' => 'depot'
+        ]);
+    }
+
 
 
     public function showFreelancerLoginForm()
@@ -86,6 +93,15 @@ class LoginController extends Controller
     {
         if ($this->guardLogin($request, Config::get('constants.guards.admin'))) {
             return redirect()->intended('/home');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+
+    public function depotLogin(Request $request)
+    {
+        if ($this->guardLogin($request, Config::get('constants.guards.depot'))) {
+            return redirect()->intended('/depot');
         }
         return back()->withInput($request->only('email', 'remember'));
     }

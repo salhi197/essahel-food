@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 
 
@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 
-                        <h1 class="mt-4"> Fournisseurs</h1>
+                        <h1 class="mt-4"> Liste des Livreurs</h1>
 
                              <div class="card mb-4">
 

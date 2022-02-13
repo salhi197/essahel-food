@@ -60,16 +60,14 @@ Auth::routes();
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('login.admin');
 Route::get('/login/livreur', 'Auth\LoginController@showLivreurLoginForm')->name('login.Livreur');
 Route::get('/login/production', 'Auth\LoginController@showProductionLoginForm')->name('login.production');
-Route::get('/login/fournisseur', 'Auth\LoginController@showFournisseurLoginForm')->name('login.Fournisseur');
-Route::get('/login/freelancer', 'Auth\LoginController@showFreelancerLoginForm')->name('login.Freelancer');
+Route::get('/login/depot', 'Auth\LoginController@showDepotLoginForm')->name('login.depot');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm')->name('register.admin');
 Route::get('/register/livreur', 'Auth\RegisterController@showLivreurRegisterForm')->name('register.Livreur');
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/login/livreur', 'Auth\LoginController@livreurLogin');
 Route::post('/login/production', 'Auth\LoginController@productionLogin');
-Route::post('/login/fournisseur', 'Auth\LoginController@fournisseurLogin');
-Route::post('/login/freelancer', 'Auth\LoginController@freelancerLogin');
+Route::post('/login/depot', 'Auth\LoginController@depotLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
 Route::post('/register/livreur', 'Auth\RegisterController@createLivreur')->name('register.Livreur');
 
@@ -124,6 +122,16 @@ Route::group(['prefix' => 'produit', 'as' => 'produit'], function () {
     Route::post('/update/{produit}', ['as' => '.update', 'uses' => 'ProduitController@update']);    
 });
 
+
+Route::group(['prefix' => 'depot', 'as' => 'depot'], function () {
+    Route::get('/', ['as' => '.index', 'uses' => 'DepotController@index']);
+    Route::get('/show/create',['as'=>'.show.create', 'uses' => 'DepotController@create']);
+    Route::post('/create', ['as' => '.create', 'uses' => 'DepotController@store']);
+    Route::get('/destroy/{id_depot}', ['as' => '.destroy', 'uses' => 'DepotController@destroy']);    
+    Route::get('/edit/{id_depot}', ['as' => '.edit', 'uses' => 'DepotController@edit']);
+    Route::get('/show/{id_depot}', ['as' => '.show', 'uses' => 'DepotController@show']);
+    Route::post('/update/{id_depot}', ['as' => '.update', 'uses' => 'DepotController@update']);    
+});
 
 
 Route::group(['prefix' => 'production', 'as' => 'production'], function () {

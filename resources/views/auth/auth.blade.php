@@ -40,32 +40,6 @@
               </span>
             </button>
             <div class="collapse navbar-collapse" id="navigation">
-              <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="../pages/dashboard.html">
-                    <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                    Dashboard
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/profile.html">
-                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                    Profile
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/sign-up.html">
-                    <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                    Sign Up
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/sign-in.html">
-                    <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                    Sign In
-                  </a>
-                </li>
-              </ul>
               <ul class="navbar-nav d-lg-block d-none">
               </ul>
             </div>
@@ -82,8 +56,8 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Page Login</h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <h3 class="font-weight-bolder text-info text-gradient">Authentification {{$url}}</h3>
+                  <p class="mb-0">Entrer votre login</p>
                 </div>
                 <div class="card-body">
                     @isset($url)
@@ -92,25 +66,21 @@
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                     @endisset
                         @csrf                    
-                    <label>Email</label>
+                    <label>Login</label>
                     <div class="mb-3">
                       <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                     </div>
-                    <label>Password</label>
+                    <label>Mot de passe</label>
                     <div class="mb-3">
                       <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" aria-describedby="password-addon">
                     </div>
                     
                     <div class="text-center">
-                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Se Connecter </button>
                     </div>
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-sm mx-auto">
-                    Don't have an account?
-                    <a href="javascript:;" class="text-info text-gradient font-weight-bold">Sign up</a>
-                  </p>
                 </div>
               </div>
             </div>
@@ -124,59 +94,6 @@
       </div>
     </section>
   </main>
-  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <footer class="footer py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mb-4 mx-auto text-center">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Company
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            About Us
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Team
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Products
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Blog
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Pricing
-          </a>
-        </div>
-        <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-dribbble"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-twitter"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-instagram"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-pinterest"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-github"></span>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-8 mx-auto text-center mt-1">
-          <p class="mb-0 text-secondary">
-            Copyright © <script>
-              document.write(new Date().getFullYear())
-            </script> Power Evo.
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
   <script src="{{asset('ui/js/core/popper.min.js')}}"></script>
   <script src="{{asset('ui/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('ui/js/plugins/perfect-scrollbar.min.js')}}"></script>

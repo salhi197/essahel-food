@@ -33,6 +33,9 @@ class RedirectIfAuthenticated
         if ($guard === 'production' && Auth::guard($guard)->check()) {
             return redirect('/impression');
         }
+        if ($guard === 'depot' && Auth::guard($guard)->check()) {
+            return redirect('/depot');
+        }
 
         if (Auth::guard($guard)->check()) {
             return redirect('/home');

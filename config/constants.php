@@ -5,7 +5,8 @@
             'livreur' => 'livreur',
             'freelancer' => 'freelancer',
             'fournisseur' => 'fournisseur',
-            'production' => 'production'
+            'production' => 'production',
+            'depot'=>'depot'
         ]
     ];
 
