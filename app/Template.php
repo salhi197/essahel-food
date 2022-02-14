@@ -189,19 +189,21 @@ class Template extends Model
     {
         $codebar = asset($codebar);
         $html='
-            <div style="position:absolute;left:50%;margin-left:-70px;top:0px;width:283px;height:283px;overflow:hidden">
+            <div style="position:absolute;left:50%;margin-left:-65px;top:-45px;width:283px;height:283px;overflow:hidden">
                 <div style="position:absolute;left:20.89px;top:10px" class="cls_002">
                     <span class="cls_002">
-                        <img src="'.$codebar.'" width="100px" height="50px">
+                        <img src="'.$codebar.'" width="50px" height="60px">
                     </span>
-                </div>
-                <div style="position:absolute;left:20.89px;top:60px" class="cls_006">
-                    '.$number.'
-                </div>
+                    <div style="position:absolute;left:1.89px;top:50px;font-size:5px;" class="cls_006">
+                        '.$number.'
+                    </div>
+                
+                </div>ref1n439id489
                 
             </div>
                 ';
         return $html;
+
     }
 
 

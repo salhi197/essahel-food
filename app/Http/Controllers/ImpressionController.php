@@ -55,7 +55,7 @@ class ImpressionController  extends Controller
         <html style="page-break-before: always;">
         <head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
         <style type="text/css">
-        @page { size: 85pt 65pt;margin:0; }
+        @page { size: 75pt 35pt;margin:0; }
         span.cls_008{font-family:"Trebuchet MS",serif;font-size:7.0px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
         div.cls_008{font-family:"Trebuchet MS",serif;font-size:7.0px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
         span.cls_003{font-family:"Trebuchet MS",serif;font-size:9.1px;color:rgb(24,24,24);font-weight:normal;font-style:normal;text-decoration: none}
@@ -154,6 +154,45 @@ class ImpressionController  extends Controller
 
 
 
+    public function fournisseurs()
+    {
+        $wilayas = Wilaya::all();
+        return view('wilayas-fournisseurs',compact('wilayas'));
+    }
+
+    public function fournisseur(Request $request)
+    {
+        $wilaya = Wilaya::find($request['wilaya']);
+        $wilaya->fournisseur = $request['fournisseur'];
+        $wilaya->save();
+        return redirect()->back()->with('success', 'insertion effectué !  ');     
+    }
+
+
+
+    public function livreurs()
+    {
+        $wilayas = Wilaya::all();
+        return view('wilayas-livreurs',compact('wilayas'));
+    }
+
+    public function livreur(Request $request)
+    {
+        $wilaya = Wilaya::find($request['wilaya']);
+        $wilaya->livreur = $request['livreur'];
+        $wilaya->save();
+        return redirect()->back()->with('success', 'insertion effectué !  ');     
+    }
+
+
+
+    public function livraison(Request $request)
+    {
+        $wilaya = Wilaya::find($request['wilaya']);
+        $wilaya->livraison = $request['livraison'];
+        $wilaya->save();
+        return redirect()->route('wilaya.livreurs')->with('success', 'insertion effectué !  ');     
+    }
 
 
 }
