@@ -20,6 +20,7 @@ use Carbon\Carbon;
 
 class TicketController  extends Controller
 {
+    
     public function index()
     {
         $tickets= Ticket::orderBy('created_at', 'desc')->limit(300)->get();
@@ -146,7 +147,51 @@ class TicketController  extends Controller
             'date_debut',
             'date_fin'
         ));
+    }
+
+    
+
+
+    public function vers_depot()
+    {
+        $tickets = Ticket::where('satut', '=', '0')
+            ->orderBy('created_at','desc')
+            ->get();
+        return view('tickets.vers_depot',compact('tickets'));
 
     }
+
+    public function vers_depot_action(Request $request)
+    {
+        $ticket = Ticket::find($request['ticket']);
+        $ticket->satut= "vers_depot";
+        $ticket->save();
+        return response()->json([
+            'ticket'=>$request['ticket']
+        ]);
+    }
+
+
+    public function au_depot()
+    {
+        $tickets = Ticket::where('satut', '=', 'vers_depot')
+            ->orderBy('created_at','desc')
+            ->get();
+        return view('tickets.au_depot',compact('tickets'));
+
+    }
+
+    public function au_depot_action(Request $request)
+    {
+        $ticket = Ticket::find($request['ticket']);
+        $ticket->satut= "au_depot";
+        $ticket->save();
+        return response()->json([
+            'ticket'=>$request['ticket']
+        ]);
+    }
+
+
+
 }
 

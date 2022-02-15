@@ -17,11 +17,9 @@ scanner.on('code', code => {
   })
   .then(res => res.json())
     .then(res => {
-      console.log(res);
     })
     .catch(err=>function (err) {
       console.log("err.message")
   });
-
 })
 scanner.off();

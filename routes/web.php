@@ -34,6 +34,12 @@ Route::post('/ticket/filter/livreur/{livreur}', 'TicketController@filter')->name
 Route::post('/ticket/filter/extra', 'TicketController@filterExtra')->name('ticket.filter.extra');
 
 
+Route::get('/ticket/vers_depot', 'TicketController@vers_depot')->name('ticket.vers_depot');
+Route::post('/ticket/vers_depot/action', 'TicketController@vers_depot_action');
+
+Route::get('/ticket/au_depot', 'TicketController@au_depot')->name('ticket.au_depot');
+Route::post('/ticket/au_depot/action', 'TicketController@au_depot_action');
+
 
 Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
     Route::get('/', ['as' => '.index', 'uses' => 'CategorieController@index']);
