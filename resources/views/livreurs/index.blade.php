@@ -29,10 +29,6 @@
                                             <th>Login</th>
                                             <th>Password</th>
 
-                                            <th>wilaya - Commune</th>
-
-                                            <th>Nombre de Course</th>
-
                                             <th>actions</th>
 
                                         </tr>
@@ -54,9 +50,7 @@
                                             <td>{{$livreur->email ?? ''}}</td>
                                             <td>{{$livreur->password_text ?? ''}}</td>
 
-                                            <td>{{$livreur->getWilaya() ?? ''}} - {{$livreur->getCommune() ?? ''}}</td>
 
-                                            <td>{{$livreur->NbrCourse() ?? ''}}</td>
 
                                             <td >
 
@@ -184,65 +178,7 @@
         </div>
 
 
-                <div class="form-group">
 
-                    <label class="control-label">{{ __('Wilaya') }}: </label>
-
-                    <select class="form-control" id="wilaya_select" name="wilaya_id">
-
-                        <option value="">{{ __('Please choose...') }}</option>
-
-                        @foreach ($wilayas as $wilaya)
-
-                            <option value="{{$wilaya->id}}" {{$wilaya->id == (old('wilaya_id') ?? ($member->wilaya_id ?? '')) ? 'selected' : ''}}>
-
-                                {{$wilaya->name}}
-
-                            </option>
-
-                        @endforeach
-
-                    </select>
-
-                    @if ($errors->has('wilaya_id'))
-
-                        <p class="help-block">{{ $errors->first('wilaya_id') }}</p>
-
-                    @endif
-
-            </div>
-
-                    <div class="form-group">
-
-                    <label class="control-label">{{ __('Commune') }}: </label>
-
-                    <select class="form-control" name="commune_id" id="commune_select">
-
-                        <option value="">{{ __('Please choose...') }}</option>
-
-                        @foreach ($communes as $commune)
-
-                            <option value="{{$commune->id}}" {{$commune->id == (old('commune_id') ?? ($member->commune_id ?? '')) ? 'selected' : ''}}>
-
-                                {{$commune->name}}
-
-                            </option>
-
-                        @endforeach
-
-                    </select>
-
-                    <input class="form-control valid" id="commune_select_loading" value="{{ __('Loading...') }}"
-
-                        readonly style="display: none;"/>
-
-                    @if ($errors->has('commune_id'))
-
-                        <p class="help-block">{{ $errors->first('commune_id') }}</p>
-
-                    @endif
-
-            </div>
 
 
 
@@ -292,70 +228,5 @@
 
 @section('scripts')
 
-<script>
-
-function watchWilayaChanges() {
-
-            $('#wilaya_select').on('change', function (e) {
-
-                e.preventDefault();
-
-                var $communes = $('#commune_select');
-
-                var $communesLoader = $('#commune_select_loading');
-
-                var $iconLoader = $communes.parents('.input-group').find('.loader-spinner');
-
-                var $iconDefault = $communes.parents('.input-group').find('.material-icons');
-
-                $communes.hide().prop('disabled', 'disabled').find('option').not(':first').remove();
-
-                $communesLoader.show();
-
-                $iconDefault.hide();
-
-                $iconLoader.show();
-
-                $.ajax({
-
-                    dataType: "json",
-
-                    method: "GET",
-
-                    url: "/api/static/communes/ " + $(this).val()
-
-                })
-
-                    .done(function (response) {
-
-                        $.each(response, function (key, commune) {
-
-                            $communes.append($('<option>', {value: commune.id}).text(commune.name));
-
-                        });
-
-                        $communes.prop('disabled', '').show();
-
-                        $communesLoader.hide();
-
-                        $iconLoader.hide();
-
-                        $iconDefault.show();
-
-                    });
-
-            });
-
-        }
-
-
-
-        $(document).ready(function () {
-
-            watchWilayaChanges();
-
-        });
-
-</script>
 
 @endsection
