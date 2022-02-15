@@ -40,12 +40,18 @@
               </span>
             </button>
             <div class="collapse navbar-collapse" id="navigation">
-              <ul class="navbar-nav d-lg-block d-none">
+              <ul class="navbar-nav ">
 
-                <li class="nav-item">
+              <li class="nav-item">
                   <a class="nav-link" href="/login/production">
                     <i class="fa fa-user opacity-6 text-dark me-1"></i>
                     Espace Agent Production
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login/depot">
+                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                    Espace Agent Depot
                   </a>
                 </li>
 
