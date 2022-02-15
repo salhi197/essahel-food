@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "alert": "^5.0.10",
     "native-barcode-scanner": "^1.3.0",
     "node-fetch": "^2.6.7"
   }

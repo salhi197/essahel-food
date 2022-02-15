@@ -5,6 +5,8 @@ const options = {}
 
 const scanner = new BarcodeScanner(options);
 
+
+
 scanner.on('code', code => {
   console.log(code);
   fetch('http://localhost:8000/api/scan/production', {
