@@ -13,7 +13,9 @@ class ApiController extends Controller
 {
     public function scan_production(Request $request)
     {      
+
         $ticket =Ticket::where('codebar',$request['code'])->first();
+
         if($ticket){
             $ticket->satut= "vers_depot";
             $ticket->save();

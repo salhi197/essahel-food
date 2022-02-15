@@ -28,25 +28,25 @@
                                     
             <div class="row">
                     <div class="card col-md-3">
-                        <h3>
+                        <h4>
                         Tickets Générés :
-                        </h3>
+                        </h4>
                     </div>
 
                     <div class="card col-md-3">
-                        <h3>
+                        <h4>
                         Tickets Vers Depot :
-                        </h3>
+                        </h4>
                     </div>
                     <div class="card col-md-3">
-                        <h3>
+                        <h4>
                         Tickets Au Depot :
-                        </h3>
+                        </h4>
                     </div>
                     <div class="card col-md-3">
-                        <h3>
+                        <h4>
                         Tickets Sortie :
-                        </h3>
+                        </h4>
                     </div>
 
             </div>        
@@ -56,25 +56,25 @@
                 @foreach($produits as $produit)
                     <div class="card col-md-3 " style="margin-top: 2%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
+                            <h6 class="card-title">{{$produit->nom ?? ''}} <span style="font-size:10px;"> (Générés) </span> </h6>
                             <p class="card-text text-center" id="produit_genere_{{$produit->id}}" >0</p>
                         </div>
                     </div>
                     <div class="card col-md-3 " style="margin-top: 2%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
+                            <h6 class="card-title">{{$produit->nom ?? ''}} <span style="font-size:10px;">  (Vers_Depot) </span>  </h6>
                             <p class="card-text text-center" id="produit_vers_depot_{{$produit->id}}">0</p>
                         </div>
                     </div>
                     <div class="card col-md-3 " style="margin-top: 2%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
+                            <h6 class="card-title">{{$produit->nom ?? ''}} <span style="font-size:10px;"> (Au_Depot) </span>  </h6>
                             <p class="card-text text-center" id="produit_au_depot_{{$produit->id}}">0</p>
                         </div>
                     </div>
                     <div class="card col-md-3 " style="margin-top: 2%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{$produit->nom ?? ''}}</h5>
+                            <h6 class="card-title">{{$produit->nom ?? ''}} <span style="font-size:10px;"> (Sortie) </span> </h6>
                             <p class="card-text text-center" id="produit_sortie_{{$produit->id}}">0</p>
                         </div>
                     </div>
