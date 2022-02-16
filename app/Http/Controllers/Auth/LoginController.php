@@ -100,7 +100,7 @@ class LoginController extends Controller
     public function depotLogin(Request $request)
     {
         if ($this->guardLogin($request, Config::get('constants.guards.depot'))) {
-            return redirect()->intended('/depot');
+            return redirect()->intended('/ticket/au_depot');
         }
         return back()->withInput($request->only('email', 'remember'));
     }
@@ -109,7 +109,7 @@ class LoginController extends Controller
     public function productionLogin(Request $request)
     {
         if ($this->guardLogin($request, Config::get('constants.guards.production'))) {
-            return redirect()->intended('/production');
+            return redirect()->intended('/impression');
         }
         return back()->withInput($request->only('email', 'remember'));
     }

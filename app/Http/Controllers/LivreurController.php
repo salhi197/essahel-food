@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Commande;
 use App\Commune;
 use App\Http\Requests\StoreLivreur;
 use App\Livreur;
@@ -75,40 +74,11 @@ class LivreurController extends Controller
 
     public function index()
     {
-        if(Auth::guard('livreur')->user()){
-            $livreur = Auth::guard('livreur')->user();
-            //$livreurs = Livreur::all();
-            $commandes = Commande::where(['state'=>'en attente','livreur'=>null])->orWhere('state',"annule")->get();                   
-            return view('livreurs.my-index',compact('commandes'));            
-            }
-            if(Auth::guard('admin')->user()){
-                $communes = Commune::all();
-                $wilayas = Wilaya::all();
-                $livreurs = Livreur::all();//where('id', '>', 0)->paginate(10);
-                return view('livreurs.index',compact('livreurs','communes','wilayas'));
-        
-            }
-            return redirect()->route('login');
+        $livreurs = Livreur::all();
+        return view('livreurs.index',compact('livreurs'));        
     }
 
-    public function create()
-    {
-        $communes = Commune::all();
-        $wilayas = Wilaya::all();
-        return view('livreur.create',compact('wilayas','communes'));
-    }
 
-    public function maList()
-    {
-        if(Auth::guard('livreur')->user()){
-            $livreur = Auth::guard('livreur')->user();
-            $commandes = Commande::where(['livreur_id'=>$livreur->id,'state'=>'accepte'])->get(); 
-            return view('livreurs.mes-livraisons',compact('commandes'));                
-        }else{
-            return redirect()->route('login');//->with('success', 'pub changé avec succés ');                   
-        }
-
-}
     public function store(Request $request)
     {
         // $validated = $request->validated();
@@ -121,14 +91,6 @@ class LivreurController extends Controller
         $livreur->birth= $request->get('birth');
         $livreur->password=Hash::make($request->get('password'));
         $livreur->password_text= $request->get('password');
-        $livreur->wilaya_id = $request->get('wilaya_id');
-        $livreur->commune_id = $request->get('commune_id');
-        if ($request->hasFile('identite')) {
-            $livreur->identite = $request->file('identite')->store(
-                'livreurs/identite',
-                'public'
-            );
-        }
 
         $livreur->save();
         return redirect()->route('livreur.index')->with('success', 'livreur inséré avec succés ');
@@ -158,22 +120,9 @@ class LivreurController extends Controller
         ));
     }
 
-
-
-
-
-
-    public function edit($livreur)
+    public function update(Request $request,$livreur)
     {
-        $communes = Commune::all();
-        $wilayas =Wilaya::all();
         $livreur = Livreur::find($livreur);
-        return view('livreurs.edit',compact('livreur','wilayas','communes'));
-    }
-
-    public function update(Request $request)
-    {
-        $livreur = Livreur::find($request['livreur_id']);
         $livreur->name= $request->get('nom');
         $livreur->prenom= $request->get('prenom');
         $livreur->telephone = $request->get('telephone');

@@ -48,8 +48,9 @@ class StatistiqueController extends Controller
         
         $nb_tickets_yesterday = ($nb_tickets_yesterday[0]->nb_ticket_yesterday);
 
-        $pctg_ceation_ysterday_today=number_format((float)((($nb_tickets_today/$nb_tickets_yesterday)-1)*100), 1, '.', '');
-        
+        ($nb_tickets_yesterday==0) ? $pctg_ceation_ysterday_today = 0 : $pctg_ceation_ysterday_today=number_format((float)((($nb_tickets_today/$nb_tickets_yesterday)-1)*100), 1, '.', '');
+
+       
         /*sorties */
 
         $nb_sorties_today=DB::select("select count(satut) as nb_sortie_today from tickets where (date(updated_at) = date('$today') and satut='sortie')");

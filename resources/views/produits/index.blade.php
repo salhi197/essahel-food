@@ -122,10 +122,6 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Catégorie : </label>
-
-                    </div>
-                    <div class="form-group">
                         <label for="exampleInputEmail1">Réference : </label>
                         <input type="text" value="{{ old('reference') }}" name="reference" class="form-control"
                             placeholder="  ">

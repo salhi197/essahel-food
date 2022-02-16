@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 
-                        <h1 class="mt-4"> Agentes Depot</h1>
+                        <h1 class="mt-4"> Agents Depot</h1>
 
                              <div class="card mb-4">
 
@@ -80,7 +80,7 @@
                                                                             </div>
 
                                                                             <div class="btn-group" role="group">
-                                                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                                                <button type="submit" class="btn btn-primary"> Enregistrer </button>
                                                                             </div>
                                                                             <button type="button" class="btn btn-danger" data-dismiss="modal" role="button">Fermer</button>
                                                                         </form>

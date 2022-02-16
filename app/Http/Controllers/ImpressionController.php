@@ -198,4 +198,3 @@ class ImpressionController  extends Controller
 
 
 }
-
