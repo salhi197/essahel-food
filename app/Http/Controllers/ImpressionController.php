@@ -87,8 +87,10 @@ class ImpressionController  extends Controller
         $margin = -40;
         for($i=0;$i<$request['tickets'];$i++){
             $number ='ref'.$id_produit.'n'.$last_num_ticket_produit.'id'.$lastIdTicket; 
-            // mt_rand(100000,999999);
-            file_put_contents('img/essahel_food/'.$number.'.svg', DNS1D::getBarcodeSVG($number, 'C128'));    
+            $number_to_code_barre =/*'ref'.$id_produit.'n'.$last_num_ticket_produit.*/'id'.$lastIdTicket; 
+            
+            file_put_contents('img/essahel_food/'.$number.'.svg',DNS1D::getBarcodeSVG($number_to_code_barre,'C128'));    
+            
             $codebar = 'img/essahel_food/'.$number.'.svg';
             $h = Template::templateBon($i,$margin,$codebar,$number);
             $html=$html.$h;
@@ -114,7 +116,7 @@ class ImpressionController  extends Controller
             $number ='ref'.$id_produit.'n'.$last_num_ticket_produit_copie.'id'.$lastIdTicketCopie; 
             $ticket = new Ticket();
             $ticket->id_produit = $id_produit;
-            $ticket->codebar = $number;
+            $ticket->codebar = $number_to_code_barre;
             // $cpt = selct max(num_ticket_produit) from tickets where idproduit=$idproduit
             // if $cpt = null 1
             // else 
