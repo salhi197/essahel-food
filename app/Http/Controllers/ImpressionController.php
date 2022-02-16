@@ -112,11 +112,13 @@ class ImpressionController  extends Controller
         $current = date('Y-m-d');
         $file = "facture_".$current;
         $dompdf->stream("$file", array('Attachment'=>1));
-        for($i=0;$i<$request['tickets'];$i++){
-            $number ='ref'.$id_produit.'n'.$last_num_ticket_produit_copie.'id'.$lastIdTicketCopie; 
+        
+        for($i=0;$i<$request['tickets'];$i++)
+        {
+            $number =/*'ref'.$id_produit.'n'.$last_num_ticket_produit_copie.*/'id'.$lastIdTicketCopie; 
             $ticket = new Ticket();
             $ticket->id_produit = $id_produit;
-            $ticket->codebar = $number_to_code_barre;
+            $ticket->codebar = $number;
             // $cpt = selct max(num_ticket_produit) from tickets where idproduit=$idproduit
             // if $cpt = null 1
             // else 
