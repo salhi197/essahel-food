@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 
-                        <h1 class="mt-4"> Liste des Livreurs</h1>
+                        <h1 class="mt-4"> Liste des Livreurs :</h1>
 
                              <div class="card mb-4">
 
@@ -56,22 +56,15 @@
 
                                                 <div class="table-action">  
 
-                                                <a  
-
-                                                href="{{route('livreur.destroy',['id_livreur'=>$livreur->id])}}"
-
-                                                onclick="return confirm('etes vous sure  ?')"
-
+                                                <a  href="{{route('livreur.destroy',['id_livreur'=>$livreur->id])}}" onclick="return confirm('etes vous sure  ?')"
                                                 class="text-white btn btn-danger">
 
                                                         <i class="fas fa-trash"></i>  
 
                                                 </a>
 
-                                                <a href="{{route('livreur.edit',['livreur'=>$livreur])}}"
-                                                class="btn btn-info text-white">
-                                                <i class="fas fa-edit"></i>  
-                                                </a>
+                                                <button data-toggle="modal" data-target="#squarespaceModal{{$livreur->id}}" class="btn btn-primary center-block">Modifier livreur</button>
+                                                @include('includes.edit_livreur')
 
 
                                                 @if($livreur->state)
@@ -114,99 +107,99 @@
 
 
 
-                    <div class="modal fade "  id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
-<div class="modal-dialog modal-lg" >
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title" id="lineModalLabel">Ajouter livreur</h3>
-        </div>
+<div class="modal fade "  id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="lineModalLabel">Ajouter livreur</h3>
+            </div>
 
-    <div class="modal-body">
-        <form action="{{route('livreur.create')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="exampleInputEmail1">Login</label>
-            <input type="text" value="{{ old('email') }}" name="email" class="form-control" id="exampleInputEmail1" placeholder="Entrer clé de Login ">
-        </div>
+        <div class="modal-body">
+            <form action="{{route('livreur.create')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="exampleInputEmail1">Login</label>
+                <input type="text" value="{{ old('email') }}" name="email" class="form-control" id="exampleInputEmail1" placeholder="Entrer clé de Login ">
+            </div>
 
-        <div class="form-group">
-            <label for="exampleInputEmail1">mot de passe : </label>
-            <input type="text" value="{{ old('password') }}" name="password" class="form-control" placeholder="  ">
-        </div>
-
-
-
-
-
-        <div class="form-group">
-            <label for="exampleInputEmail1">nom  : </label>
-
-            <input type="text" class="form-control"  value="{{ old('name') }}" name="name" id="nom" placeholder="votre nom ">
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="exampleInputEmail1">prenom  : </label>
-
-            <input type="text" class="form-control"  value="{{ old('prenom') }}" name="prenom" id="prenom" placeholder="votre prenom ">
-
-        </div>
-
-        
-
-
-
-        <div class="form-group">
-
-            <label for="exampleInputEmail1">N Téléphone :</label>
-
-            <input type="text" value="{{ old('telephone') }}" name="telephone" class="form-control" id="" placeholder="Enter votre numero de téléphone ">
-
-        </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">mot de passe : </label>
+                <input type="text" value="{{ old('password') }}" name="password" class="form-control" placeholder="  ">
+            </div>
 
 
 
 
 
-        <div class="form-group">
+            <div class="form-group">
+                <label for="exampleInputEmail1">nom  : </label>
 
-            <label for="exampleInputEmail1">Adress : </label>
-
-            <input type="text" value="{{ old('adress') }}" name="adress" class="form-control" id="adress" placeholder="Enter votre adress : ">
-
-        </div>
-
-
-
-
-
-
-        <!-- <div class="form-group">
-
-            <label for="exampleInputPassword1">date naissance</label>
-
-            <input type="date" name="birth" class="form-control" id="birth" placeholder="">
-
-        </div> -->
-
-        <div class="btn-group" role="group">
-
-                <button type="submit" class="btn btn-primary">Save</button>
+                <input type="text" class="form-control"  value="{{ old('name') }}" name="name" id="nom" placeholder="votre nom ">
 
             </div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Fermer</button>
 
-        </form>
+            <div class="form-group">
 
+                <label for="exampleInputEmail1">prenom  : </label>
+
+                <input type="text" class="form-control"  value="{{ old('prenom') }}" name="prenom" id="prenom" placeholder="votre prenom ">
+
+            </div>
+
+            
+
+
+
+            <div class="form-group">
+
+                <label for="exampleInputEmail1">N Téléphone :</label>
+
+                <input type="text" value="{{ old('telephone') }}" name="telephone" class="form-control" id="" placeholder="Enter votre numero de téléphone ">
+
+            </div>
+
+
+
+
+
+            <div class="form-group">
+
+                <label for="exampleInputEmail1">Adress : </label>
+
+                <input type="text" value="{{ old('adress') }}" name="adress" class="form-control" id="adress" placeholder="Enter votre adress : ">
+
+            </div>
+
+
+
+
+
+
+            <!-- <div class="form-group">
+
+                <label for="exampleInputPassword1">date naissance</label>
+
+                <input type="date" name="birth" class="form-control" id="birth" placeholder="">
+
+            </div> -->
+
+            <div class="btn-group" role="group">
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+
+                </div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Fermer</button>
+
+            </form>
+
+
+
+        </div>
 
 
     </div>
 
-
-</div>
-
-</div>
+    </div>
 
 </div>
 

@@ -120,9 +120,9 @@ class LivreurController extends Controller
         ));
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$livreur)
     {
-        $livreur = Livreur::find($request['livreur_id']);
+        $livreur = Livreur::find($livreur);
         $livreur->name= $request->get('nom');
         $livreur->prenom= $request->get('prenom');
         $livreur->telephone = $request->get('telephone');

@@ -167,7 +167,7 @@ Route::group(['prefix' => 'livreur', 'as' => 'livreur'], function () {
     Route::get('/destroy/{id_livruer}', ['as' => '.destroy', 'uses' => 'LivreurController@destroy']);    
     Route::get('/change/state/{id_livruer}', ['as' => '.change.state', 'uses' => 'LivreurController@changeState']);
     Route::get('/show/{id_livruer}', ['as' => '.show', 'uses' => 'LivreurController@show']);
-    Route::post('/update', ['as' => '.update', 'uses' => 'LivreurController@update']);    
+    Route::post('/update/livreur/{livreur}', ['as' => '.update', 'uses' => 'LivreurController@update']);    
     Route::get('/livraisons', ['as' => '.livraisons', 'uses' => 'LivreurController@maList']);
 
 });
