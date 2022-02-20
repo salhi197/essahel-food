@@ -191,7 +191,19 @@ class TicketController  extends Controller
         ]);
     }
 
-
-
+    public function bl($ticket)
+    {
+        $ticket = Ticket::find($ticket);
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions(); 
+        $options->set(array('isRemoteEnabled' => true));
+        $dompdf->setOptions($options);
+        $html = Template::bl($ticket);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $current = date('Y-m-d');
+        $file = "bonlivraison_".$current;
+        $dompdf->stream("$file", array('Attachment'=>0));
+    }
 }
 

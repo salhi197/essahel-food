@@ -41,6 +41,9 @@ Route::get('/ticket/au_depot', 'TicketController@au_depot')->name('ticket.au_dep
 Route::post('/ticket/au_depot/action', 'TicketController@au_depot_action');
 
 
+Route::get('/ticket/bl/{livreur}', 'TicketController@bl')->name('ticket.bl');
+
+
 Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
     Route::get('/', ['as' => '.index', 'uses' => 'CategorieController@index']);
     Route::get('/show/create',['as'=>'.show.create', 'uses' => 'CategorieController@create']);
