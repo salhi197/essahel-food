@@ -19,16 +19,23 @@
                             id="search" placeholder="filter avec Code Bar" />
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <a class="float-right btn btn-primary btn-sm"
                             href="{{ route('ticket.detacher', ['livreur' => $_livreur]) }}">
                             Détacher Colis
                         </a>
                     </div>
 
-                    <div class="col-md-4">
+
+
+                    <div class="col-md-2">
                         <a class=" btn btn-primary btn-sm" href="{{ route('ticket.retour', ['livreur' => $_livreur]) }}">
-                            Retour
+                            Colis Retour
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a target="_blank" class=" btn btn-primary btn-sm" href="{{ route('livreur.bl', ['livreur' => $_livreur]) }}">
+                            Imprimer BL
                         </a>
                     </div>
 

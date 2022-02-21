@@ -30,6 +30,15 @@ Route::get('/ticket/retour/livreur/{livreur}', 'TicketController@retour')->name(
 Route::post('/ticket/retourner/livreur', 'TicketController@retourner')->where('items', '(.*)');
 
 
+Route::get('/ticket/retour/destruction', 'TicketController@retourDestruction')->name('ticket.retour.destruction');
+Route::post('/ticket/retourner/destruction', 'TicketController@retournerDestruction')->where('items', '(.*)');
+
+
+Route::get('/ticket/retour/recyclage', 'TicketController@retourRecyclage')->name('ticket.retour.recyclage');
+Route::post('/ticket/retourner/recyclage', 'TicketController@retournerRecyclage')->where('items', '(.*)');
+
+
+
 Route::post('/ticket/filter/livreur/{livreur}', 'TicketController@filter')->name('ticket.filter.livreur');
 Route::post('/ticket/filter/extra', 'TicketController@filterExtra')->name('ticket.filter.extra');
 
@@ -169,6 +178,7 @@ Route::group(['prefix' => 'livreur', 'as' => 'livreur'], function () {
     Route::post('/create', ['as' => '.create', 'uses' => 'LivreurController@store']);
     Route::get('/destroy/{id_livruer}', ['as' => '.destroy', 'uses' => 'LivreurController@destroy']);    
     Route::get('/change/state/{id_livruer}', ['as' => '.change.state', 'uses' => 'LivreurController@changeState']);
+    Route::get('/bl/{id_livruer}', ['as' => '.bl', 'uses' => 'LivreurController@bl']);
     Route::get('/show/{id_livruer}', ['as' => '.show', 'uses' => 'LivreurController@show']);
     Route::post('/update/livreur/{livreur}', ['as' => '.update', 'uses' => 'LivreurController@update']);    
     Route::get('/livraisons', ['as' => '.livraisons', 'uses' => 'LivreurController@maList']);

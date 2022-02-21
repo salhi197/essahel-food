@@ -65,10 +65,8 @@ class Template extends Model
 
     }
 
-    public static  function bl(Ticket $ticket)
+    public static  function bl(Livreur $livreur,$elements)
     {
-        $sortie = $ticket->getSortie();
-        $livreur = $ticket->getLivreur();
         
         $html = '        
             <!doctype html>
@@ -115,13 +113,10 @@ class Template extends Model
             
             <table width="100%">
                 <tr>
-                    <td><strong>Livreur:</strong> '.$livreur->prenom.'</td>
+                    <td><strong>Livreur: </strong> '.$livreur->name.' '.$livreur->prenom.'</td>
                 </tr>
                 <tr>
-                    <td><strong>Téléphone:</strong> '.$livreur->telephone.'</td>
-                </tr>
-                <tr>
-                    <td><strong>Date de Sortie:</strong> '.$sortie->created_at.'</td>
+                    <td><strong>Date de Sortie:</strong> '.date('d-m-Y').'</td>
                 </tr>
             
             </table>
@@ -131,31 +126,24 @@ class Template extends Model
             <table width="100%">
                 <thead style="background-color: lightgray;">
                 <tr>
-                    <th style="cursor:pointer;">créé le</th>
-                    <th style="cursor:pointer;">Mis à jour le : </th>
-                    <th style="cursor:pointer;"> nom de produit</th>
-                    <th style="cursor:pointer;">code bar </th>
-                    <th style="cursor:pointer;">Staut </th>
-                    <th style="cursor:pointer;">N°ticket_produit </th>
+                    <th style="cursor:pointer;">Nom Produit</th>
+                    <th style="cursor:pointer;">Quantité </th>
+                    <th style="cursor:pointer;">Prix Unitaire </th>
+                    <th style="cursor:pointer;">Total </th>
                 </tr>
                 </thead>
                 <tbody>
-                                                <tr id="">
-                                                    <td>'.date('d-m-Y h:m:s',strtotime($ticket->created_at)).'</td>
-                                                    <td>'.date('d-m-Y h:m:s',strtotime($ticket->updated_at)).'</td>
-                                                    <td>'.$ticket->getProduit()['nom'].'</td>
-                                                    <td>'.$ticket->codebar .'</td>
-                                                    
-                                                    <td >
-
-                                                        '. $ticket->satut .'
-                                                    </td>
-                                                    
-                                                    <td>'.$ticket->num_ticket_produit .'</td>                                                
-                                                                                                
-                                                </tr>                
-
+                    <tr>';
+                    foreach($elements as $element){
+                        $html = $html.'<td>'.$element->nom.'</td>';
+                        $html = $html.'<td>'.$element->qte.'</td>';
+                        $html = $html.'<td>'.$element->prix_gros.' DA</td>';
+                        $html = $html.'<td>'.$element->prix_gros*$element->qte.' DA</td>';
+                    }
+                                                                    
+                $html=$html.'</tr>                
                 </tbody>
+
             
                 
             </table>

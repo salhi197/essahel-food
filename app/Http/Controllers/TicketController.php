@@ -48,6 +48,10 @@ class TicketController  extends Controller
             'date_fin'
         ));
     }
+
+    /**
+     * retour normal
+     */
     public function retour($livreur)
     {
         $tickets = DB::select("select *,t.id as id_ticket, t.updated_at as pupdated_at,t.created_at as pcreated_at,p.nom from tickets t,produits p where (t.id_produit=p.id) and t.id in (select id_ticket from sorties s where id_livreur=$livreur) and satut='sortie'");
@@ -75,6 +79,52 @@ class TicketController  extends Controller
     }
 
 
+
+    /**
+     * 
+     *  Retour Prodution
+     * 
+     * 
+     */
+
+
+    public function retourRecyclage()
+    {
+        $tickets = Ticket::all();
+        return view('tickets.retour-recyclage',compact('tickets'));
+    }
+
+    public function retournerRecyclage(Request $request)
+    {
+        $ticket = Ticket::find($request['ticket']);
+        $ticket->satut = 'recyclee';
+        $ticket->save();
+        return response()->json([
+            'ticket'=>$request['ticket']
+        ]);
+    }     
+
+
+
+    public function retourDestruction()
+    {
+        $tickets = Ticket::all();
+        return view('tickets.retour-destruction',compact('tickets'));
+    }
+
+    public function retournerDestruction(Request $request)
+    {
+        $ticket = Ticket::find($request['ticket']);
+        $ticket->satut = 'detruit';
+        $ticket->save();
+        return response()->json([
+            'ticket'=>$request['ticket']
+        ]);
+    }     
+
+
+
+
     public function detacher($livreur)
     {
         $tickets = DB::select("select *,t.id as id_ticket, t.updated_at as pupdated_at,t.created_at as pcreated_at,p.nom from tickets t,produits p where (t.id_produit=p.id) and t.id in (select id_ticket from sorties s where id_livreur=$livreur) and satut='sortie'");
@@ -99,9 +149,9 @@ class TicketController  extends Controller
     public function affecter($livreur)
     {
         $_livreur = $livreur;
-        $tickets = Ticket::where('satut', '=', 'au_depot')
+        $tickets = Ticket::where('satut', '<>', 'sortie')
 //            ->orWhere('satut', '=', '0')
-           ->orWhere('satut', '=', 'retour')
+        //    ->orWhere('satut', '=', 'retour')
             ->orderBy('created_at','desc')
             ->get();
         return view('tickets.affecter',compact('tickets','_livreur'));

@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Commune;
 use App\Http\Requests\StoreLivreur;
 use App\Livreur;
-use App\Ticket;
-use App\Sortie;
-use App\Wilaya;
+use App\Template;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -141,5 +140,22 @@ class LivreurController extends Controller
 
     }
 
-   
+
+    public function bl($livreur)
+    {
+        $elements = DB::select("select p.nom ,p.prix_gros ,count(satut) as qte from produits p , tickets t,sorties s where s.id_ticket= t.id and t.id_produit=p.id and date(t.updated_at)=CURDATE() and s.id_livreur=$livreur group by p.nom,p.prix_gros ");
+        $livreur = Livreur::find($livreur);
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions(); 
+        $options->set(array('isRemoteEnabled' => true));
+        $dompdf->setOptions($options);
+        $html = Template::bl($livreur,$elements);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $current = date('Y-m-d');
+        $file = "bonlivraison_".$current;
+        $dompdf->stream("$file", array('Attachment'=>0));
+
+    }
+
 }

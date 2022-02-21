@@ -56,11 +56,6 @@ $_livreurs = Livreur::all();
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
-
-
-
-
-            
                 @auth("production")
                     @include('includes.production')
                 @endauth
