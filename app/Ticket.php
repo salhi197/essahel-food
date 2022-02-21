@@ -34,8 +34,16 @@ class Ticket extends Model
         $ret['numbers'] = $numbers;
         
         return (object)$ret;
-
-
         // code...
+    }
+
+    public function getLivreur()
+    {
+        $sortie = Sortie::where('id_livreur',$this->id)->orderBy('created_at', 'desc')->first();
+        $livreur = null;
+        if($sortie!=null)
+            $livreur = Livreur::find($sortie->id_livreur);
+        return $livreur;
+        
     }
 }

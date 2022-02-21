@@ -60,6 +60,8 @@
                                                 <th style="cursor:pointer;">code bar </th>
                                                 <th style="cursor:pointer;">Staut </th>
                                                 <th style="cursor:pointer;">N°ticket_produit </th>
+                                                <th style="cursor:pointer;">Bon de livraison </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -76,6 +78,11 @@
                                                     </td>
                                                     
                                                     <td>{{$ticket->num_ticket_produit ?? ''}}</td>                                                
+                                                    <td>
+                                                        <a href="{{route('ticket.bl',['ticket'=>$ticket->id])}}" class="btn btn-primary btn-sm" target="_blank"> 
+                                                            Imprimer
+                                                        </a>
+                                                    </td>                                                
                                                 </tr>
                                             @endforeach
                                         </tbody>

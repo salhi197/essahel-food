@@ -67,12 +67,16 @@ class Template extends Model
 
     public static  function bl(Ticket $ticket)
     {
+        $livreur = $ticket->getLivreur();
+        $prenom = $livreur->prenom ?? '//';
+        $telephone = $livreur->telephone ?? '//';
+        
         $html = '        
             <!doctype html>
             <html lang="en">
             <head>
             <meta charset="UTF-8">
-            <title>Aloha!</title>
+            <title>Bon de livraison </title>
             
             <style type="text/css">
                 * {
@@ -84,6 +88,7 @@ class Template extends Model
                 tfoot tr td{
                     font-weight: bold;
                     font-size: x-small;
+                    text-align:center;
                 }
                 .gray {
                     background-color: lightgray
@@ -95,15 +100,11 @@ class Template extends Model
             
             <table width="100%">
                 <tr>
-                    <td valign="top"><img src="https://via.placeholder.com/150" alt="" width="150"/></td>
-                    <td align="right">
-                        <h3>Shinra Electric power company</h3>
+                    <td valign="top"></td>
+                    <td align="center">
+                        <h3>Essahel Food</h3>
                         <pre>
-                            Company representative name
-                            Company address
-                            Tax ID
-                            phone
-                            fax
+                           
                         </pre>
                     </td>
                 </tr>
@@ -112,8 +113,10 @@ class Template extends Model
             
             <table width="100%">
                 <tr>
-                    <td><strong>From:</strong> Linblum - Barrio teatral</td>
-                    <td><strong>To:</strong> Linblum - Barrio Comercial</td>
+                    <td><strong>Livreur:</strong> '.$prenom.'</td>
+                </tr>
+                <tr>
+                    <td><strong>Téléphone:</strong> '.$telephone.'</td>
                 </tr>
             
             </table>
@@ -123,54 +126,33 @@ class Template extends Model
             <table width="100%">
                 <thead style="background-color: lightgray;">
                 <tr>
-                    <th>#</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Unit Price $</th>
-                    <th>Total $</th>
+                    <th style="cursor:pointer;">créé le</th>
+                    <th style="cursor:pointer;">Mis à jour le : </th>
+                    <th style="cursor:pointer;"> nom de produit</th>
+                    <th style="cursor:pointer;">code bar </th>
+                    <th style="cursor:pointer;">Staut </th>
+                    <th style="cursor:pointer;">N°ticket_produit </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Playstation IV - Black</td>
-                    <td align="right">1</td>
-                    <td align="right">1400.00</td>
-                    <td align="right">1400.00</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Metal Gear Solid - Phantom</td>
-                    <td align="right">1</td>
-                    <td align="right">105.00</td>
-                    <td align="right">105.00</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Final Fantasy XV - Game</td>
-                    <td align="right">1</td>
-                    <td align="right">130.00</td>
-                    <td align="right">130.00</td>
-                </tr>
+                                                <tr id="">
+                                                    <td>'.date('d-m-Y h:m:s',strtotime($ticket->created_at)).'</td>
+                                                    <td>'.date('d-m-Y h:m:s',strtotime($ticket->updated_at)).'</td>
+                                                    <td>'.$ticket->getProduit()['nom'].'</td>
+                                                    <td>'.$ticket->codebar .'</td>
+                                                    
+                                                    <td >
+
+                                                        '. $ticket->satut .'
+                                                    </td>
+                                                    
+                                                    <td>'.$ticket->num_ticket_produit .'</td>                                                
+                                                                                                
+                                                </tr>                
+
                 </tbody>
             
-                <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td align="right">Subtotal $</td>
-                        <td align="right">1635.00</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td align="right">Tax $</td>
-                        <td align="right">294.3</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td align="right">Total $</td>
-                        <td align="right" class="gray">$ 1929.3</td>
-                    </tr>
-                </tfoot>
+                
             </table>
             
             </body>
