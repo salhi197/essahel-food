@@ -40,10 +40,22 @@ class Ticket extends Model
     public function getLivreur()
     {
         $sortie = Sortie::where('id_livreur',$this->id)->orderBy('created_at', 'desc')->first();
-        $livreur = null;
+        $livreur = new Livreur();
         if($sortie!=null)
             $livreur = Livreur::find($sortie->id_livreur);
         return $livreur;
         
     }
+
+
+    public function getSortie()
+    {
+
+        $sortie = Sortie::where('id_livreur',$this->id)->orderBy('created_at', 'desc')->first() ?? new Sortie();
+        return $sortie;
+       
+    }
+
+
+
 }

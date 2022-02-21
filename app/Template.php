@@ -67,9 +67,8 @@ class Template extends Model
 
     public static  function bl(Ticket $ticket)
     {
+        $sortie = $ticket->getSortie();
         $livreur = $ticket->getLivreur();
-        $prenom = $livreur->prenom ?? '//';
-        $telephone = $livreur->telephone ?? '//';
         
         $html = '        
             <!doctype html>
@@ -80,19 +79,24 @@ class Template extends Model
             
             <style type="text/css">
                 * {
+                    font-size:15px;
                     font-family: Verdana, Arial, sans-serif;
                 }
                 table{
                     font-size: x-small;
                 }
-                tfoot tr td{
+                 tr td{
                     font-weight: bold;
-                    font-size: x-small;
+
                     text-align:center;
                 }
-                .gray {
-                    background-color: lightgray
+
+                tfoot tr td{
+                    font-weight: bold;
+
+                    text-align:center;
                 }
+                
             </style>
             
             </head>
@@ -102,10 +106,8 @@ class Template extends Model
                 <tr>
                     <td valign="top"></td>
                     <td align="center">
-                        <h3>Essahel Food</h3>
-                        <pre>
-                           
-                        </pre>
+                        <h1>Essahel Food</h1>
+                        
                     </td>
                 </tr>
             
@@ -113,10 +115,13 @@ class Template extends Model
             
             <table width="100%">
                 <tr>
-                    <td><strong>Livreur:</strong> '.$prenom.'</td>
+                    <td><strong>Livreur:</strong> '.$livreur->prenom.'</td>
                 </tr>
                 <tr>
-                    <td><strong>Téléphone:</strong> '.$telephone.'</td>
+                    <td><strong>Téléphone:</strong> '.$livreur->telephone.'</td>
+                </tr>
+                <tr>
+                    <td><strong>Date de Sortie:</strong> '.$sortie->created_at.'</td>
                 </tr>
             
             </table>
