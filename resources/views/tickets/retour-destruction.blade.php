@@ -38,7 +38,7 @@
                         </thead>
                         <tbody >
                         @foreach($tickets as $ticket)
-                            <tr id="{{$ticket->id_ticket ?? ''}}">
+                            <tr id="{{$ticket->id ?? ''}}">
                                 <td>{{$ticket->created_at}}</td>
                                 <td>{{$ticket->updated_at}}</td>
                                 <td>{{$ticket->getProduit()['nom'] ?? ''}}</td>
@@ -148,7 +148,7 @@
                                 for (i = 1; i < tr.length; i++) {
                                     tr[i].classList.remove("tr-code");
                                 }
-                                trFound.getElementsByTagName("td")[4].innerHTML = "Retour";
+                                trFound.getElementsByTagName("td")[4].innerHTML = "Retour Destruction";
                                 $('#'+trId).addClass('alert alert-success')
 
                                 console.log(res);
