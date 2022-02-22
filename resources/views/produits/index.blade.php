@@ -42,7 +42,7 @@
 
                                                 <td>{{$produit->id ?? ''}}</td>
                                                 <td>
-                                                    {{$produit->nom ?? ''}}
+                                                    {{$produit->nom ?? ''}} / {!! $produit->id_categorie ?? '' !!}
                                                 </td>
                                                 <td>{{$produit->prix_gros ?? ''}} </td>
                                                 <td>{{$produit->prix_semi_gros?? ''}} </td>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Catégorie</label>
-                        <select class="form-control">
+                        <select class="form-control" name="id_categorie">
                             @foreach($categories as $categorie)
                                 <option value="{{$categorie->nom}}"
                                         @if($categorie->id == $produit->id) selected @endif>
@@ -121,11 +121,13 @@
                         </select>
 
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Réference : </label>
                         <input type="text" value="{{ old('reference') }}" name="reference" class="form-control"
                             placeholder="  ">
                     </div>
+                    
                     <div class="form-group">
                         <label for="exampleInputEmail1">Description : </label>
                         <input type="text" class="form-control" value="{{ old('description') }}" name="description" id="nom"

@@ -33,6 +33,7 @@ class ProduitController extends Controller
 
     public function store(Request $request)
     {        
+
         $produit = new Produit();   
         $produit->nom= $request->get('nom');
         $produit->reference = $request['reference'];

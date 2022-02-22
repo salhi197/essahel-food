@@ -40,8 +40,11 @@ class TicketController  extends Controller
     {        
         $date_debut = Carbon::parse($request['date_debut'])->format('Y-m-d');
         $date_fin = Carbon::parse($request['date_fin'])->format('Y-m-d');
+
         // $tickets = DB::select("select * from tickets t where ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
+
         $tickets = DB::select("select t.id,t.created_at,t.updated_at,t.satut,t.num_ticket_produit,t.codebar ,p.nom  as nom from tickets t,produits p where (p.id=t.id_produit) and ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
+
         return view('tickets.index',compact(
             'tickets',
             'date_debut',
@@ -163,6 +166,7 @@ class TicketController  extends Controller
         $id_ticket = $request['ticket'];
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'sortie';
+        $ticket->updated_at=date("Y-m-d H:i:s");
         $ticket->save();
         
         $nbticket = DB::select("select statut_livraison as nbticket from sorties where id_ticket=$id_ticket and date(updated_at)=CURDATE()");

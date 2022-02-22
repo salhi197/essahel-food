@@ -60,29 +60,29 @@
                                                 <th style="cursor:pointer;">code bar </th>
                                                 <th style="cursor:pointer;">Staut </th>
                                                 <th style="cursor:pointer;">N°ticket_produit </th>
-                                                <th style="cursor:pointer;">Bon de livraison </th>
+                                                {{-- <th style="cursor:pointer;">Bon de livraison </th> --}}
                                                 
                                             </tr>
                                         </thead>
                                         <tbody >
                                             @foreach($tickets as $ticket)
                                                 <tr id="{{$ticket->id}}">
-                                                    <td>{{date('d-m-Y h:m:s',strtotime($ticket->created_at))}}</td>
-                                                    <td>{{date('d-m-Y h:m:s',strtotime($ticket->updated_at))}}</td>
-                                                    <td>{{$ticket->nom ?? $ticket->getProduit()['nom']}}</td>
-                                                    <td>{{$ticket->codebar ?? ''}}</td>
+                                                    <td class="text-center">{{date('d-m-Y h:m:s',strtotime($ticket->created_at))}}</td>
+                                                    <td class="text-center">{{date('d-m-Y h:m:s',strtotime($ticket->updated_at))}}</td>
+                                                    <td class="text-center">{{$ticket->nom ?? $ticket->getProduit()['nom']}}</td>
+                                                    <td class="text-center">{{$ticket->codebar ?? ''}}</td>
                                                     
                                                     <td style="color:rgb({!! ord($ticket->satut)%256 !!},{!! (ord($ticket->satut)**2)%256 !!},{!! (ord($ticket->satut)**3)%256 !!});">
 
                                                         {!! $ticket->satut=='0' ? 'Vient d\'étre créé' : $ticket->satut !!}
                                                     </td>
                                                     
-                                                    <td>{{$ticket->num_ticket_produit ?? ''}}</td>                                                
-                                                    <td>
+                                                    <td class="text-center">{{$ticket->num_ticket_produit ?? ''}}</td>                                                
+{{--                                                     <td class="text-center">
                                                         <a href="{{route('ticket.bl',['ticket'=>$ticket->id])}}" class="btn btn-primary btn-sm" target="_blank"> 
                                                             Imprimer
                                                         </a>
-                                                    </td>                                                
+                                                    </td> --}}                                                
                                                 </tr>
                                             @endforeach
                                         </tbody>

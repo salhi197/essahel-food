@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0 p-3 text-center">
-                                <h6 class="text-center mb-0">{{$produit->nom ?? ''}}</h6>
+                                <h6 class="text-center mb-0">{{$produit->nom ?? ''}}/ {!! $produit->id_categorie ?? '' !!}</h6>
                                 <span class="text-xs"></span>
                                 <hr class="horizontal dark my-3">
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$produit->id}}">
@@ -43,8 +43,27 @@
                                     @csrf
                                     <input type="hidden" value="{{$produit->id}}" name="id_produit" />
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Nombre de ticket à imprimer :</label>
-                                        <input type="number"  value="" name="tickets" class="form-control nombre_ticket" placeholder="Nombre de ticket à imprimer ">
+    
+                                        <label for="type">Type de farce : </label>
+
+                                        <select class="form-control" name="type" id="type"> 
+
+                                            <option value="A" id="A"> A </option>
+                                            <option value="B" id="B"> B </option>
+                                            <option value="C" id="C"> C </option>
+                                            <option value="D" id="D"> D </option>  
+                                            <option value="E" id="E"> E </option>
+                                            <option value="F" id="F"> F </option>
+                                            <option value="G" id="G"> G </option>
+                                            <option value="H" id="H"> H </option>
+                                            <option value="I" id="I"> I </option>
+                                            <option value="J" id="J"> J </option>                                            
+
+                                            {{--  --}}
+                                        </select>
+
+                                        <label for="nombre">Nombre de tickets à imprimer :</label>
+                                        <input type="number" id="nombre" value="" name="tickets" class="form-control nombre_ticket" placeholder="Nombre de ticket à imprimer ">
                                     </div>
                                     <div class="btn-group" role="group">
                                         <button type="submit" class="btn btn-primary">Imprimer</button>

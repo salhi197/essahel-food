@@ -22,15 +22,26 @@ class ImpressionController  extends Controller
 
     public function impression()
     {
-        $produits = Produit::all();
+        $produits = DB::table('produits')->orderBy('nom','asc')->get();
+        
         return view('impression',compact('produits'));
     }
 
 
     public function imprimer(Request $request){
 
+        $les_jours=DB::select("select distinct date(created_at) from tickets order by date(created_at)");
+        
+        $num_lot = count($les_jours);
 
         $id_produit = $request['id_produit'];
+        $produit = Produit::where('id',$id_produit)->get();
+
+        $produit = ($produit[0]);
+        $reference = $produit->reference;
+
+        $categorie = $produit->id_categorie;
+
         $last_num_ticket_produit = DB::select("select max(num_ticket_produit) as cpt from tickets t where t.id_produit=$id_produit");
         $last_num_ticket_produit = $last_num_ticket_produit[0]->cpt;
         if(is_null($last_num_ticket_produit)){
@@ -86,7 +97,7 @@ class ImpressionController  extends Controller
         ';
         $margin = -40;
         for($i=0;$i<$request['tickets'];$i++){
-            $number ='ref'.$id_produit.'n'.$last_num_ticket_produit.'id'.$lastIdTicket; 
+            $number ='LOT.N°'.$num_lot.'_'.$reference.'/'.$categorie.'_id'.$lastIdTicket;
             $number_to_code_barre =/*'ref'.$id_produit.'n'.$last_num_ticket_produit.*/'id'.$lastIdTicket; 
             
             file_put_contents('img/essahel_food/'.$number.'.svg',DNS1D::getBarcodeSVG($number_to_code_barre,'C128'));    
