@@ -100,6 +100,7 @@
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("search");
             filter = input.value.toUpperCase();
+            $('#search').val('')
             table = document.getElementById("myTable");
             tr = table.getElementsByTagName("tr");
             var trId=0;

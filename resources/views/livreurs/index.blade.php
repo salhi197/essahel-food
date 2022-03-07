@@ -25,9 +25,10 @@
                                             <th>Nom et Prénom </th>
 
                                             <th>N°Téléphone</th>
+                                            
+                                            <th>Mot de passe</th>
 
-                                            <th>Login</th>
-                                            <th>Password</th>
+                                            <th>Région</th>
 
                                             <th>actions</th>
 
@@ -46,9 +47,11 @@
                                             <td>{{$livreur->name ?? ''}} {{$livreur->prenom ?? ''}}</td>
 
                                             <td>{{$livreur->telephone ?? ''}}</td>
-
-                                            <td>{{$livreur->email ?? ''}}</td>
+                                            
                                             <td>{{$livreur->password_text ?? ''}}</td>
+
+                                            <td>{{$livreur->adress ?? ''}}</td>
+
 
 
 
@@ -67,23 +70,6 @@
                                                 @include('includes.edit_livreur')
 
 
-                                                @if($livreur->state)
-
-                                                    <a class="text-white btn btn-primary" href="{{route('livreur.change.state',['id_livreur'=>$livreur->id])}}">
-
-                                                        X 
-
-                                                    </a>
-
-                                                @else
-
-                                                    <a class="text-white btn btn-primary" href="{{route('livreur.change.state',['id_livreur'=>$livreur->id])}}">
-
-                                                        <i class="fas fa-edit"></i> débloquer 
-
-                                                    </a>
-
-                                                @endif
 
                                                 </div>
 
@@ -164,7 +150,7 @@
 
             <div class="form-group">
 
-                <label for="exampleInputEmail1">Adress : </label>
+                <label for="exampleInputEmail1">Region: </label>
 
                 <input type="text" value="{{ old('adress') }}" name="adress" class="form-control" id="adress" placeholder="Enter votre adress : ">
 

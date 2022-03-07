@@ -128,6 +128,29 @@ class HomeController extends Controller
         return redirect()->route('wilaya.livreurs')->with('success', 'insertion effectué !  ');     
     }
 
+    public function sms(){
+        $url="http://sms.icosnet.com:8000/bulksms/bulksms";
 
+        $ch = curl_init();
+        $variables = array(
+            'username' => 'BIBAN_FRET',
+            'password' => 'SMS3265',
+            'type' => '0',
+            'dlr' => '1',
+            'destination' => "213794498727", 
+            'source' => 'BIBAN FRET',
+            'message' => "sms",
+        );
+        
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $variables);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 400); 
+        echo $result = curl_exec($ch);        
+        $err = curl_error($ch);
+        dd($err);
+        dd('test');
+
+    }
 }
 

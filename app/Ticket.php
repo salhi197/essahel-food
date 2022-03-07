@@ -9,6 +9,9 @@ class Ticket extends Model
     public function getProduit()
     {
         $produit = Produit::find($this->id_produit);
+        if($produit==null){
+            return new Produit();
+        }
         return $produit;
     }
 

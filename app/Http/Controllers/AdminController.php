@@ -48,36 +48,33 @@ class AdminController extends Controller
     }  
     public function edit($id_admin)
     {
-        $communes = Commune::all();
-        $wilayas = Wilaya::all();
         $admin = Admin::find($id_admin);
-        return view('admins.edit',compact('admin','wilayas','communes'));
+        return view('admins.edit',compact('admin'));
     }
 
     public function update(Request $request,$id_admin)
     {
         $admin = Admin::find($id_admin);
-        $admin->name = $request->get('name');
-        $admin->email = $request->get('email');
-        $admin->password = Hash::make($request->get('password'));
-        $admin->password_text = $request->get('password');
+        if($request['password']==null){
+            return redirect()->back()->with('error', 'mot de passe n\'a été entré ');
+        }
+        if($request['password']!=$admin->password_text){
+            return redirect()->back()->with('error', 'ancien mot de passe n\'est pas correcte ');
+        }
+        if($request['new_password']==null){
+            return redirect()->back()->with('error', 'Nouveau mot de passe ne peut aps etre vide ');
+        }
+
+        $admin->password = Hash::make($request->get('new_password'));
+        $admin->password_text = $request->get('new_password');
         try {
             $admin->save();
-            return redirect()->route('admin.index')->with('success', 'le  commercial a été supprimé ');
+            return redirect()->back()->with('success', 'Mot de passe modifié avec succés ');
         } catch (\Throwable $e) {
-            return redirect()->route('admin.index')->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
     }
 
     
-    public function destroy($id_admin)
-    {
-        $communes = Commune::all();
-        $wilayas = Wilaya::all();
-        $admin = Admin::find($id_admin);
-        $admin->delete();    
-        return redirect()->route('admin.index')->with('success', 'le  commercial a été supprimé ');
-    }
-
 }

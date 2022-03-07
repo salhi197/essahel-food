@@ -24,12 +24,8 @@
                                             <tr>
                                                 <th>ID produit</th>
                                                 <th>Nom produit </th>
-                                                <th> prix_semi_gros </th>
-                                                <th> prix_detail  </th>
-                                                <th> prix_minimum  </th>
-                                                <th> prix_autre  </th>
-
-                                                <th>Prix</th>
+                                                <th> Reference </th>
+                                                <th> Categorie  </th>
                                                 <th>actions</th>
                                             </tr>
                                         </thead>
@@ -44,16 +40,15 @@
                                                 <td>
                                                     {{$produit->nom ?? ''}} / {!! $produit->id_categorie ?? '' !!}
                                                 </td>
-                                                <td>{{$produit->prix_gros ?? ''}} </td>
-                                                <td>{{$produit->prix_semi_gros?? ''}} </td>
-                                                <td>{{$produit->prix_detail ?? ''}} </td>
-                                                <td>{{$produit->prix_minimum ?? ''}} </td>
-                                                <td>{{$produit->prix_autre ?? ''}} </td>
+                                                <td>{{$produit->reference ?? ''}} </td>
+                                                <td>{{$produit->id_categorie ?? ''}} </td>
 
                                                 <td >
 
                                                     <div class="table-action">  
-                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="return confirm('etes vous sure  ?')" >
+                                                        <a 
+                                                        href="{{route('produit.destroy',['produit'=>$produit->id])}}"
+                                                        class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="return confirm('etes vous sure  ?')" >
                                                             <i class="far fa-trash-alt me-2"></i>
                                                             Delete
                                                         </a>
@@ -112,8 +107,7 @@
                         <label for="exampleInputEmail1">Catégorie</label>
                         <select class="form-control" name="id_categorie">
                             @foreach($categories as $categorie)
-                                <option value="{{$categorie->nom}}"
-                                        @if($categorie->id == $produit->id) selected @endif>
+                                <option value="{{$categorie->nom}}">
                                     {{$categorie->nom ?? ''}}
                                 </option>
                             @endforeach

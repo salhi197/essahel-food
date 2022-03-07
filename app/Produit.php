@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DB;
 
 class Produit extends Model
 {
@@ -16,6 +17,15 @@ class Produit extends Model
         $nbrTickets = count($tickets); 
         return $nbrTickets;
     }
+
+
+    public static function getNomProduit($id_produit)
+    {
+        $produit = DB::select("select nom from produits where id = '$id_produit' ");
+        $produit = $produit[0];
+        return $produit->nom;
+    }
+
 
     public static function getNumber($response)
     {

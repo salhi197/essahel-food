@@ -100,6 +100,7 @@
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("search");
             filter = input.value.toUpperCase();
+            $('#search').val('')
             table = document.getElementById("myTable");
             tr = table.getElementsByTagName("tr");
             var trId=0;
@@ -118,7 +119,7 @@
                     td = tr[i].getElementsByTagName("td")[3];
                     if (td) {
                         txtValue=td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        if (txtValue.toUpperCase()==(filter).toUpperCase()) {
                             tr[i].classList.remove("tr-code");
                             hrefAttacher =hrefAttacher +tr[i].id+",";
                             trId = tr[i].id;

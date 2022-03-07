@@ -181,7 +181,7 @@ $_livreurs = Livreur::all();
 
     <script src="{{ asset('ui/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
-
+    <script src="{{ asset('js/printThis.js') }}"></script>
 
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script>

@@ -188,9 +188,7 @@ $_livreurs = Livreur::all();
 
                         </h3>
                         <h4 class="text-white">Accès
-                            @auth('fournisseur')
-                                Fournisseur
-                            @endif
+                            
                             @auth('admin')
                                 Admin
                             @endif

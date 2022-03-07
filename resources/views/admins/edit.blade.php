@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ui')
 
 
 
@@ -42,11 +42,18 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputConfirmPassword">mot de passe : </label>
-                                                        <input  class="form-control py-4" value="{{ $admin->password_text ?? '' }}" name="password" id="email" type="text" placeholder="" />
-                                                        <small>il doit etre transmis au commercial , NB:il peut etre changer </small>
+                                                        <input  class="form-control py-4" name="password" id="email" type="text" placeholder="" />
+                                                        
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputConfirmPassword">Nouveau mot de passe: </label>
+                                                        <input  class="form-control py-4" value="{{ old('new_password') }}" name="new_password" id="email" type="text" placeholder="" />
+                                                        
+                                                    </div>
+                                                </div>
 
 
 

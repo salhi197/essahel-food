@@ -44,29 +44,11 @@
                                     <input type="hidden" value="{{$produit->id}}" name="id_produit" />
                                     <div class="form-group">
     
-                                        <label for="type">Type de farce : </label>
-
-                                        <select class="form-control" name="type" id="type"> 
-
-                                            <option value="A" id="A"> A </option>
-                                            <option value="B" id="B"> B </option>
-                                            <option value="C" id="C"> C </option>
-                                            <option value="D" id="D"> D </option>  
-                                            <option value="E" id="E"> E </option>
-                                            <option value="F" id="F"> F </option>
-                                            <option value="G" id="G"> G </option>
-                                            <option value="H" id="H"> H </option>
-                                            <option value="I" id="I"> I </option>
-                                            <option value="J" id="J"> J </option>                                            
-
-                                            {{--  --}}
-                                        </select>
-
                                         <label for="nombre">Nombre de tickets à imprimer :</label>
                                         <input type="number" id="nombre" value="" name="tickets" class="form-control nombre_ticket" placeholder="Nombre de ticket à imprimer ">
                                     </div>
                                     <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-primary">Imprimer</button>
+                                        <button onclick="cacher(this)" type="submit" class="btn btn-primary">Imprimer</button>
                                     </div>
                                 </form>
                             </div>
@@ -77,6 +59,17 @@
             </div>        
     </div>
 
+    <script>
+        
+        function cacher(objet)
+        {
+            
+            $(objet).hide(500,function(){ setTimeout( function(){$(objet).show(1000)} ,10000)});
+            
+        }
+        
+        
+    </script>
 
 
 

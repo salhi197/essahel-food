@@ -15,6 +15,7 @@ use App\Sortie;
 use App\Retour;
 use App\Ticket;
 use DB;
+use Auth;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
 
@@ -23,9 +24,10 @@ class TicketController  extends Controller
     
     public function index()
     {
-        $tickets= Ticket::orderBy('created_at', 'desc')->limit(300)->get();
+        $tickets= Ticket::orderBy('created_at', 'desc')->limit(1000)->get();
+        $tickets = DB::select("select t.id,t.id_produit,t.created_at,t.updated_at,t.satut,t.num_ticket_produit,t.codebar,t.impression,t.maj ,p.nom  as nom from tickets t,produits p where (p.id=t.id_produit) order by t.created_at desc limit 1000");
         $nbrtickets = count(Ticket::all());
-
+        
         $date_debut = date('Y-m-d');
         // date($request['date_debut'],'Y-m-d');
         $date_fin = date('Y-m-d');
@@ -43,7 +45,7 @@ class TicketController  extends Controller
 
         // $tickets = DB::select("select * from tickets t where ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
 
-        $tickets = DB::select("select t.id,t.created_at,t.updated_at,t.satut,t.num_ticket_produit,t.codebar ,p.nom  as nom from tickets t,produits p where (p.id=t.id_produit) and ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') )");
+        $tickets = DB::select("select t.id,t.id_produit,t.created_at,t.updated_at,t.satut,t.num_ticket_produit,t.codebar,t.impression,t.maj ,p.nom  as nom from tickets t,produits p where (p.id=t.id_produit) and ( DATE(t.updated_at)>=DATE('$date_debut') and DATE(t.updated_at)<=DATE('$date_fin') ) order by t.created_at desc");
 
         return view('tickets.index',compact(
             'tickets',
@@ -63,8 +65,15 @@ class TicketController  extends Controller
 
     public function retourner(Request $request)
     {
+        
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+        
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'retour';
+        $ticket->maj = $acteur;
         $ticket->save();
         /**
          * insérer retour
@@ -99,8 +108,14 @@ class TicketController  extends Controller
 
     public function retournerRecyclage(Request $request)
     {
+        
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'recyclee';
+        $ticket->maj = $acteur;
         $ticket->save();
         return response()->json([
             'ticket'=>$request['ticket']
@@ -117,8 +132,15 @@ class TicketController  extends Controller
 
     public function retournerDestruction(Request $request)
     {
+        
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'detruit';
+        $ticket->maj = $acteur;
         $ticket->save();
         return response()->json([
             'ticket'=>$request['ticket']
@@ -136,8 +158,15 @@ class TicketController  extends Controller
 
     public function enlever(Request $request)
     {
+
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+        
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'au_depot';
+        $ticket->maj = $acteur;
         $ticket->save();
         Sortie::where('id_ticket',$ticket->id)->first()->delete();
         return response()->json([
@@ -151,6 +180,7 @@ class TicketController  extends Controller
 
     public function affecter($livreur)
     {
+        
         $_livreur = $livreur;
         $tickets = Ticket::where('satut', '<>', 'sortie')
 //            ->orWhere('satut', '=', '0')
@@ -163,9 +193,15 @@ class TicketController  extends Controller
 
     public function assigner(Request $request)
     {
+        
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+        
         $id_ticket = $request['ticket'];
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut = 'sortie';
+        $ticket->maj = $acteur;
         $ticket->updated_at=date("Y-m-d H:i:s");
         $ticket->save();
         
@@ -192,12 +228,14 @@ class TicketController  extends Controller
         // date($request['date_debut'],'Y-m-d');
         $date_fin = Carbon::parse($request['date_fin'])->format('Y-m-d');
         // date($request['date_fin'],'Y-m-d');  
-        $tickets = DB::select("select * from tickets t where ( DATE(t.created_at)>=DATE('$date_debut') and DATE(t.created_at)<=DATE('$date_fin') ) and t.id in (select id_ticket from sorties s where id_livreur=$id_livreur)");
+        $tickets = DB::select("select * from tickets t where ( DATE(t.updated_at)>=DATE('$date_debut') and DATE(t.updated_at)<=DATE('$date_fin') ) and t.id in (select id_ticket from sorties s where id_livreur=$id_livreur)");
         $livreur=Livreur::find($id_livreur);
+        $produits_qte = DB::select("select l.id,l.name,l.prenom,p.nom,count(t.id) as nb_ticket from livreurs l,tickets t,sorties s,produits p where (l.id=s.id_livreur) and(l.id = '$id_livreur') and (t.id=s.id_ticket) and (t.id_produit=p.id) /*and (satut='sortie')*/ and (DATE(t.updated_at) between '$date_debut' and '$date_fin' ) group by l.id,l.name,l.prenom,p.nom ");
         return view('livreurs.filter',compact(
             'tickets',
             'livreur',
             'id_livreur',
+            'produits_qte',
             'date_debut',
             'date_fin'
         ));
@@ -209,16 +247,25 @@ class TicketController  extends Controller
     public function vers_depot()
     {
         $tickets = Ticket::where('satut', '=', '0')
+            ->whereDate('created_at', Carbon::today())
             ->orderBy('created_at','desc')
             ->get();
+            
         return view('tickets.vers_depot',compact('tickets'));
 
     }
 
     public function vers_depot_action(Request $request)
     {
+
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+        
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut= "vers_depot";
+        $ticket->maj = $acteur;
         $ticket->save();
         return response()->json([
             'ticket'=>$request['ticket']
@@ -237,8 +284,15 @@ class TicketController  extends Controller
 
     public function au_depot_action(Request $request)
     {
+        
+        if(auth()->guard('admin')->check()){$acteur= (Auth::guard('admin')->user()->email);} 
+        if(auth()->guard('depot')->check()){$acteur =(Auth::guard('depot')->user()->email);}
+        if(auth()->guard('production')->check()){$acteur= (Auth::guard('production')->user()->email);}
+
+        
         $ticket = Ticket::find($request['ticket']);
         $ticket->satut= "au_depot";
+        $ticket->maj= $acteur;
         $ticket->save();
         return response()->json([
             'ticket'=>$request['ticket']

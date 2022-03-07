@@ -34,19 +34,33 @@ class ProductionController extends Controller
     public function edit($id_user)
     {
         $production = Production::find($id_user);
-        return view('productions.edit',compact('user','wilayas','communes'));
+        return view('productions.edit',compact('production'));
     }
 
-    public function update(Request $request,$id_user)
+    public function update(Request $request,$id_production)
     {
-        $production = Production::find($id_user);
-        $production->name = $request->get('name');
-        $production->email = $request->get('email');
-        $production->password = Hash::make($request->get('password'));
-        $production->password_text = $request->get('password');
-        $production->save();
-        return redirect()->route('production.index')->with('success', 'les informations de l\'agent ont été modifié ');
-    }
+        $production = production::find($id_production);
+
+        if($request['password']==null){
+            return redirect()->back()->with('error', 'mot de passe n\'a été entré ');
+        }
+        if($request['password']!=$production->password_text){
+            return redirect()->back()->with('error', 'ancien mot de passe n\'est pas correcte ');
+        }
+        if($request['new_password']==null){
+            return redirect()->back()->with('error', 'Nouveau mot de passe ne peut aps etre vide ');
+        }
+
+        $production->password = Hash::make($request->get('new_password'));
+        $production->password_text = $request->get('new_password');
+        try {
+            $production->save();
+            return redirect()->back()->with('success', 'Mot de passe modifié avec succés ');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+    }    
 
     
     public function destroy($id_user)

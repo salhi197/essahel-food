@@ -33,19 +33,32 @@ class DepotController extends Controller
     }  
     public function edit($id_user)
     {
-        $depots = Depot::find($id_user);
-        return view('depots.edit',compact('user','wilayas','communes'));
+        $depot = Depot::find($id_user);
+        return view('depots.edit',compact('depot'));
     }
 
-    public function update(Request $request,$id_user)
+    public function update(Request $request,$id_depot)
     {
-        $depots = Depot::find($id_user);
-        $depot->name = $request->get('name');
-        $depot->email = $request->get('email');
-        $depot->password = Hash::make($request->get('password'));
-        $depot->password_text = $request->get('password');
-        $depot->save();
-        return redirect()->route('depot.index')->with('success', 'les informations de l\'agent ont été modifié ');
+        $depot = Depot::find($id_depot);
+        if($request['password']==null){
+            return redirect()->back()->with('error', 'mot de passe n\'a été entré ');
+        }
+        if($request['password']!=$depot->password_text){
+            return redirect()->back()->with('error', 'ancien mot de passe n\'est pas correcte ');
+        }
+        if($request['new_password']==null){
+            return redirect()->back()->with('error', 'Nouveau mot de passe ne peut aps etre vide ');
+        }
+
+        $depot->password = Hash::make($request->get('new_password'));
+        $depot->password_text = $request->get('new_password');
+        try {
+            $depot->save();
+            return redirect()->back()->with('success', 'Mot de passe modifié avec succés ');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
     }
 
     

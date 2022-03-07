@@ -63,10 +63,14 @@ Route::group(['prefix' => 'categorie', 'as' => 'categorie'], function () {
 });
 
 
+
+
 Route::get('/test', function(){
+    dd(date('Y-m-d H:m:s'));
     return view('template_for_dash');
 });
 
+Route::get('/sms', 'HomeController@sms')->name('sms');
 
 
 
@@ -119,12 +123,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
     Route::get('/', ['as' => '.index', 'uses' => 'AdminController@index']);
     Route::get('/show/create',['as'=>'.show.create', 'uses' => 'AdminController@create']);
     Route::post('/create', ['as' => '.create', 'uses' => 'AdminController@store']);
-    Route::get('/destroy/{id_admin}', ['as' => '.destroy', 'uses' => 'AdminController@destroy']);    
-    Route::get('/destroy/{id_admin}', ['as' => '.destroy', 'uses' => 'AdminController@destroy']);    
     Route::get('/edit/{id_admin}', ['as' => '.edit', 'uses' => 'AdminController@edit']);
-    Route::get('/show/{id_admin}', ['as' => '.show', 'uses' => 'AdminController@show']);
     Route::post('/update/{id_admin}', ['as' => '.update', 'uses' => 'AdminController@update']);   
-    Route::get('/remise/zero/{id_admin}', ['as' => '.remise.zero', 'uses' => 'AdminController@remiseZero']);   
      
 });
 
@@ -222,6 +222,19 @@ Route::group(['prefix' => 'wilaya', 'as' => 'wilaya'], function () {
     Route::get('/sortie', ['as' => '.sortie', 'uses' => 'HomeController@sortie']);
     
 });
+
+
+Route::get('/clear', function () {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+});
+
 
 Route::get('/down', function () {
     $clearcache = Artisan::call('down');

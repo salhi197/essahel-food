@@ -29,6 +29,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="exampleInputEmail1">Catégorie</label>
+                        <select class="form-control" name="id_categorie">
+                            @foreach($categories as $categorie)
+                                <option value="{{$categorie->nom}}"
+                                        @if($categorie->id == $produit->id) selected @endif>
+                                    {{$categorie->nom ?? ''}}
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Réference : </label>
                         <input type="text" value="{{ $produit->reference ?? '' }}" name="reference" class="form-control"
                             placeholder="  ">

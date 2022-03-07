@@ -44,20 +44,20 @@ class Template extends Model
         
     ];
     
-    public static function templateBon($commande,$margin,$codebar,$number) 
+    public static function templateBon($commande,$margin,$codebar,$number,$num_lot) 
     {
         $codebar = asset($codebar);
         $html='
-            <div style="position:absolute;left:50%;margin-left:-65px;top:-45px;width:283px;height:283px;overflow:hidden">
+            <div style="position:absolute;left:50%;margin-left:-40px;top:-35px;width:283px;height:283px;overflow:hidden">
                 <div style="position:absolute;left:20.89px;top:10px" class="cls_002">
                     <span class="cls_002">
                         <img src="'.$codebar.'" width="50px" height="60px">
                     </span>
-                    <div style="position:absolute;left:1.89px;top:50px;font-size:5px;" class="cls_006">
+                    <div style="position:absolute;left:1.89px;top:50px;font-size:3px;" class="cls_006">
                         '.$number.'
                     </div>
-                
-                </div>ref1n439id489
+                    <div style="position:absolute;left:0.5px;top:54px;font-size:12px;" class="cls_006"> Lot N° '.$num_lot.' </div>
+                </div>
                 
             </div>
                 ';
@@ -67,34 +67,29 @@ class Template extends Model
 
     public static  function bl(Livreur $livreur,$elements)
     {
-        
+        $total = 0;
+        $total = 0;
         $html = '        
             <!doctype html>
             <html lang="en">
             <head>
             <meta charset="UTF-8">
-            <title>Bon de livraison </title>
+            <title>Bon de livraison!</title>
             
             <style type="text/css">
                 * {
-                    font-size:15px;
                     font-family: Verdana, Arial, sans-serif;
                 }
                 table{
                     font-size: x-small;
                 }
-                 tr td{
-                    font-weight: bold;
-
-                    text-align:center;
-                }
-
                 tfoot tr td{
                     font-weight: bold;
-
-                    text-align:center;
+                    font-size: x-small;
                 }
-                
+                .gray {
+                    background-color: lightgray
+                }
             </style>
             
             </head>
@@ -102,21 +97,32 @@ class Template extends Model
             
             <table width="100%">
                 <tr>
-                    <td valign="top"></td>
-                    <td align="center">
-                        <h1>Essahel Food</h1>
-                        
+                    <td align="left">
+                        <h3>Essahel Food</h3>
+                        <pre>
+                            RC: 16/00-5127021A18
+                            MF : 16302737197
+                            Adresse : Alger CITE 32 KAIDI LOT 7 BORDK EL KIFFAN
+                        </pre>
                     </td>
+                    <td align="">
+                        <h3>Client : Divers CLient 4</h3>
+                        <pre>
+                            RC :  Divers CLient 4
+                            MF :  
+                            Adresse : Alger 
+                        </pre>
+                    </td>
+
                 </tr>
             
             </table>
             
             <table width="100%">
                 <tr>
-                    <td><strong>Livreur: </strong> '.$livreur->name.' '.$livreur->prenom.'</td>
-                </tr>
-                <tr>
-                    <td><strong>Date de Sortie:</strong> '.date('d-m-Y').'</td>
+                    <td><strong>Suivi Par :</strong>Admin</td>
+                    <td><strong>Facture Numéro:</strong>Admin</td>
+                    <td><strong>Le:</strong> '.date('d-m-Y').'</td>
                 </tr>
             
             </table>
@@ -139,13 +145,40 @@ class Template extends Model
                         $html = $html.'<td>'.$element->qte.'</td>';
                         $html = $html.'<td>'.$element->prix_gros.' DA</td>';
                         $html = $html.'<td>'.$element->prix_gros*$element->qte.' DA</td>';
+                        $total = $total + $element->prix_gros*$element->qte;
                     }
-                                                                    
+                                                               
                 $html=$html.'</tr>                
                 </tbody>
-
             
-                
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td align="right">Total HTA</td>
+                        <td align="center">'.$total.' DA</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td align="center">Total TVA</td>
+                        <td align="center">0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td align="center">Total TTC</td>
+                        <td align="right" class="gray">'.$total.' DA</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td align="center">Timbre</td>
+                        <td align="right" class="gray"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td align="center">Net à payer</td>
+                        <td align="right" class="gray">'.$total.' DA</td>
+                    </tr>
+
+                </tfoot>
             </table>
             
             </body>

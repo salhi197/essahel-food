@@ -56,7 +56,7 @@
 
             <div class="form-group">
 
-                <label for="exampleInputEmail1">Adress : </label>
+                <label for="exampleInputEmail1">Région: </label>
 
                 <input type="text" value="{{ $livreur->adress ?? '' }}" name="adress" class="form-control" id="adress" placeholder="Enter votre adress : ">
 
